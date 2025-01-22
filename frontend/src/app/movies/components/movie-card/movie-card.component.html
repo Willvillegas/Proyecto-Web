@@ -1,0 +1,10 @@
+<mat-card class="w-64 h-70">
+    <mat-card-header>
+        <mat-card-title>{{movie.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="coverImageUrl" alt="{{ movie.title }}">
+    <mat-card-content>
+        <strong>{{movie.rating}}</strong>
+    </mat-card-content>
+
+</mat-card>

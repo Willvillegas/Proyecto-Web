@@ -1,0 +1,320 @@
+{
+    "movies": [
+        {
+            "id": "inception",
+            "title": "Inception",
+            "description": "A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.",
+            "genre": "Sci-Fi, Thriller",
+            "director": "Christopher Nolan",
+            "cast": ["leonardo-dicaprio", "joseph-gordon-levitt", "elliot-page"],
+            "releaseYear": 2010,
+            "rating": 8.8,
+            "posters": [
+                { "url": "https://th.bing.com/th/id/R.7d82d780b0679dba7737c24246e50818?rik=b2HcjJxLhtY3MA&pid=ImgRaw&r=0", "isCover": true },
+                { "url": "https://example.com/inception_1.jpg", "isCover": false },
+                { "url": "https://example.com/inception_2.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "the-dark-knight",
+            "title": "The Dark Knight",
+            "description": "Batman faces the Joker, a criminal mastermind who wreaks havoc in Gotham City.",
+            "genre": "Action, Crime, Drama",
+            "director": "Christopher Nolan",
+            "cast": ["christian-bale", "heath-ledger", "aaron-eckhart"],
+            "releaseYear": 2008,
+            "rating": 9.0,
+            "posters": [
+                { "url": "https://th.bing.com/th/id/R.34df6b287faf65b160b47e05ba85bb3b?rik=o5LsP1up4eGlXA&pid=ImgRaw&r=0", "isCover": true },
+                { "url": "https://example.com/darkknight_1.jpg", "isCover": false },
+                { "url": "https://example.com/darkknight_2.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "the-revenant",
+            "title": "The Revenant",
+            "description": "A frontiersman on a quest for survival after being mauled by a bear and left for dead by members of his own hunting team.",
+            "genre": "Action, Adventure, Drama",
+            "director": "Alejandro González Iñárritu",
+            "cast": ["leonardo-dicaprio", "tom-hardy", "will-poulter"],
+            "releaseYear": 2015,
+            "rating": 8.0,
+            "posters": [
+                { "url": "https://www.themoviedb.org/t/p/original/47CPtrJri6T9roxbs38Pdq54g41.jpg", "isCover": true },
+                { "url": "https://example.com/revenant_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "interstellar",
+            "title": "Interstellar",
+            "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+            "genre": "Adventure, Drama, Sci-Fi",
+            "director": "Christopher Nolan",
+            "cast": ["matthew-mcconaughey", "anne-hathaway", "jessica-chastain"],
+            "releaseYear": 2014,
+            "rating": 8.6,
+            "posters": [
+                { "url": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", "isCover": true },
+                { "url": "https://example.com/interstellar_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "fight-club",
+            "title": "Fight Club",
+            "description": "An insomniac office worker forms an underground fight club with soap salesman Tyler Durden.",
+            "genre": "Drama",
+            "director": "David Fincher",
+            "cast": ["brad-pitt", "edward-norton", "helena-bonham-carter"],
+            "releaseYear": 1999,
+            "rating": 8.8,
+            "posters": [
+                { "url": "https://www.new-video.de/co/fightclu.jpg", "isCover": true },
+                { "url": "https://example.com/fightclub_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "matrix",
+            "title": "The Matrix",
+            "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+            "genre": "Action, Sci-Fi",
+            "director": "Lana Wachowski, Lilly Wachowski",
+            "cast": ["keanu-reeves", "laurence-fishburne", "carrie-anne-moss"],
+            "releaseYear": 1999,
+            "rating": 8.7,
+            "posters": [
+                { "url": "https://pics.filmaffinity.com/Matrix-155050517-large.jpg", "isCover": true },
+                { "url": "https://example.com/matrix_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "pulp-fiction",
+            "title": "Pulp Fiction",
+            "description": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+            "genre": "Crime, Drama",
+            "director": "Quentin Tarantino",
+            "cast": ["john-travolta", "uma-thurman", "samuel-l-jackson"],
+            "releaseYear": 1994,
+            "rating": 8.9,
+            "posters": [
+                { "url": "https://www.themoviedb.org/t/p/original/pbWgQPC6l9pkpEpi3WNRSfWYNP6.jpg", "isCover": true },
+                { "url": "https://example.com/pulpfiction_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "gladiator",
+            "title": "Gladiator",
+            "description": "A betrayed Roman general seeks revenge against the corrupt emperor who murdered his family and sent him into slavery.",
+            "genre": "Action, Adventure, Drama",
+            "director": "Ridley Scott",
+            "cast": ["russell-crowe", "joaquin-phoenix", "connie-nielsen"],
+            "releaseYear": 2000,
+            "rating": 8.5,
+            "posters": [
+                { "url": "https://www.themoviedb.org/t/p/original/ixsPIb7dIiZlrqbV1QVdqA9XWxm.jpg", "isCover": true },
+                { "url": "https://example.com/gladiator_1.jpg", "isCover": false }
+            ]
+        },
+        {
+            "id": "ice-age",
+            "title": "Ice Age",
+            "description": "Set during the ice age, a group of prehistoric animals embark on a journey to return a human baby to its tribe.",
+            "genre": "Animation, Adventure, Comedy",
+            "director": "Chris Wedge, Carlos Saldanha",
+            "cast": ["Ray Romano", "John Leguizamo", "Denis Leary", "Queen Latifah"],
+            "releaseYear": 2002,
+            "rating": 7.5,
+            "posters": [
+              { 
+                "url": "https://th.bing.com/th/id/R.6b0113544137b5c3e520382f3ddef89f?rik=yz1jbsJop%2fAlwg&pid=ImgRaw&r=0", "isCover": true},
+              { "url": "https://example.com/ice-age-1.jpg", "isCover": false }
+            ]
+          },
+          
+        {
+            "id": "the-godfather",
+            "title": "The Godfather",
+            "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+            "genre": "Crime, Drama",
+            "director": "Francis Ford Coppola",
+            "cast": ["marlon-brando", "al-pacino", "james-caan"],
+            "releaseYear": 1972,
+            "rating": 9.2,
+            "posters": [
+                { "url": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", "isCover": true },
+                { "url": "https://example.com/godfather_1.jpg", "isCover": false }
+            ]
+        }
+
+    ],
+    "actors": [
+        {
+            "id": "leonardo-dicaprio",
+            "name": "Leonardo DiCaprio",
+            "birthDate": "1974-11-11",
+            "biography": "Leonardo DiCaprio is an American actor known for his performances in Titanic, Inception, and The Revenant.",
+            "posters": [
+                { "url": "https://example.com/leonardo_cover.jpg", "isCover": true },
+                { "url": "https://example.com/leonardo_1.jpg", "isCover": false }
+            ],
+            "movies": ["inception", "the-revenant"]
+        },
+        {
+            "id": "joseph-gordon-levitt",
+            "name": "Joseph Gordon-Levitt",
+            "birthDate": "1981-02-17",
+            "biography": "Joseph Gordon-Levitt is an American actor known for his roles in 500 Days of Summer, Inception, and The Dark Knight Rises.",
+            "posters": [
+                { "url": "https://example.com/joseph_cover.jpg", "isCover": true },
+                { "url": "https://example.com/joseph_1.jpg", "isCover": false }
+            ],
+            "movies": ["inception"]
+        },
+        {
+            "id": "elliot-page",
+            "name": "Elliot Page",
+            "birthDate": "1987-02-21",
+            "biography": "Elliot Page is a Canadian actor, known for his roles in Juno, Inception, and The Umbrella Academy.",
+            "posters": [
+                { "url": "https://example.com/elliot_cover.jpg", "isCover": true },
+                { "url": "https://example.com/elliot_1.jpg", "isCover": false }
+            ],
+            "movies": ["inception"]
+        },
+        {
+            "id": "christian-bale",
+            "name": "Christian Bale",
+            "birthDate": "1974-01-30",
+            "biography": "Christian Bale is an English actor known for his versatility and starring roles in The Dark Knight and American Psycho.",
+            "posters": [
+                { "url": "https://example.com/christian_cover.jpg", "isCover": true },
+                { "url": "https://example.com/christian_1.jpg", "isCover": false }
+            ],
+            "movies": ["the-dark-knight"]
+        },
+        {
+            "id": "heath-ledger",
+            "name": "Heath Ledger",
+            "birthDate": "1979-04-04",
+            "biography": "Heath Ledger was an Australian actor best known for his role as the Joker in The Dark Knight.",
+            "posters": [
+                { "url": "https://example.com/heath_cover.jpg", "isCover": true },
+                { "url": "https://example.com/heath_1.jpg", "isCover": false }
+            ],
+            "movies": ["the-dark-knight"]
+        },
+        {
+            "id": "aaron-eckhart",
+            "name": "Aaron Eckhart",
+            "birthDate": "1968-03-12",
+            "biography": "Aaron Eckhart is an American actor, known for his roles in The Dark Knight, Thank You for Smoking, and Olympus Has Fallen.",
+            "posters": [
+                { "url": "https://example.com/aaron_cover.jpg", "isCover": true },
+                { "url": "https://example.com/aaron_1.jpg", "isCover": false }
+            ],
+            "movies": ["the-dark-knight"]
+        },
+        {
+            "id": "matthew-mcconaughey",
+            "name": "Matthew McConaughey",
+            "birthDate": "1969-11-04",
+            "biography": "Matthew McConaughey is an American actor known for his roles in Interstellar, Dallas Buyers Club, and True Detective.",
+            "posters": [
+                { "url": "https://example.com/matthew_cover.jpg", "isCover": true },
+                { "url": "https://example.com/matthew_1.jpg", "isCover": false }
+            ],
+            "movies": ["interstellar"]
+        },
+        {
+            "id": "anne-hathaway",
+            "name": "Anne Hathaway",
+            "birthDate": "1982-11-12",
+            "biography": "Anne Hathaway is an American actress, known for her roles in Les Misérables, The Devil Wears Prada, and Interstellar.",
+            "posters": [
+                { "url": "https://example.com/anne_cover.jpg", "isCover": true },
+                { "url": "https://example.com/anne_1.jpg", "isCover": false }
+            ],
+            "movies": ["interstellar"]
+        },
+        {
+            "id": "jessica-chastain",
+            "name": "Jessica Chastain",
+            "birthDate": "1977-03-24",
+            "biography": "Jessica Chastain is an American actress known for her roles in Interstellar, Zero Dark Thirty, and The Martian.",
+            "posters": [
+                { "url": "https://example.com/jessica_cover.jpg", "isCover": true },
+                { "url": "https://example.com/jessica_1.jpg", "isCover": false }
+            ],
+            "movies": ["interstellar"]
+        },
+        {
+            "id": "brad-pitt",
+            "name": "Brad Pitt",
+            "birthDate": "1963-12-18",
+            "biography": "Brad Pitt is an American actor and producer, known for his roles in Fight Club, Fight Club, and Once Upon a Time in Hollywood.",
+            "posters": [
+                { "url": "https://example.com/brad_cover.jpg", "isCover": true },
+                { "url": "https://example.com/brad_1.jpg", "isCover": false }
+            ],
+            "movies": ["fight-club"]
+        },
+        {
+            "id": "edward-norton",
+            "name": "Edward Norton",
+            "birthDate": "1969-08-18",
+            "biography": "Edward Norton is an American actor, known for his roles in Fight Club, American History X, and Primal Fear.",
+            "posters": [
+                { "url": "https://example.com/edward_cover.jpg", "isCover": true },
+                { "url": "https://example.com/edward_1.jpg", "isCover": false }
+            ],
+            "movies": ["fight-club"]
+        },
+        {
+            "id": "helena-bonham-carter",
+            "name": "Helena Bonham Carter",
+            "birthDate": "1966-05-26",
+            "biography": "Helena Bonham Carter is an English actress known for her roles in Fight Club, Sweeney Todd, and The King's Speech.",
+            "posters": [
+                { "url": "https://example.com/helena_cover.jpg", "isCover": true },
+                { "url": "https://example.com/helena_1.jpg", "isCover": false }
+            ],
+            "movies": ["fight-club"]
+        },
+        {
+            "id": "keanu-reeves",
+            "name": "Keanu Reeves",
+            "birthDate": "1964-09-02",
+            "biography": "Keanu Reeves is a Canadian actor known for his roles in The Matrix, John Wick, and Speed.",
+            "posters": [
+                { "url": "https://example.com/keanu_cover.jpg", "isCover": true },
+                { "url": "https://example.com/keanu_1.jpg", "isCover": false }
+            ],
+            "movies": ["matrix"]
+        },
+        {
+            "id": "laurence-fishburne",
+            "name": "Laurence Fishburne",
+            "birthDate": "1961-07-30",
+            "biography": "Laurence Fishburne is an American actor, known for his roles in The Matrix, Apocalypse Now, and Mystic River.",
+            "posters": [
+                { "url": "https://example.com/laurence_cover.jpg", "isCover": true },
+                { "url": "https://example.com/laurence_1.jpg", "isCover": false }
+            ],
+            "movies": ["matrix"]
+        },
+        {
+            "id": "carrie-anne-moss",
+            "name": "Carrie-Anne Moss",
+            "birthDate": "1967-08-21",
+            "biography": "Carrie-Anne Moss is a Canadian actress known for her role as Trinity in The Matrix trilogy.",
+            "posters": [
+                { "url": "https://example.com/carrie_cover.jpg", "isCover": true },
+                { "url": "https://example.com/carrie_1.jpg", "isCover": false }
+            ],
+            "movies": ["matrix"]
+        }
+    ]
+}
+
+    
+
+
