@@ -1,59 +1,99 @@
-# Frontend
+```markdown
+# Frontend 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+## Instrucciones de Instalación y Ejecución
 
-## Development server
+### 1. Instalar Dependencias
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Abre una terminal en el directorio raíz del proyecto y navega a la carpeta del frontend:
 
 ```bash
-ng generate component component-name
+cd frontend
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Luego, instala las dependencias necesarias con el siguiente comando:
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+### 2. Instalar `json-server` (si no está instalado)
 
-To build the project run:
+Si no tienes `json-server` instalado globalmente, puedes hacerlo ejecutando:
 
 ```bash
-ng build
+npm install json-server
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 3. Simulación de Backend con `json-server`
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Ejecuta el siguiente comando para iniciar el servidor simulado:
 
 ```bash
-ng test
+npx json-server data/movies.json
 ```
 
-## Running end-to-end tests
+Esto arrancará el servidor en el puerto **3000** y creará los siguientes endpoints que simularán el backend:
 
-For end-to-end (e2e) testing, run:
+- **Películas**: [http://localhost:3000/movies](http://localhost:3000/movies)
+- **Actores**: [http://localhost:3000/actors](http://localhost:3000/actors)
+
+### 4. Angular Material
+
+Este proyecto está utilizando el tema de **Angular Material** con los colores **Cyan & Orange**.
+
+- El color de fondo es **negro**.
+- El color rojo usado en la **toolbar** es: **#E50000**.
+
+### 5. Instalación de Herramientas Adicionales
+
+#### Instalar Angular (si no lo tienes instalado)
+
+Si aún no tienes **Angular CLI** instalado, puedes hacerlo con el siguiente comando:
 
 ```bash
-ng e2e
+npm install -g @angular/cli
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+#### Instalar Angular Material
 
-## Additional Resources
+Si aún no has instalado **Angular Material**, puedes agregarlo a tu proyecto con el siguiente comando:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng add @angular/material
+```
+
+#### Instalar Tailwind CSS
+
+Para instalar **Tailwind CSS**, ejecuta el siguiente comando:
+
+```bash
+npm install tailwindcss postcss autoprefixer
+```
+
+#### Configurar Tailwind CSS
+
+Una vez que Tailwind CSS esté instalado, ejecuta el siguiente comando para crear el archivo de configuración de Tailwind:
+
+```bash
+npx tailwindcss init
+```
+
+### 6. Estructura de Archivos
+
+El archivo `movies.json` se encuentra en la carpeta `data` y contiene los datos de las películas y actores que están siendo utilizados en el proyecto.
+
+### 7. Puesta en Marcha del Proyecto
+
+Una vez que hayas configurado todos los pasos anteriores, puedes ejecutar el proyecto Angular con el siguiente comando:
+
+```bash
+ng serve -o
+```
+
+Accede a la aplicación en tu navegador mediante [http://localhost:4200](http://localhost:4200).
+
+---
+
+¡Listo! Ya deberías poder ejecutar el proyecto y ver la gestión de películas y actores con simulación del backend utilizando **json-server**.
+```
