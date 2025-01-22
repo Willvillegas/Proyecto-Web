@@ -26,7 +26,7 @@ export class ActorRepository {
      * @returns Promise<IActor>
      */
     static async findById(id: string): Promise<IActor | null> {
-        return Actor.findById(id).populate('movies').exec();
+        return Actor.findById(id).populate('movies', ['title', 'releaseYear']).exec();
     }
 
     /**
@@ -35,8 +35,14 @@ export class ActorRepository {
      * @param actor Interface IActor
      * @returns Promise<IActor | null>
      */
-    static async update( actor: IActor): Promise<IActor | null> {
-        return Actor.findByIdAndUpdate (actor._id, actor, {new: true}).exec();
+    static async update(actor: IActor): Promise<IActor | null> {
+        return Actor.findByIdAndUpdate(actor._id, actor, { new: true }).exec();
+    }
+    /**
+     * Counts the number of actors in the database
+     */
+    static async count(): Promise<number> {
+        return Actor.countDocuments().exec();
     }
 
 }

@@ -6,6 +6,12 @@ export interface IMovie extends Document {
     genre: string;
     director: string;
     cast: string[];
-    year: number;
+    releaseYear: number;
     rating: string;
+    posters: IImage[];
+}
+
+export interface IImage {
+    url: string;
+    isCover: boolean;
 }

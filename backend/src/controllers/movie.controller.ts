@@ -12,6 +12,11 @@ export class MovieController {
     static async create(req: Request, res: Response): Promise<Response> {
         try {
             const movieData: IMovie = req.body;
+            //validate if poster is not empty
+            if (!movieData.posters || movieData.posters.length === 0) {
+                return res.status(400).json({ message: "At least one poster is required" });
+            }
+
             const newMovie = await MovieService.create(movieData);
             return res.status(201).json(newMovie);
         } catch (error) {
@@ -109,8 +114,9 @@ export class MovieController {
      */
     static async addActor(req: Request, res: Response): Promise<Response> {
         try {
-            const { movieId, actorId } = req.params;
-            const updatedMovie = await MovieService.addActor(movieId, actorId);
+            const { id } = req.params;
+            const { actorId } = req.body;
+            const updatedMovie = await MovieService.addActor(id, actorId);
             if (!updatedMovie) {
                 return res.status(404).json({ message: "Movie not found" });
             }
@@ -132,8 +138,8 @@ export class MovieController {
      */
     static async removeActor(req: Request, res: Response): Promise<Response> {
         try {
-            const { movieId, actorId } = req.params;
-            const updatedMovie = await MovieService.removeActor(movieId, actorId);
+            const { id, actorId } = req.params;
+            const updatedMovie = await MovieService.removeActor(id, actorId);
             if (!updatedMovie) {
                 return res.status(404).json({ message: "Movie not found" });
             }

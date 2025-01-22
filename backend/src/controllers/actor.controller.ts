@@ -31,8 +31,17 @@ export class ActorController {
      */
     static async getAll(req: Request, res: Response): Promise<Response> {
         try {
+            const limit = parseInt(req.query.limit as string) || 10;
+            const offset = parseInt(req.query.offset as string) || 0;
             const actors = await ActorService.findAll();
-            return res.status(200).json(actors);
+            const total = await ActorService.count();
+            return res.status(200).json({
+                data: actors,
+                total,
+                offset,
+                limit,
+                pages: Math.ceil(total / limit)
+            });
         } catch (error) {
             console.log(error);
             if (error instanceof Error) {
@@ -67,7 +76,7 @@ export class ActorController {
 
     /**
      * Update an actor by id
-     * @param req Request
+     * @param req Request Body = IActor
      * @param res Response
      * @returns Promise<Response>
      */

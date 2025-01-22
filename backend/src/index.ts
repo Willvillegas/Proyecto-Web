@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { connectBD } from './utils/connectBD';
+import movieRoute from './routes/movie.route';
+import actorRoute from './routes/actor.route';
 
 const app: Express = express();
 const PORT: number = 3000;
@@ -16,4 +18,9 @@ connectBD(BD_URL || '').then(() => {
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World');
 });
+
+app.use(express.json());
+app.disable('x-powered-by');
+app.use('/api', movieRoute);
+app.use('/api', actorRoute);
 

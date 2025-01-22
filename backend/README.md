@@ -26,7 +26,7 @@ Verano 2024-2025
 
 3. Create a `.env` file in the root directory and add your MongoDB URI and other environment variables:
     ```env
-    MONGODB_URI=your_mongodb_uri
+    BD_URL=your_mongodb_uri
     PORT=your_port
     ```
 
@@ -54,65 +54,75 @@ Verano 2024-2025
 - `services/` : Capa que contiene la lógica de negocio de la aplicación, validaciones, entre otros.
 - `interfaces/` : Contiene las formas que contiene los objetos que se usan en el backend (importante para typescript)
 - `routes/` : Contiene los archivos encargados de definir las rutas de la api y de dirigir las solicitudes HTTP y de gestionar los métodos HTTP
-- `utils/` : Contiene funcionalidades externas que puede ser usadas durante todo el proceso de una solitud (ya sea HTTP o de la base de datos)
+- `utils/` : Contiene funcionalidades externas que puede ser usadas durante todo el proceso de una solicitud (ya sea HTTP o de la base de datos)
 
 ## API Endpoints
 
 ### Entidad: Película
-- `GET /api/movie` - Recuperar todos las peliculas
+- `GET /api/movies` - Recuperar todos las peliculas
     - **Query Params:**
         - `offset` (int): Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.
         - `limit` (int): Especifica cuántos documentos queremos obtener en una sola consulta.
     - Nota: si no coloca los params, devuelve los primeros 10...
-- `POST /api/movie` - Crea una nueva pelicula
+- `POST /api/movies` - Crea una nueva pelicula
     - **Body Params**
         - `title` (string): Título de la pelicula
         - `description` (string): Breve descripción de la pelicula
         - `genre` (string): Género de la pelicula
         - `director` (string): Nombre del director
         - `rating` (string): Número del 0 al 5 flotante convertido en string
+        - `cast` (string []) : id de los actores o si no tambien puede ser vacío
 
-- `GET /api/movie/:id` - Recupera la pelicula por su id
+- `GET /api/movies/:id` - Recupera la pelicula por su id
     - **Path Params**
         - `id` el identificador de la pelicula.
-- `PUT /api/movie/:id` - Actualiza la pelicula por su id
-    - **Path Params**
-        - `id` el identificador de la pelicula.
+- `PUT /api/movies/` - Actualiza la pelicula por su id
     - **Body Params**
         - `title` (string): Título de la pelicula
         - `description` (string): Breve descripción de la pelicula
         - `genre` (string): Género de la pelicula
         - `director` (string): Nombre del director
         - `rating` (string): Número del 0 al 5 flotante convertido en string
-- `DELETE /api/movie/:id` - Elimina una pelicula especifica
+        - `cast` (stirng []): Arreglo actores
+- `DELETE /api/movies/:id` - Elimina una pelicula especifica
     - **Path Params**
-        - `id` el identificador de la pelicula.
+        - `id` El identificador de la pelicula.
+
+- `POST /api/movie/:id/actors` - Agrega un actor a una pelicula y agrega una pelicula a un actor
+    - **Path Params**
+        - `id` El identificador de la pelicula.
+    - **Body Params**
+        - `actorId` (string) : El id del actor a enlazar.
+- `DELETE /api/movies/:id/actors/:actorId`- Elimina una actor a una pelicula y elimina una pelicula a un actor
+    - **Path Params**
+        - `id` El identificador de la pelicula.
+        - `actorId` El identificador del actor.
 
 ### Entidad: Actor
-- `GET /api/actor` - Recupera todos los actores
+- `GET /api/actors` - Recupera todos los actores
     - **Query Params:**
         - `offset` (int): Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.
         - `limit` (int): Especifica cuántos documentos queremos obtener en una sola consulta.
     - Nota: si no coloca los params, devuelve los primeros 10...
-- `POST /api/actor` - Crea un nuevo actor
+- `POST /api/actors` - Crea un nuevo actor
     - **Body Params**
         - `name` (string): Nombre del actor
         - `birth` (string): Fecha de nacimiento
         - `biography` (string): Biografía del actor
+        - `movies` (string[]): id de las peliculas que participa o vacío
         - **TODO:FOTO_Pendiente**
 
-- `GET /api/actor/:id` - Recupera el actor por su id
+- `GET /api/actors/:id` - Recupera el actor por su id
     - **Path Params**
-        - `id` el identificador de la pelicula.
-- `PUT /api/actor/:id` - Actualiza la información del actor por su id
-    - **Path Params**
-        - `id` el identificador del actor
+        - `id` el identificador del actor.
+- `PUT /api/actors` - Actualiza la información del actor 
     - **Body Params**
         - `name` (string): Nombre del actor
-        - `birth` (string): Fecha de nacimiento
+        - `birthday` (string): Fecha de nacimiento
         - `biography` (string): Biografía del actor
-        - **TODO:FOTO_Pendiente**
-- `DELETE /api/actor/:id` - Elimina una actor especifico
+        - `movies` (string[]): id de las peliculas que participa o vacío
+
+- `DELETE /api/actor/:id` - Elimina una actor especifico (TODO)
     - **Path Params**
         - `id` el identificador del actor.
 

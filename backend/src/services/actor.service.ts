@@ -37,4 +37,13 @@ export class ActorService {
     static async update(actor: IActor): Promise<IActor | null> {
         return ActorRepository.update(actor);
     }
+
+    /**
+     * COunts the number of actors in the database
+     * @returns Promise<number>
+     */
+    static async count(): Promise<number> {
+        return ActorRepository.count();
+    }
+
 }

@@ -1,4 +1,5 @@
 import { IMovie } from "../interfaces/movie.interface";
+import { ActorRepository } from "../repositories/actor.repository";
 import { MovieRepository } from "../repositories/movie.repository";
 
 export class MovieService {
@@ -47,9 +48,13 @@ export class MovieService {
      */
     static async addActor(movieId: string, actorId: string): Promise<IMovie | null> {
         const movie = await MovieRepository.findById(movieId);
-        if (!movie) return null;
+        const actor = await ActorRepository.findById(actorId);
+        if (!movie || !actor) return null;
         movie.cast.push(actorId);
+        actor.movies.push(movieId);
+        await ActorRepository.update(actor);
         return MovieRepository.update(movie);
+
     }
 
     /**

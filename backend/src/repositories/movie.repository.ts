@@ -32,7 +32,7 @@ export class MovieRepository {
      * @returns Promise<IMovie>
      */
     static async findById(id: string): Promise<IMovie | null> {
-        return Movie.findById(id).populate('cast').exec();
+        return Movie.findById(id).populate('cast', 'name').exec();
     }
 
     /**
