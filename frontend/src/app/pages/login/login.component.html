@@ -1,14 +1,14 @@
 <div class="flex justify-center items-center h-screen bg-[#141414]">
     <mat-card class="w-96 bg-[#141414] text-white p-6 rounded-lg shadow-lg">
       <div class="text-center mb-6">
-        <h1 class="text-3xl font-semibold text-[#E50000]">Bienvenido!</h1>
+        <h1 class="text-3xl font-semibold text-[#E50000]">Welcome!</h1>
       </div>
       <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <mat-form-field class="w-full" appearance="fill">
           <mat-label class="text-white">Usuario o Email</mat-label>
           <input matInput placeholder="Ingresa tu usuario o email" formControlName="username" required />
           <mat-error *ngIf="LoginForm.get('username')?.invalid && LoginForm.get('username')?.touched">
-            Este campo es obligatorio.
+            This is a mandatory field.
           </mat-error>
         </mat-form-field>
   
@@ -16,18 +16,18 @@
           <mat-label class="text-white">Contraseña</mat-label>
           <input matInput type="password" placeholder="Ingresa tu contraseña" formControlName="password" required />
           <mat-error *ngIf="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched">
-            Este campo es obligatorio.
+            This is a mandatory field.
           </mat-error>
         </mat-form-field>
   
         <div class="flex justify-center">
           <button mat-flat-button type="submit" class="w-full py-2 rounded-lg bg-[#E50000] text-white font-bold hover:bg-red-700" [disabled]="LoginForm.invalid">
-            Iniciar sesión
+            Log in
           </button>
         </div>
       </form>
       <div class="text-center mt-2">
-        <a href="#" class="text-sm text-[#E50000] hover:text-red-700">¿No tienes una cuenta? Regístrate</a>
+        <a href="#" class="text-sm text-[#E50000] hover:text-red-700">¿Don't have an account? Register here</a>
       </div>
     </mat-card>
   </div>

@@ -6,6 +6,7 @@ import { MoviePageComponent } from './movies/pages/movie-page/movie-page.compone
 import { MovieFormPageComponent } from './movies/pages/movie-form-page/movie-form-page.component';
 import { MoviesListPageComponent } from './movies/pages/movies-list-page/movies-list-page.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
             {path: ':id', component: MoviePageComponent},
             {path: '**', redirectTo: 'list'}
         ]
+    },
+    {
+        path: 'register',
+        component:  RegisterComponent,
     }
 
 ];
