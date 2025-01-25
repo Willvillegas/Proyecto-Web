@@ -46,4 +46,37 @@ export class ActorService {
         return ActorRepository.count();
     }
 
+    /**
+     * set images for an actor
+     * @param actorId string
+     * @param images Express.Multer.File[]
+     * @returns Promise<IActor | null>
+     */
+    static async setImages(actorId: string, images: Express.Multer.File[]): Promise<IActor | null> {
+        const actor = await ActorRepository.findById(actorId);
+        if (!actor) return null;
+        actor.images.push(...images.map((image) => ({
+            url: image.filename,
+            isCover: false
+        })));
+        return ActorRepository.update(actor);
+    }
+
+    /**
+     * adds a principal image to an actor
+     * @param actorId string
+     * @param image Express.Multer.File
+     * @returns Promise<IActor | null>
+     */
+    static async setCover(actorId: string, image: Express.Multer.File): Promise<IActor | null> {
+        const actor = await ActorRepository.findById(actorId);
+        if (!actor) return null;
+        actor.images.forEach((img) => img.isCover = false);
+        actor.images.push({
+            url: image.filename,
+            isCover: true
+        });
+        return ActorRepository.update(actor);
+    }
+
 }
