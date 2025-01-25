@@ -7,6 +7,8 @@ import { MovieFormPageComponent } from './movies/pages/movie-form-page/movie-for
 import { MoviesListPageComponent } from './movies/pages/movies-list-page/movies-list-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ActorFormPageComponent } from './movies/pages/actor-form-page/actor-form-page.component';
+import { ActorPageComponent } from './movies/pages/actor-page/actor-page.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +29,18 @@ export const routes: Routes = [
     {
         path: 'register',
         component:  RegisterComponent,
-    }
+    },
+    { 
+        path: 'actors',
+        component: LayoutPageComponent,
+        children: [
+          { path: 'list', component: ActorsListPageComponent }, 
+          { path: 'new-actor', component: ActorFormPageComponent }, 
+          { path: 'edit/:id', component: ActorFormPageComponent }, 
+          { path: ':id', component: ActorPageComponent },
+          { path: '**', redirectTo: 'list' }
+        ]
+      }
+      
 
 ];

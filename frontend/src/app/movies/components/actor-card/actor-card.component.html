@@ -1,0 +1,10 @@
+<mat-card class="w-64 h-70">
+    <mat-card-header>
+        <mat-card-title>{{actor.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="coverImageUrl" alt="{{ actor.name }}">
+    <mat-card-content>
+        <p>{{actor.biography | slice:0:100}}...</p> 
+        <strong>Born: {{actor.birthDate | date}}</strong>
+    </mat-card-content>
+</mat-card>
