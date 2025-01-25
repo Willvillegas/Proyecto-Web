@@ -5,8 +5,13 @@ import { ActorsListPageComponent } from './movies/pages/actors-list-page/actors-
 import { MoviePageComponent } from './movies/pages/movie-page/movie-page.component';
 import { MovieFormPageComponent } from './movies/pages/movie-form-page/movie-form-page.component';
 import { MoviesListPageComponent } from './movies/pages/movies-list-page/movies-list-page.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        component:  LoginComponent,
+    },
     {path: 'movies',
         component: LayoutPageComponent,
         children:[
@@ -17,12 +22,6 @@ export const routes: Routes = [
             {path: ':id', component: MoviePageComponent},
             {path: '**', redirectTo: 'list'}
         ]
-    },
-    {
-        path: '',
-        redirectTo:  'movies',
-        pathMatch: 'full'
-
     }
 
 ];
