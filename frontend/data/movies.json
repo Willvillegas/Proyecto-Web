@@ -153,7 +153,7 @@
             "birthDate": "1974-11-11",
             "biography": "Leonardo DiCaprio is an American actor known for his performances in Titanic, Inception, and The Revenant.",
             "posters": [
-                { "url": "https://example.com/leonardo_cover.jpg", "isCover": true },
+                { "url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Leonardo_Dicaprio_Cannes_2019.jpg", "isCover": true },
                 { "url": "https://example.com/leonardo_1.jpg", "isCover": false }
             ],
             "movies": ["inception", "the-revenant"]
@@ -164,7 +164,7 @@
             "birthDate": "1981-02-17",
             "biography": "Joseph Gordon-Levitt is an American actor known for his roles in 500 Days of Summer, Inception, and The Dark Knight Rises.",
             "posters": [
-                { "url": "https://example.com/joseph_cover.jpg", "isCover": true },
+                { "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeblXFzipZDWbyf7Br-Juq6WYbUgav2uvcdg&s", "isCover": true },
                 { "url": "https://example.com/joseph_1.jpg", "isCover": false }
             ],
             "movies": ["inception"]
@@ -175,7 +175,7 @@
             "birthDate": "1987-02-21",
             "biography": "Elliot Page is a Canadian actor, known for his roles in Juno, Inception, and The Umbrella Academy.",
             "posters": [
-                { "url": "https://example.com/elliot_cover.jpg", "isCover": true },
+                { "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvC-FBDXTmVyoAv5s2vyLjqNQrA35_8U4lEQ&s", "isCover": true },
                 { "url": "https://example.com/elliot_1.jpg", "isCover": false }
             ],
             "movies": ["inception"]
@@ -186,7 +186,7 @@
             "birthDate": "1974-01-30",
             "biography": "Christian Bale is an English actor known for his versatility and starring roles in The Dark Knight and American Psycho.",
             "posters": [
-                { "url": "https://example.com/christian_cover.jpg", "isCover": true },
+                { "url": "https://hips.hearstapps.com/hmg-prod/images/christian-bale-arrives-at-the-pale-blue-eye-los-angeles-news-photo-1706895210.jpg?crop=0.670xw:1.00xh;0.167xw,0&resize=1200:*", "isCover": true },
                 { "url": "https://example.com/christian_1.jpg", "isCover": false }
             ],
             "movies": ["the-dark-knight"]
