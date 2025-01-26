@@ -1,5 +1,10 @@
 import { model, Schema } from "mongoose";
-import { IMovie } from "../interfaces/movie.interface";
+import { IImage, IMovie } from "../interfaces/movie.interface";
+
+const imageSchema = new Schema<IImage>({
+    url: { type: String, required: true },
+    isCover: { type: Boolean, default: false },
+});
 
 const movieSchema = new Schema<IMovie>({
     title: { type: String, required: true },
@@ -11,10 +16,11 @@ const movieSchema = new Schema<IMovie>({
     }],
     releaseYear: { type: Number, required: true },
     rating: { type: String, required: true },
-    posters: [{
-        url: { type: String, required: true },
-        isCover: { type: Boolean, required: true }
-    }]
+    posters: {
+        type: [imageSchema],
+        default: []
+    },
+    clasification: { type: String, required: true }
 });
 
 export const Movie = model<IMovie>('Movie', movieSchema);

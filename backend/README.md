@@ -55,6 +55,7 @@ Verano 2024-2025
 - `interfaces/` : Contiene las formas que contiene los objetos que se usan en el backend (importante para typescript)
 - `routes/` : Contiene los archivos encargados de definir las rutas de la api y de dirigir las solicitudes HTTP y de gestionar los métodos HTTP
 - `utils/` : Contiene funcionalidades externas que puede ser usadas durante todo el proceso de una solicitud (ya sea HTTP o de la base de datos)
+- `middlewares/` Contiene las configuraciones que procesan a "medio camino" las solicitudes HTTP, para este proyecto se implementarán para la validación de los usuarios y el procesamento de archivos
 
 ## API Endpoints
 

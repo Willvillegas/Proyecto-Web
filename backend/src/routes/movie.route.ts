@@ -1,12 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { Router } from "express";
 import { MovieController } from "../controllers/movie.controller";
+import { upload } from "../middlewares/multer.middleware";
 
 const router: Router = express.Router();
+
 
 router.get("/movies", MovieController.getAll as any);
 router.get("/movies/:id", MovieController.getById as any);
 router.post("/movies", MovieController.create as any);
+//Image upload
+// router.post("/movies/upload", upload.array('images', 12), (req, res) => {
+//     res.json(req.files);
+// });
+router.post("/movies/:id/upload", upload.array('images', 12), MovieController.uploadImages as any);
+router.post("/movies/:id/set-cover", upload.single('cover'), MovieController.setCover as any);
 router.put("/movies", MovieController.update as any);
 
 // Endpoints with movies and actor actions
