@@ -5,7 +5,8 @@ const router: Router = express.Router();
 
 router.route("/users")
     .post(UserController.create)
-    .get(UserController.findAll);
+    .get(UserController.findAll)
+    .put(UserController.update);
 router.get("/users/:id", UserController.findById);
 router.post("/users/login", UserController.login);
 

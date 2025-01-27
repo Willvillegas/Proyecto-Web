@@ -214,4 +214,27 @@ export class MovieController {
             return res.status(500).json({ message: "An unknown error occurred" });
         }
     }
+
+    /**
+     * Delete a movie by id
+     * @param req Request
+     * @param res Response
+     * @returns Promise<Response>
+     */
+    static async delete(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params;
+            const movie = await MovieService.remove(id);
+            if (!movie) {
+                return res.status(404).json({ message: "Movie not found" });
+            }
+            return res.status(200).json(movie);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                return res.status(500).json({ message: error.message });
+            }
+            return res.status(500).json({ message: "An unknown error occurred" });
+        }
+    }
 }

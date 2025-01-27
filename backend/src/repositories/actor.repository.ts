@@ -1,4 +1,5 @@
 import { Actor } from "../models/actor.model";
+import { Movie } from "../models/movie.model";
 import { IActor } from "../interfaces/actor.interface";
 
 export class ActorRepository {
@@ -43,6 +44,21 @@ export class ActorRepository {
      */
     static async count(): Promise<number> {
         return Actor.countDocuments().exec();
+    }
+
+    /**
+     * Deletes an actor by ID
+     * @param id string
+     * @returns Promise<IActor | null>
+     */
+    static async remove(id: string): Promise<IActor | null> {
+        if (!Actor.findById(id)) return null;
+        await Movie.updateMany(
+            { cast: id },
+            { $pull: { cast: id } }
+        ).exec();
+
+        return Actor.findByIdAndDelete(id).exec();
     }
 
 }

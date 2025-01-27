@@ -33,6 +33,16 @@ export class UserController {
         }
     }
 
+    static async update(req: Request, res: Response) {
+        try {
+            const user: IUser = req.body;
+            const updateUser = await UserService.update(user);
+            res.status(200).json(updateUser);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
     static async login(req: Request, res: Response) {
         try {
             const { username, password } = req.body;

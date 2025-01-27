@@ -79,4 +79,11 @@ export class ActorService {
         return ActorRepository.update(actor);
     }
 
+    /** 
+     * Remove actor by ID
+     */
+    static async remove(id: string): Promise<IActor | null> {
+        return ActorRepository.remove(id);
+    }
+
 }

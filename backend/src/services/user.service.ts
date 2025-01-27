@@ -15,6 +15,10 @@ export class UserService {
         return UserRepository.findById(id);
     }
 
+    static async update(user: IUser): Promise<IUser | null> {
+        return UserRepository.update(user);
+    }
+
     /**
      * login user
      */
