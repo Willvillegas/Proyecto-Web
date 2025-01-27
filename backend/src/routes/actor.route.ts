@@ -5,11 +5,13 @@ import { upload } from "../middlewares/multer.middleware";
 
 const router: Router = express.Router();
 
-
-router.get("/actors", ActorController.getAll as any);
-router.get("/actors/:id", ActorController.getById as any);
-router.post("/actors", ActorController.create as any);
-router.put("/actors", ActorController.update as any);
+router.route("/actors/:id")
+    .get(ActorController.getById as any)
+    .delete(ActorController.delete as any);
+router.route("/actors")
+    .get(ActorController.getAll as any)
+    .post(ActorController.create as any)
+    .put(ActorController.update as any);
 
 /**
  * Images upload for actors

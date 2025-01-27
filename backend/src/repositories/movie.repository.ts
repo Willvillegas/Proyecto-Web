@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
 import { Movie } from "../models/movie.model";
+import { Actor } from "../models/actor.model";
 
 export class MovieRepository {
     /**
@@ -25,7 +26,7 @@ export class MovieRepository {
             query['clasification'] = filters.clasification;
         }
         if (filters.genre) {
-            query['genre'] = filters.genre;
+            query['genre'] = { $regex: filters.genre, $options: 'i' };
         }
         if (filters.releaseYear) {
             query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
@@ -36,7 +37,7 @@ export class MovieRepository {
         return Movie.find(query)
             .skip(offset)
             .limit(limit)
-            .populate('cast')
+            .populate('cast', 'name')
             .exec();
     }
 
@@ -75,5 +76,24 @@ export class MovieRepository {
             query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
         }
         return Movie.countDocuments(query).exec();
+    }
+
+    /**
+     * delete a movie by ID
+     * @param id string
+     * @returns Promise<IMovie | null>
+     */
+    static async remove(id: string): Promise<IMovie | null> {
+        /**
+         * Remove the movie from the actors
+         */
+        if (!Movie.findById(id)) {
+            return null;
+        }
+        await Actor.updateMany(
+            { 'movies': { id } },
+            { $pull: { 'movies': id } }
+        ).exec();
+        return Movie.findByIdAndDelete(id).exec();
     }
 }

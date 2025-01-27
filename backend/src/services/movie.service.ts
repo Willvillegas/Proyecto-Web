@@ -42,8 +42,8 @@ export class MovieService {
 
     /**
      * add an actor to a cast
-     * @param movieId string
-     * @param actorId string
+     * @param movieId Identifier of the movie
+     * @param actorId Identifier of the actor
      * @returns Promise<IMovie | null>
      */
     static async addActor(movieId: string, actorId: string): Promise<IMovie | null> {
@@ -110,5 +110,12 @@ export class MovieService {
             isCover: true
         });
         return MovieRepository.update(movie);
+    }
+
+    /**
+     * remove a movie by ID
+     */
+    static async remove(id: string): Promise<IMovie | null> {
+        return MovieRepository.remove(id);
     }
 }

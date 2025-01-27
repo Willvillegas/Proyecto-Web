@@ -10,9 +10,9 @@ const configStorage = multer.diskStorage({
          * else
          * save the file in uploads/
          */
-        if (req.originalUrl === '/api/movies/upload') {
+        if (req.originalUrl.includes('/api/movies')) {
             destination = "uploads/movies/";
-        } else if (req.originalUrl === '/api/actors/upload') {
+        } else if (req.originalUrl.includes('/api/actors')) {
             destination = "uploads/actors/";
         } else {
             destination = "uploads/";

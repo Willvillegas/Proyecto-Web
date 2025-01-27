@@ -145,4 +145,27 @@ export class ActorController {
             return res.status(500).json({ message: "An unknown error occurred" });
         }
     }
+
+    /**
+     * Delete an actor by id
+     * @param req Request
+     * @param res Response
+     * @returns Promise<Response>
+     */
+    static async delete(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params;
+            const actor = await ActorService.remove(id);
+            if (!actor) {
+                return res.status(404).json({ message: "Actor not found" });
+            }
+            return res.status(200).json(actor);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                return res.status(500).json({ message: error.message });
+            }
+            return res.status(500).json({ message: "An unknown error occurred" });
+        }
+    }
 }
