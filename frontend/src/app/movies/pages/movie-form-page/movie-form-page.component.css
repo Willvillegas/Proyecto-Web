@@ -1,0 +1,70 @@
+/* Personalización del botón de eliminación */
+.mat-danger {
+    background-color: rgb(194, 42, 42) !important;
+    color: white !important;
+  }
+  
+  .mat-danger:hover {
+    background-color: rgb(194, 42, 42);
+    color: white;
+  }
+  
+  /* Personalización de texto de error */
+  .mat-danger-text {
+    color: rgb(194, 42, 42);
+  }
+  
+  /* Flexbox para la alineación de botones */
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  /* Estilo para inputs de tipo 'poster' */
+  .poster-input {
+    margin-bottom: 1rem;
+  }
+  
+  /* Material Design Input Fields */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  mat-input-element {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  mat-checkbox {
+    margin-top: 0.5rem;
+  }
+  
+  /* Estilo de la tarjeta */
+  mat-card {
+    padding: 2rem;
+  }
+  
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-card-image {
+    width: 100%;
+    height: auto;
+  }
+  

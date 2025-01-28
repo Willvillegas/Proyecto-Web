@@ -1,0 +1,18 @@
+.carousel-container {
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    display: flex;
+  }
+  
+  .carousel-item {
+    width: 100%;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  

@@ -13,7 +13,8 @@
                 { "url": "https://th.bing.com/th/id/R.7d82d780b0679dba7737c24246e50818?rik=b2HcjJxLhtY3MA&pid=ImgRaw&r=0", "isCover": true },
                 { "url": "https://example.com/inception_1.jpg", "isCover": false },
                 { "url": "https://example.com/inception_2.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "PG-13"
         },
         {
             "id": "the-dark-knight",
@@ -25,10 +26,11 @@
             "releaseYear": 2008,
             "rating": 9.0,
             "posters": [
-                { "url": "https://th.bing.com/th/id/R.34df6b287faf65b160b47e05ba85bb3b?rik=o5LsP1up4eGlXA&pid=ImgRaw&r=0", "isCover": true },
+                { "url": "https://www.themoviedb.org/t/p/original/2Ka2nOtSlwuFlsHtrtfHKMIjldC.jpg", "isCover": true },
                 { "url": "https://example.com/darkknight_1.jpg", "isCover": false },
                 { "url": "https://example.com/darkknight_2.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "PG-13"
         },
         {
             "id": "the-revenant",
@@ -42,7 +44,8 @@
             "posters": [
                 { "url": "https://www.themoviedb.org/t/p/original/47CPtrJri6T9roxbs38Pdq54g41.jpg", "isCover": true },
                 { "url": "https://example.com/revenant_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         },
         {
             "id": "interstellar",
@@ -56,7 +59,8 @@
             "posters": [
                 { "url": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", "isCover": true },
                 { "url": "https://example.com/interstellar_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "PG-13"
         },
         {
             "id": "fight-club",
@@ -70,7 +74,8 @@
             "posters": [
                 { "url": "https://www.new-video.de/co/fightclu.jpg", "isCover": true },
                 { "url": "https://example.com/fightclub_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         },
         {
             "id": "matrix",
@@ -84,7 +89,8 @@
             "posters": [
                 { "url": "https://pics.filmaffinity.com/Matrix-155050517-large.jpg", "isCover": true },
                 { "url": "https://example.com/matrix_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         },
         {
             "id": "pulp-fiction",
@@ -98,7 +104,8 @@
             "posters": [
                 { "url": "https://www.themoviedb.org/t/p/original/pbWgQPC6l9pkpEpi3WNRSfWYNP6.jpg", "isCover": true },
                 { "url": "https://example.com/pulpfiction_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         },
         {
             "id": "gladiator",
@@ -112,7 +119,8 @@
             "posters": [
                 { "url": "https://www.themoviedb.org/t/p/original/ixsPIb7dIiZlrqbV1QVdqA9XWxm.jpg", "isCover": true },
                 { "url": "https://example.com/gladiator_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         },
         {
             "id": "ice-age",
@@ -127,9 +135,9 @@
               { 
                 "url": "https://th.bing.com/th/id/R.6b0113544137b5c3e520382f3ddef89f?rik=yz1jbsJop%2fAlwg&pid=ImgRaw&r=0", "isCover": true},
               { "url": "https://example.com/ice-age-1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "PG"
           },
-          
         {
             "id": "the-godfather",
             "title": "The Godfather",
@@ -142,10 +150,11 @@
             "posters": [
                 { "url": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", "isCover": true },
                 { "url": "https://example.com/godfather_1.jpg", "isCover": false }
-            ]
+            ],
+            "classification": "R"
         }
-
     ],
+
     "actors": [
         {
             "id": "leonardo-dicaprio",

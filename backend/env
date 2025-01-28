@@ -1,0 +1,3 @@
+BD_URL="mongodb+srv://admin:admin12345@proyectoweb.v67qs.mongodb.net/ProyectoWeb"
+PORT =3000
+JWT="ProyectoWeb2425"

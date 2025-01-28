@@ -8,6 +8,7 @@ export interface Movie {
     releaseYear: number; 
     rating: number; // Calificación de la película
     posters: Image[]; // Lista de imágenes de la película
+    classification: string;
   }
   
   export interface Image {

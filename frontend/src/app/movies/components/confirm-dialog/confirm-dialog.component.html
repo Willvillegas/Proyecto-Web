@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-content class="mt-2">
+        <h1 mat-dialog-title>¿Está seguro que desea eliminar la película {{ data.title }}?</h1>
+        <div mat-dialog-content>
+            <p>
+                Este proceso no es reversible. Está a punto de eliminar la película <strong>{{ data.title }}</strong> 
+                dirigida por <strong>{{ data.director }}</strong>.
+            </p>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="onNoClick()">Cancelar</button>
+            <span class="spacer"></span>
+            <button mat-button color="warn" (click)="onConfirm()" cdkFocusInitial>Eliminar</button>
+        </div>
+    </mat-card-content>
+</mat-card>
+

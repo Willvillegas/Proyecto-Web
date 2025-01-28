@@ -17,4 +17,9 @@ export class ActorsService {
   getActors(): Observable<Actor[]> {
     return this.httpClient.get<Actor[]>(`${this.url}/actors`);
   }
+
+  // Método para buscar actores por nombre 
+  searchActors(query: string): Observable<Actor[]> {
+    return this.httpClient.get<Actor[]>(`${this.url}/actors?q=${query}`);
+  }
 }

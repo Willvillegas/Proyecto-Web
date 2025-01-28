@@ -1,10 +1,31 @@
-<mat-card class="w-64 h-70">
-    <mat-card-header>
-        <mat-card-title>{{movie.title}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="coverImageUrl" alt="{{ movie.title }}">
-    <mat-card-content>
-        <strong>{{movie.rating}}</strong>
-    </mat-card-content>
+<mat-card class="w-64 h-auto">
+  <mat-card-header>
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+  </mat-card-header>
 
+  <img mat-card-image [src]="coverImageUrl" alt="{{ movie.title }}" />
+
+  <mat-card-content>
+    <div class="rating-section">
+      <mat-icon class="yellow-star">star</mat-icon>
+      <span class="rating-text">{{ movie.rating.toFixed(1) }}/10</span>
+    </div>
+    <div class="details-section">
+      <span class="release-year">{{ movie.releaseYear }}</span>
+      <span class="classification-text">{{ movie.classification }}</span>
+    </div>
+    <div class="genre-section">
+      <span class="genre">{{ movie.genre }}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="actions-container">
+    <button mat-raised-button color="primary" (click)="editMovie(movie.id)">
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+    <button mat-raised-button color="primary" (click)="moreOptions(movie.id)">
+      Ver más
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </mat-card-actions>
 </mat-card>

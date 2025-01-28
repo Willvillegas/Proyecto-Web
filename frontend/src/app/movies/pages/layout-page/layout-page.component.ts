@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { SearchComponent } from "../../components/search/search.component";
 
 
 @Component({
@@ -17,15 +18,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    SearchComponent
 ],
   templateUrl: './layout-page.component.html',
   styleUrl: './layout-page.component.css'
 })
 export class LayoutPageComponent {
   public sidebarItems = [
-    { label: 'Películas', icon: 'movie', url: './list' },
-    { label: 'Actores', icon: 'groups', url: './actors-list' },
-    { label: 'Reparto', icon: 'badge', url: './list' },//TODO: EL list SE CAMBIA LUEGO 
+    { label: 'Películas', icon: 'movie', url: '/movies/list' }, // RUTA ABSOLUTA
+    { label: 'Actores', icon: 'groups', url: '/actors/list' },   // RUTA ABSOLUTA
+    { label: 'Reparto', icon: 'badge', url: '/movies/list' },     // RUTA ABSOLUTA
   ]
 }
+

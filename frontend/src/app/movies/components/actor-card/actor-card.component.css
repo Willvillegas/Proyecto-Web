@@ -1,0 +1,22 @@
+.actor-card {
+    width: 16rem; /* Ancho fijo, igual que en las películas */
+    min-height: 24rem; /* Altura mínima para las tarjetas */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .actor-card img {
+    width: 100%;
+    height: 350px; /* Altura fija para la imagen */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+  }
+  
+  .actor-card mat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  
+
+  

@@ -1,0 +1,27 @@
+<div >
+  <mat-form-field class="example-form" appearance="fill">
+    <mat-label>Buscar {{ formMode === 'movies' ? 'Película' : 'Actor' }}
+      <mat-icon>search</mat-icon>
+    </mat-label>
+    <input
+      matInput
+      [formControl]="searchInput"
+      [matAutocomplete]="auto"
+      placeholder="Escribe para buscar..."
+      class="example-input">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectedOption($event)">
+      <mat-option *ngFor="let option of searchResults" [value]="option">
+        {{ formMode === 'movies' ? option.title : option.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div *ngIf="selectedOption" class="selection-details">
+    <p *ngIf="formMode === 'movies'">
+      Película seleccionada: {{ selectedOption.title }}
+    </p>
+    <p *ngIf="formMode === 'actors'">
+      Actor seleccionado: {{ selectedOption.name }}
+    </p>
+  </div>
+</div>
+

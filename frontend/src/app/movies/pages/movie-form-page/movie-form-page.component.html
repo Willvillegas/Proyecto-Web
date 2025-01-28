@@ -1,1 +1,107 @@
-<p>movie-form-page works!</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="col-span-1 sm:col-span-1">
+      <mat-card>
+        <mat-card-content>
+          <form class="grid grid-cols-1 gap-4" [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Título -->
+            <mat-form-field class="col-12">
+              <mat-label>Título</mat-label>
+              <input matInput type="text" required formControlName="title" />
+            </mat-form-field>
+  
+            <!-- Descripción -->
+            <mat-form-field class="col-12">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput required formControlName="description"></textarea>
+            </mat-form-field>
+  
+            <!-- Género -->
+            <mat-form-field class="col-12">
+              <mat-label>Género</mat-label>
+              <input matInput type="text" required formControlName="genre" />
+            </mat-form-field>
+  
+            <!-- Director -->
+            <mat-form-field class="col-12">
+              <mat-label>Director</mat-label>
+              <input matInput type="text" required formControlName="director" />
+            </mat-form-field>
+  
+            <!-- Reparto -->
+            <mat-form-field class="col-12">
+              <mat-label>Reparto</mat-label>
+              <input matInput type="text" required formControlName="cast" placeholder="Lista de actores separados por comas" />
+            </mat-form-field>
+  
+            <!-- Año de lanzamiento -->
+            <mat-form-field class="col-12 sm:col-6">
+              <mat-label>Año de lanzamiento</mat-label>
+              <input matInput type="number" required formControlName="releaseYear" />
+            </mat-form-field>
+  
+            <mat-form-field class="col-12">
+                <mat-label>URLs de Posters</mat-label>
+                <div *ngFor="let poster of posters; let i = index" class="flex flex-col gap-4 mb-4">
+                  <div class="flex gap-4 items-center">
+                    <input
+                      matInput
+                      type="text"
+                      [placeholder]="'URL del poster ' + (i + 1)"
+                      [formControlName]="'poster' + i"  
+                      required
+                      class="flex-1 rounded-md border-gray-300"
+                    />
+                    <mat-checkbox
+                      [(ngModel)]="poster.isCover"
+                      [checked]="poster.isCover"
+                      class="self-center"
+                      (change)="toggleCover(i)">
+                      Portada
+                    </mat-checkbox>
+              
+                    <button
+                      mat-button
+                      type="button"
+                      (click)="removePoster(i)"
+                      class="self-center text-red-600 hover:text-red-800"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+                <button
+                  mat-button
+                  type="button"
+                  (click)="addPoster()"
+                  class="w-full bg-cyan-600 text-white hover:bg-cyan-700"
+                >
+                  Agregar Otro Poster
+                </button>
+              </mat-form-field>
+  
+            <!-- Calificación -->
+            <mat-form-field class="col-12 sm:col-6">
+              <mat-label>Calificación</mat-label>
+              <input matInput type="number" step="0.1" min="0" max="10" required formControlName="rating" />
+            </mat-form-field>
+  
+          </form>
+  
+          <div class="flex justify-between mt-4">
+            <!-- Botón Eliminar -->
+            <button *ngIf="formMode === 'edit'" mat-flat-button class="mat-danger" (click)="onDeleteMovie()">
+              Borrar
+            </button>
+  
+            <!-- Botón Guardar -->
+            <button mat-flat-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
