@@ -4,9 +4,18 @@ import { connectBD } from './utils/connectBD';
 import movieRoute from './routes/movie.route';
 import actorRoute from './routes/actor.route';
 import path from 'path';
+import cors from 'cors';
 
 const app: Express = express();
 const PORT: number = 3000;
+
+app.use(cors(
+    {
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
 
 const result = dotenv.config();
 if (result.error) {
