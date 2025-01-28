@@ -9,9 +9,16 @@ export interface IMovie extends Document {
     releaseYear: number;
     rating: string;
     posters: IImage[];
+    clasification: string;
 }
 
 export interface IImage {
     url: string;
     isCover: boolean;
+}
+
+export interface IFilterMovie {
+    genre?: string;
+    releaseYear?: string;
+    clasification?: string;
 }

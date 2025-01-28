@@ -1,4 +1,4 @@
-import { IMovie } from "../interfaces/movie.interface";
+import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
 import { ActorRepository } from "../repositories/actor.repository";
 import { MovieRepository } from "../repositories/movie.repository";
 
@@ -18,8 +18,8 @@ export class MovieService {
      * @param limit number
      * @returns Promise<IMovie[]>
      */
-    static async findAll(offset: number, limit: number): Promise<IMovie[]> {
-        return MovieRepository.findAll(offset, limit);
+    static async findAll(filters: IFilterMovie, offset: number, limit: number): Promise<IMovie[]> {
+        return MovieRepository.findAll(filters, offset, limit);
     }
 
     /**
@@ -42,8 +42,8 @@ export class MovieService {
 
     /**
      * add an actor to a cast
-     * @param movieId string
-     * @param actorId string
+     * @param movieId Identifier of the movie
+     * @param actorId Identifier of the actor
      * @returns Promise<IMovie | null>
      */
     static async addActor(movieId: string, actorId: string): Promise<IMovie | null> {
@@ -74,8 +74,48 @@ export class MovieService {
      * get all number of movies
      * @returns Promise<number>
      */
-    static async count(): Promise<number> {
-        return MovieRepository.count();
+    static async count(filters: IFilterMovie): Promise<number> {
+        return MovieRepository.count(filters);
     }
 
+    /**
+     * set images to a movie
+     */
+    static async setImages(id: string, images: Express.Multer.File[]): Promise<IMovie | null> {
+        const movie = await MovieRepository.findById(id);
+        if (!movie) return null;
+
+        movie.posters.push(...images.map((image) => ({
+            url: image.filename,  // Usa image.filename para la URL
+            isCover: false  // Establece isCover como false
+        })));
+        return MovieRepository.update(movie);
+    }
+
+    /**
+     * set cover to a movie
+     */
+    static async setCover(id: string, cover: Express.Multer.File): Promise<IMovie | null> {
+        const movie = await MovieRepository.findById(id);
+        if (!movie) return null;
+        //validate if any images in posters is cover
+        movie.posters.forEach((image) => {
+            if (image.isCover) {
+                image.isCover = false;
+            }
+        });
+        //set the new image as cover
+        movie.posters.push({
+            url: cover.filename,
+            isCover: true
+        });
+        return MovieRepository.update(movie);
+    }
+
+    /**
+     * remove a movie by ID
+     */
+    static async remove(id: string): Promise<IMovie | null> {
+        return MovieRepository.remove(id);
+    }
 }

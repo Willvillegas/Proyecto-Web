@@ -1,5 +1,7 @@
-import { IMovie } from "../interfaces/movie.interface";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
 import { Movie } from "../models/movie.model";
+import { Actor } from "../models/actor.model";
 
 export class MovieRepository {
     /**
@@ -18,11 +20,24 @@ export class MovieRepository {
      * @param limit number
      * @returns Promise<IMovie[]>
      */
-    static async findAll(offset: number, limit: number): Promise<IMovie[]> {
-        return Movie.find()
+    static async findAll(filters: IFilterMovie, offset: number, limit: number): Promise<IMovie[]> {
+        const query: any = {};
+        if (filters.clasification) {
+            query['clasification'] = filters.clasification;
+        }
+        if (filters.genre) {
+            query['genre'] = { $regex: filters.genre, $options: 'i' };
+        }
+        if (filters.releaseYear) {
+            query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
+        }
+
+
+
+        return Movie.find(query)
             .skip(offset)
             .limit(limit)
-            .populate('cast')
+            .populate('cast', 'name')
             .exec();
     }
 
@@ -49,7 +64,36 @@ export class MovieRepository {
      * get all number of movies
      * @returns Promise<number>
      */
-    static async count(): Promise<number> {
-        return Movie.countDocuments().exec();
+    static async count(filters: IFilterMovie): Promise<number> {
+        const query: any = {};
+        if (filters.clasification) {
+            query['clasification'] = filters.clasification;
+        }
+        if (filters.genre) {
+            query['genre'] = filters.genre;
+        }
+        if (filters.releaseYear) {
+            query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
+        }
+        return Movie.countDocuments(query).exec();
+    }
+
+    /**
+     * delete a movie by ID
+     * @param id string
+     * @returns Promise<IMovie | null>
+     */
+    static async remove(id: string): Promise<IMovie | null> {
+        /**
+         * Remove the movie from the actors
+         */
+        if (!Movie.findById(id)) {
+            return null;
+        }
+        await Actor.updateMany(
+            { 'movies': { id } },
+            { $pull: { 'movies': id } }
+        ).exec();
+        return Movie.findByIdAndDelete(id).exec();
     }
 }

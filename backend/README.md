@@ -34,7 +34,7 @@ Verano 2024-2025
 
 1. Start the development server:
     ```sh
-    npm run dev
+    npm run start
     ```
 
 2. Build for production:
@@ -42,10 +42,6 @@ Verano 2024-2025
     npm run build
     ```
 
-3. Start the production server:
-    ```sh
-    npm start
-    ```
 
 ## Estructura carpetas
 - `controllers/` : Capa que contiene los archivos que controlan las solicitudes HTTP recibidas del cliente, aqui se generan las respuestas HTTP de las solicitudes.
@@ -55,6 +51,7 @@ Verano 2024-2025
 - `interfaces/` : Contiene las formas que contiene los objetos que se usan en el backend (importante para typescript)
 - `routes/` : Contiene los archivos encargados de definir las rutas de la api y de dirigir las solicitudes HTTP y de gestionar los métodos HTTP
 - `utils/` : Contiene funcionalidades externas que puede ser usadas durante todo el proceso de una solicitud (ya sea HTTP o de la base de datos)
+- `middlewares/` Contiene las configuraciones que procesan a "medio camino" las solicitudes HTTP, para este proyecto se implementarán para la validación de los usuarios y el procesamento de archivos
 
 ## API Endpoints
 
@@ -63,6 +60,9 @@ Verano 2024-2025
     - **Query Params:**
         - `offset` (int): Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.
         - `limit` (int): Especifica cuántos documentos queremos obtener en una sola consulta.
+        - `genre` (string) : [Opcional] buscar por genero
+        - `releaseYear` (string) : [Opcional] buscar por año
+        - `clasification` (string) : [Opcional] buscar por clasificación 
     - Nota: si no coloca los params, devuelve los primeros 10...
 - `POST /api/movies` - Crea una nueva pelicula
     - **Body Params**
@@ -70,7 +70,7 @@ Verano 2024-2025
         - `description` (string): Breve descripción de la pelicula
         - `genre` (string): Género de la pelicula
         - `director` (string): Nombre del director
-        - `rating` (string): Número del 0 al 5 flotante convertido en string
+        - `rating` (string): Número convertido en string
         - `cast` (string []) : id de los actores o si no tambien puede ser vacío
 
 - `GET /api/movies/:id` - Recupera la pelicula por su id
@@ -78,12 +78,13 @@ Verano 2024-2025
         - `id` el identificador de la pelicula.
 - `PUT /api/movies/` - Actualiza la pelicula por su id
     - **Body Params**
+        - `_id` (string): Id de la pelicula
         - `title` (string): Título de la pelicula
         - `description` (string): Breve descripción de la pelicula
         - `genre` (string): Género de la pelicula
         - `director` (string): Nombre del director
-        - `rating` (string): Número del 0 al 5 flotante convertido en string
-        - `cast` (stirng []): Arreglo actores
+        - `rating` (string): Número convertido en string
+        - `cast` (string []): Arreglo actores
 - `DELETE /api/movies/:id` - Elimina una pelicula especifica
     - **Path Params**
         - `id` El identificador de la pelicula.
@@ -97,6 +98,20 @@ Verano 2024-2025
     - **Path Params**
         - `id` El identificador de la pelicula.
         - `actorId` El identificador del actor.
+- `POST /api/movies/:id/upload` - Guarda las imagenes secundarias de una pelicula por su id
+    - **Path Params**
+        - `id` Identificador del actor
+    - **Body Params**
+        - `images` identificador de la imagen con un maximo de 12 imagenes
+    - **Headers Content-type**
+        - `multipart/form-data`
+- `POST /api/movies/:id/set-cover` - Guarda la imagen principal de la pelicula.
+    - **Path Params**
+        - `id` Identificador del actor
+    - **Body Params**
+        - `cover` identificador de la imagen (SOLO PERMITE 1 IMAGEN)
+    - **Headers Content-type**
+        - `multipart/form-data`
 
 ### Entidad: Actor
 - `GET /api/actors` - Recupera todos los actores
@@ -122,22 +137,39 @@ Verano 2024-2025
         - `biography` (string): Biografía del actor
         - `movies` (string[]): id de las peliculas que participa o vacío
 
-- `DELETE /api/actor/:id` - Elimina una actor especifico (TODO)
+- `DELETE /api/actor/:id` - Elimina una actor especifico por su id
     - **Path Params**
         - `id` el identificador del actor.
+- `POST /api/actors/:id/upload` - Guarda las imagenes secundarias de un actor por su id
+    - **Path Params**
+        - `id` Identificador del actor
+    - **Body Params**
+        - `images` identificador de la imagen con un maximo de 12 imagenes
+    - **Headers Content-type**
+        - `multipart/form-data`
+- `POST /api/actors/:id/set-cover` - Guarda la imagen principal del actor.
+    - **Path Params**
+        - `id` Identificador del actor
+    - **Body Params**
+        - `principal` identificador de la imagen (SOLO PERMITE 1 IMAGEN)
+    - **Headers Content-type**
+        - `multipart/form-data`
 
 ### Entidad: Usuario
 - `GET /api/user` - Recupera todos los usuarios
-    - **Query Params:**
-        - `offset` (int): Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.
-        - `limit` (int): Especifica cuántos documentos queremos obtener en una sola consulta.
-    - Nota: si no coloca los params, devuelve los primeros 10...
+
 - `POST /api/user` - Crea un nuevo usuario
     - **Body Params**
-        - `name` (string): Nombre del actor
-        - `username` (string): Nombre del usuario a registrar
+        - `name` (string): Nombre del usuario a registrar
+        - `username` (string): Nombre de ingreso al sistema
         - `password` (string): contraseña del usuario a registrar
         - `isadmin` (boolean): dice si es un administrador o no
+- `PUT /api/user` - Crea un nuevo usuario
+    - **Body Params**
+        - `name` (string): Nombre del usuario a registrar
+        - `username` (string): Nombre de ingreso al sistema
+        - `password` (string): Contraseña del usuario a registrar
+        - `isadmin` (boolean): Dice si es un administrador o no
 - `POST /api/user/login` - Hace la validación de un login
     - **Body Params**
         - `username` (string): Nombre del usuario registrado
