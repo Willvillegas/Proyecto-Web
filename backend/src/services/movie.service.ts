@@ -9,7 +9,16 @@ export class MovieService {
      * @returns Promise<IMovie>
      */
     static async create(movie: IMovie): Promise<IMovie> {
-        return MovieRepository.create(movie);
+        const createdMovie: IMovie = await MovieRepository.create(movie);
+        movie.cast.forEach(element => {
+            ActorRepository.findById(element).then(async (actor) => {
+                if (actor) {
+                    actor.movies.push(createdMovie._id as string);
+                    await ActorRepository.update(actor);
+                }
+            });
+        });
+        return createdMovie;
     }
 
     /**

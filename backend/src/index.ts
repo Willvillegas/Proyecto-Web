@@ -4,9 +4,19 @@ import { connectBD } from './utils/connectBD';
 import movieRoute from './routes/movie.route';
 import actorRoute from './routes/actor.route';
 import path from 'path';
+import cors from 'cors';
+import userRoute from './routes/user.route';
 
 const app: Express = express();
 const PORT: number = 3000;
+
+app.use(cors(
+    {
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true
+    }
+));
 
 const result = dotenv.config();
 if (result.error) {
@@ -29,4 +39,5 @@ app.use(express.json());
 app.disable('x-powered-by');
 app.use('/api', movieRoute);
 app.use('/api', actorRoute);
+app.use('/api', userRoute);
 

@@ -18,7 +18,7 @@ export class ActorRepository {
      * @returns Promise<IActor[]>
      */
     static async findAll(): Promise<IActor[]> {
-        return Actor.find().populate('movies').exec();
+        return Actor.find().populate('movies', ['title', 'releaseYear']).exec();
     }
 
     /**

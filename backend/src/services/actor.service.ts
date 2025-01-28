@@ -1,5 +1,6 @@
 import { IActor } from "../interfaces/actor.interface";
 import { ActorRepository } from "../repositories/actor.repository";
+import { MovieRepository } from "../repositories/movie.repository";
 
 
 export class ActorService {
@@ -9,7 +10,17 @@ export class ActorService {
      * @returns Promise<IActor>
      */
     static async create(actor: IActor): Promise<IActor> {
-        return ActorRepository.create(actor);
+        const actorCreated: IActor = await ActorRepository.create(actor);
+        // add actor to movies
+        actor.movies.forEach(element => {
+            MovieRepository.findById(element).then(async (movie) => {
+                if (movie) {
+                    movie.cast.push(actorCreated._id as string);
+                    await MovieRepository.update(movie);
+                }
+            });
+        });
+        return actorCreated;
     }
 
     /**

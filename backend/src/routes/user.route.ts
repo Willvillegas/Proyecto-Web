@@ -8,6 +8,6 @@ router.route("/users")
     .get(UserController.findAll)
     .put(UserController.update);
 router.get("/users/:id", UserController.findById);
-router.post("/users/login", UserController.login);
+router.post("/auth/login", UserController.login);
 
 export default router;

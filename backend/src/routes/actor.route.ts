@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { Router } from "express";
 import { ActorController } from "../controllers/actor.controller";
-import { upload } from "../middlewares/multer.middleware";
+
 
 const router: Router = express.Router();
 
@@ -15,8 +15,9 @@ router.route("/actors")
 
 /**
  * Images upload for actors
+ * not implemented in the frontend
  */
-router.post("/actors/:id/upload", upload.array('images', 12), ActorController.setImages as any);
-router.post("/actors/:id/set-cover", upload.single('principal'), ActorController.setCover as any);
+// router.post("/actors/:id/upload", upload.array('images', 12), ActorController.setImages as any);
+// router.post("/actors/:id/set-cover", upload.single('principal'), ActorController.setCover as any);
 
 export default router;
