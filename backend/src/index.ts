@@ -5,6 +5,7 @@ import movieRoute from './routes/movie.route';
 import actorRoute from './routes/actor.route';
 import path from 'path';
 import cors from 'cors';
+import userRoute from './routes/user.route';
 
 const app: Express = express();
 const PORT: number = 3000;
@@ -38,4 +39,5 @@ app.use(express.json());
 app.disable('x-powered-by');
 app.use('/api', movieRoute);
 app.use('/api', actorRoute);
+app.use('/api', userRoute);
 
