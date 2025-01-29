@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Movie } from '../../interfaces/movie.interfaces';
+import { MovieApi } from '../../interfaces/movieApi.interfaces';  // Asegúrate de importar MovieApi
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'movie-card',
@@ -12,14 +13,15 @@ import { MatChipsModule } from '@angular/material/chips';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
   ],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.css'],
 })
 export class MovieCardComponent {
   @Input()
-  public movie!: Movie;
+  public movie!: MovieApi;  
 
   constructor(private router: Router) {}
 
@@ -39,16 +41,19 @@ export class MovieCardComponent {
   editMovie(movieId: string): void {
     this.router.navigateByUrl(`/movies/edit/${movieId}`);
   }
-
-  // Mostrar más información de la película
+  
   moreOptions(movieId: string): void {
     this.router.navigateByUrl(`/movies/${movieId}`);
-    console.log('Más opciones para la película', movieId);
   }
 
+  get rating(): number {
+    return parseFloat(this.movie.rating);  // Convierte el rating a número
+  }
+  
+
   // Obtener el texto de clasificación basado en la clasificación almacenada
-  getClassificationText(classification: string): string {
-    switch (classification) {
+  getClassificationText(clasification: string): string {
+    switch (clasification) {
       case 'G':
         return 'Todo público';
       case 'PG':
@@ -64,3 +69,4 @@ export class MovieCardComponent {
     }
   }
 }
+

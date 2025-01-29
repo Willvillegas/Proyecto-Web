@@ -18,11 +18,11 @@ app.use(cors(
     }
 ));
 
-const result = dotenv.config();
-if (result.error) {
-    throw result.error;
-} else
-    console.log(result.parsed);
+//const result = dotenv.config();
+//if (result.error) {
+ //   throw result.error;
+//} else
+ //   console.log(result.parsed);
 //const { BD_URL } = process.env;
 connectBD(`mongodb+srv://admin:admin12345@proyectoweb.v67qs.mongodb.net/ProyectoWeb`).then(() => {
     app.listen(PORT, () => {

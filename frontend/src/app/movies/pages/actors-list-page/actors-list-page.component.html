@@ -1,10 +1,22 @@
 <div class="flex flex-col p-8 rounded-lg shadow-xl">
     <h1 class="text-3xl mb-4">Actores</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pt-2 bm-4">
-        @for (actor of actors; track $index){
-            <div class="col-12 sm:col-4 md:col-3 xl:col-2">
-                <actor-card [actor]="actor"></actor-card>
-            </div>
-        }
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pt-2 pb-4">
+      <div *ngFor="let actor of actors; let i = index" class="flex justify-center">
+        <div class="w-full h-full flex justify-center">
+          <actor-card [actor]="actor"></actor-card>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination-container">
+      <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
+        Anterior
+      </button>
+      <button (click)="nextPage()" [disabled]="(currentPage * limit) >= totalActors" class="pagination-button">
+        Siguiente
+      </button>
     </div>
 </div>
+  
+  

@@ -8,22 +8,26 @@
   <mat-card-content>
     <div class="rating-section">
       <mat-icon class="yellow-star">star</mat-icon>
-      <span class="rating-text">{{ movie.rating.toFixed(1) }}/10</span>
+      <span class="rating-text">{{ rating.toFixed(1) }}/10</span>
     </div>
     <div class="details-section">
       <span class="release-year">{{ movie.releaseYear }}</span>
-      <span class="classification-text">{{ movie.classification }}</span>
+      <span class="classification-text">{{ movie.clasification }}</span>
     </div>
     <div class="genre-section">
       <span class="genre">{{ movie.genre }}</span>
     </div>
   </mat-card-content>
   <mat-card-actions class="actions-container">
-    <button mat-raised-button color="primary" (click)="editMovie(movie.id)">
+    <button mat-raised-button color="primary" 
+            *ngIf="movie._id" 
+            (click)="editMovie(movie._id)">
       <mat-icon>edit</mat-icon>
       Editar
     </button>
-    <button mat-raised-button color="primary" (click)="moreOptions(movie.id)">
+    <button mat-raised-button color="primary" 
+            *ngIf="movie._id" 
+            (click)="moreOptions(movie._id)">
       Ver más
       <mat-icon>more_horiz</mat-icon>
     </button>

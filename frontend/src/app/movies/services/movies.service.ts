@@ -8,7 +8,7 @@ import { Movie } from '../interfaces/movie.interfaces';
   providedIn: 'root'
 })
 export class MoviesService {
-  private url = environment.baseUrl;
+  private url = environment.apiUrl;
 
   constructor(
     private httpClient: HttpClient

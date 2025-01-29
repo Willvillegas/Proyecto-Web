@@ -8,7 +8,7 @@ import { Actor } from '../interfaces/actor.interfaces';
   providedIn: 'root'
 })
 export class ActorsService {
-  private url = environment.baseUrl;
+  private url = environment.apiUrl;
 
   constructor(
     private httpClient: HttpClient

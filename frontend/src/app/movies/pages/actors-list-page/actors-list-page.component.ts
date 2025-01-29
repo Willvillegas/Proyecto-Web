@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Actor } from '../../interfaces/actor.interfaces';
-import { ActorsService } from '../../services/actors.service';
 import { CommonModule } from '@angular/common';
 import { ActorCardComponent } from "../../components/actor-card/actor-card.component";
+import { ActorApi } from '../../interfaces/actorApi.interfaces';
+import { ActorsApiService } from '../../services/actors-api.service';
 
 
 @Component({
@@ -12,14 +12,36 @@ import { ActorCardComponent } from "../../components/actor-card/actor-card.compo
   styleUrls: ['./actors-list-page.component.css']
 })
 export class ActorsListPageComponent {
-  public actors: Actor[] = [];
+  public actors: ActorApi[] = [];
+  public totalActors: number = 0;  // Total de actores disponibles
+  public currentPage: number = 1; // Página actual
+  public limit: number = 10; // Número de actores por página
 
-  constructor(
-    private actorsService: ActorsService
-  ) {}
+  constructor(private actorsService: ActorsApiService) {}
 
   ngOnInit(): void {
-    this.actorsService.getActors()
-      .subscribe(actors => this.actors = actors);
+    this.loadActors();
+  }
+
+  loadActors(): void {
+    const offset = (this.currentPage - 1) * this.limit;
+    this.actorsService.getActorsPage(this.limit, offset).subscribe((response) => {
+      this.actors = response.data;
+      this.totalActors = response.total;
+    });
+  }
+
+  nextPage(): void {
+    if ((this.currentPage * this.limit) < this.totalActors) {
+      this.currentPage++;
+      this.loadActors();
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadActors();
+    }
   }
 }

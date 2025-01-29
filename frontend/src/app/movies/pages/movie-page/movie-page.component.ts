@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../../interfaces/movie.interfaces';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MovieApi } from '../../interfaces/movieApi.interfaces';
+import { MoviesApiService } from '../../services/movies-api.service';
 
 @Component({
   selector: 'movie-page',
@@ -14,12 +14,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./movie-page.component.css']
 })
 export class MoviePageComponent implements OnInit {
-  public movie: Movie | null = null; // Inicializa como null
+  public movie: MovieApi | null = null; // Inicializa como null
   public currentSlide: number = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private moviesService: MoviesService
+    private moviesService: MoviesApiService
   ) {}
 
   ngOnInit(): void {

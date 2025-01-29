@@ -1,10 +1,26 @@
 <mat-card class="actor-card">
     <mat-card-header>
-        <mat-card-title>{{ actor.name }}</mat-card-title>
+      <mat-card-title>{{ actor.name }}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]="coverImageUrl" alt="{{ actor.name }}">
+  
+    <img mat-card-image [src]="coverImageUrl" alt="{{ actor.name }}" />
+  
     <mat-card-content>
-        <p>{{ actor.biography | slice: 0:100 }}...</p>
-        <strong>Born: {{ actor.birthDate | date }}</strong>
+      <div class="actor-details">
+        <span class="biography">{{ actor.biography }}</span>
+      </div>
     </mat-card-content>
-</mat-card>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary">
+         Editar
+      <mat-icon>edit</mat-icon>
+      </button>
+        
+      <button mat-raised-button color="primary">
+        Ver Perfil
+        <mat-icon>person</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  
