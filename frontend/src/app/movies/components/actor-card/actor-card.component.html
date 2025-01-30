@@ -17,7 +17,9 @@
       <mat-icon>edit</mat-icon>
       </button>
         
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary"
+            *ngIf="actor._id" 
+            (click)="moreOptions(actor._id)">
         Ver Perfil
         <mat-icon>person</mat-icon>
       </button>
