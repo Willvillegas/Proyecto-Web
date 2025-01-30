@@ -24,9 +24,10 @@ export class MoviesApiService {
   getMovieById(id: string): Observable<MovieApi> {
     return this.httpClient.get<MovieApi>(`${this.apiUrl}/${id}`)
   }
-  createMovie(movie: MovieResponse): Observable<MovieApi> {
+  createMovie(movie: MovieApi): Observable<MovieApi> {
     return this.httpClient.post<MovieApi>(`${this.apiUrl}`, movie);
   }
+  
   getMoviesPage(limit: number, offset: number): Observable<MovieResponse> {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
   }
@@ -41,6 +42,7 @@ export class MoviesApiService {
     return this.httpClient.put<MovieApi>(`${this.apiUrl}/${movie._id}`, movie);
   }
   
+  
   // Eliminar una película por su ID
   deleteMovie(movieId: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/movies/${movieId}`);
@@ -50,7 +52,7 @@ export class MoviesApiService {
   getUniqueFilterOptions(): Observable<{ genres: string[]; years: string[]; ratings: string[] }> {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}`).pipe(
       map(response => {
-        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror']; 
+        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance']; 
         const ratings = [...new Set(response.data.map(movie => movie.clasification || ''))];
 
         return { genres, years: [], ratings }; // No cargamos años dinámicamente

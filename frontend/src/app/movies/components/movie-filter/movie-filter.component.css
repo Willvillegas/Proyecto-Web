@@ -14,7 +14,7 @@
   }
   
   mat-form-field.search-input {
-    width: 250px; 
+    width: 450px !important; 
     margin: 0;
   }
   
@@ -22,5 +22,10 @@
     display: flex;
     align-items: center;
   }
-  
-  
+  mat-form-field input {
+  font-size: 16px; 
+  }
+
+  mat-form-field {
+    width: 250px; 
+  }

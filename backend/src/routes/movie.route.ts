@@ -6,12 +6,12 @@ import { MovieController } from "../controllers/movie.controller";
 const router: Router = express.Router();
 router.route("/movies")
     .get(MovieController.getAll as any)
-    .post(MovieController.create as any)
-    .put(MovieController.update as any);
+    .post(MovieController.create as any);
 
 router.route("/movies/:id")
     .get(MovieController.getById as any)
-    .delete(MovieController.delete as any);
+    .delete(MovieController.delete as any)
+    .put(MovieController.update as any);
 
 // Endpoints with images actions not available in the frontend
 // router.post("/movies/:id/upload", upload.array('images', 12), MovieController.uploadImages as any);

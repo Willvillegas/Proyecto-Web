@@ -29,19 +29,16 @@
   </mat-form-field>
   <mat-form-field appearance="fill" *ngIf="selectedFilter === 'rating'">
     <mat-label>Seleccionar Clasificación</mat-label>
-    <input 
-      matInput 
-      [(ngModel)]="selectedValue" 
-      [matAutocomplete]="ratingAuto" 
-      (ngModelChange)="onFilterChange()"
-      (keyup.enter)="onEnterPress()"
-    />
-    <mat-autocomplete #ratingAuto="matAutocomplete">
-      <mat-option *ngFor="let rating of ratings" [value]="rating">
-        {{ rating }}
-      </mat-option>
-    </mat-autocomplete>
+    <mat-select [(value)]="selectedValue" (selectionChange)="onFilterChange()">
+      <mat-option value="G">Todo público</mat-option>
+      <mat-option value="PG">Supervisión de padres</mat-option>
+      <mat-option value="PG-13">Mayores de 13 años</mat-option>
+      <mat-option value="PG-15">Mayores de 15 años</mat-option>
+      <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
+      <mat-option value="NC-17">Solo adultos</mat-option>
+    </mat-select>
   </mat-form-field>
+  
 </div>
 
 

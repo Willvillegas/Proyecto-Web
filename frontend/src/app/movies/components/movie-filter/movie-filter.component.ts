@@ -20,8 +20,17 @@ export class MovieFilterComponent implements OnInit {
   selectedFilter: string = 'genre'; 
   selectedValue: string | number | null = null; 
 
-  genres: string[] = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi']; 
-  ratings: string[] = []; 
+  genres: string[] = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance']; 
+  //ratings: string[] = []; 
+  ratings: string[] = [
+    "G", 
+    "PG", 
+    "PG-13", 
+    "PG-15", 
+    "R", 
+    "NC-17"
+  ];
+  
   years: number[] = []; 
 
   constructor(private moviesService: MoviesApiService) {}
@@ -55,9 +64,9 @@ export class MovieFilterComponent implements OnInit {
   get filterOptions() {
     switch (this.selectedFilter) {
       case 'genre':
-        return this.genres; 
+        return this.genres;
       case 'rating':
-        return this.ratings; 
+        return this.ratings;
       default:
         return [];
     }

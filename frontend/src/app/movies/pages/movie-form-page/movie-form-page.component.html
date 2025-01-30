@@ -1,107 +1,94 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="col-span-1 sm:col-span-1">
-      <mat-card>
-        <mat-card-content>
-          <form class="grid grid-cols-1 gap-4" [formGroup]="movieForm" (ngSubmit)="onSubmit()">
-            
-            <!-- Título -->
-            <mat-form-field class="col-12">
+<div class="p-5">
+  <mat-card class="shadow-lg">
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode ? 'Editar Película' : 'Crear Nueva Película' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="movieForm" (ngSubmit)="onSubmit()"> 
+        <div>
+          <div class="grid gap-5 grid-cols-1 sm:grid-cols-2">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Título</mat-label>
-              <input matInput type="text" required formControlName="title" />
+              <input matInput formControlName="title" />
+              <mat-error *ngIf="movieForm.get('title')?.hasError('required')">El título es requerido</mat-error>
             </mat-form-field>
-  
-            <!-- Descripción -->
-            <mat-form-field class="col-12">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Descripción</mat-label>
-              <textarea matInput required formControlName="description"></textarea>
+              <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
-  
-            <!-- Género -->
-            <mat-form-field class="col-12">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Género</mat-label>
-              <input matInput type="text" required formControlName="genre" />
+              <mat-select formControlName="genre">
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
-  
-            <!-- Director -->
-            <mat-form-field class="col-12">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Director</mat-label>
-              <input matInput type="text" required formControlName="director" />
+              <input matInput formControlName="director" />
             </mat-form-field>
-  
-            <!-- Reparto -->
-            <mat-form-field class="col-12">
-              <mat-label>Reparto</mat-label>
-              <input matInput type="text" required formControlName="cast" placeholder="Lista de actores separados por comas" />
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Año de Lanzamiento</mat-label>
+              <input matInput formControlName="releaseYear" type="number" />
             </mat-form-field>
-  
-            <!-- Año de lanzamiento -->
-            <mat-form-field class="col-12 sm:col-6">
-              <mat-label>Año de lanzamiento</mat-label>
-              <input matInput type="number" required formControlName="releaseYear" />
-            </mat-form-field>
-  
-            <mat-form-field class="col-12">
-                <mat-label>URLs de Posters</mat-label>
-                <div *ngFor="let poster of posters; let i = index" class="flex flex-col gap-4 mb-4">
-                  <div class="flex gap-4 items-center">
-                    <input
-                      matInput
-                      type="text"
-                      [placeholder]="'URL del poster ' + (i + 1)"
-                      [formControlName]="'poster' + i"  
-                      required
-                      class="flex-1 rounded-md border-gray-300"
-                    />
-                    <mat-checkbox
-                      [(ngModel)]="poster.isCover"
-                      [checked]="poster.isCover"
-                      class="self-center"
-                      (change)="toggleCover(i)">
-                      Portada
-                    </mat-checkbox>
-              
-                    <button
-                      mat-button
-                      type="button"
-                      (click)="removePoster(i)"
-                      class="self-center text-red-600 hover:text-red-800"
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-                <button
-                  mat-button
-                  type="button"
-                  (click)="addPoster()"
-                  class="w-full bg-cyan-600 text-white hover:bg-cyan-700"
-                >
-                  Agregar Otro Poster
-                </button>
-              </mat-form-field>
-  
-            <!-- Calificación -->
-            <mat-form-field class="col-12 sm:col-6">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Calificación</mat-label>
-              <input matInput type="number" step="0.1" min="0" max="10" required formControlName="rating" />
+              <input matInput formControlName="rating" type="number" min="0" max="10" step="0.1" (input)="validateRating($event)">
             </mat-form-field>
-  
-          </form>
-  
-          <div class="flex justify-between mt-4">
-            <!-- Botón Eliminar -->
-            <button *ngIf="formMode === 'edit'" mat-flat-button class="mat-danger" (click)="onDeleteMovie()">
-              Borrar
-            </button>
-  
-            <!-- Botón Guardar -->
-            <button mat-flat-button color="primary" type="submit">
-              <mat-icon>save</mat-icon>
-              Guardar
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Reparto (Actores)</mat-label>
+              <mat-select formControlName="cast" multiple>
+                <mat-option *ngFor="let actor of actors" [value]="actor._id">
+                  {{ actor.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Clasificación</mat-label>
+              <mat-select formControlName="clasification">
+                <mat-option value="G">Todo público</mat-option>
+                <mat-option value="PG">Supervisión de padres</mat-option>
+                <mat-option value="PG-13">Mayores de 13 años</mat-option>
+                <mat-option value="PG-15">Mayores de 15 años</mat-option>
+                <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
+                <mat-option value="NC-17">Solo adultos</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="accent" (click)="onAddImage()" [disabled]="movieForm.get('posters')?.value.length >= 12">
+              Agregar Imagen
             </button>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-  
+          <div>
+          <div class="mt-4 w-full">
+            <label>Imágenes</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
+              <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index" class="flex flex-col items-center space-y-2 w-full">
+                <img [src]="poster.url" alt="Poster" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+                <mat-radio-group formControlName="cover">
+                  <mat-radio-button [value]="poster._id" [checked]="poster._id === movieForm.get('cover')?.value">
+                    Portada
+                  </mat-radio-button>
+                </mat-radio-group>
+                <div class="flex flex-col gap-2 w-full">
+                  <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full">Cambiar</button>
+                  <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
+                          [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="mt-4 flex justify-between">
+          <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" class="ml-4">Eliminar Película</button>
+          <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
+            {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

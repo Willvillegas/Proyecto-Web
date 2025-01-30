@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,10 +12,12 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
-import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../../interfaces/movie.interfaces';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MovieApi, MovieResponse, Poster } from '../../interfaces/movieApi.interfaces';
+import { ActorApi } from '../../interfaces/actorApi.interfaces';
+import { MoviesApiService } from '../../services/movies-api.service';
+import { ActorsApiService } from '../../services/actors-api.service';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @Component({
@@ -35,153 +37,203 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDividerModule,
     FormsModule,
     MatCheckboxModule,
+    MatRadioModule,
   ],
   templateUrl: './movie-form-page.component.html',
   styleUrls: ['./movie-form-page.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MovieFormPageComponent implements OnInit {
-  public formMode: 'new' | 'edit' = 'new';
-  public movieForm: FormGroup;
-  public posters: { url: string; isCover: boolean }[] = [];  // Lista de posters
-
+  movieForm: FormGroup;
+  isEditMode = false;
+  movieId: string | null = null;
+  actors: ActorApi[] = [];
+  movieData: MovieApi | null = null;
+  genres: string[] = ['Action', 'Comedy', 'Drama', 'Science Fiction', 'Horror', 'Romance', 'Animation', 'Adventure'];
+  
   constructor(
-    private moviesService: MoviesService,
-    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private movieApiService: MoviesApiService,
+    private actorApiService: ActorsApiService,
+    private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private snackBar: MatSnackBar
   ) {
-    this.movieForm = new FormGroup({
-      id: new FormControl<string>(''),
-      title: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-      description: new FormControl<string>('', [Validators.required]),
-      genre: new FormControl<string>('', [Validators.required]),
-      director: new FormControl<string>('', [Validators.required]),
-      cast: new FormControl<string>('', [Validators.required]),
-      releaseYear: new FormControl<number | null>(null, [Validators.required, Validators.min(1800)]),
-      rating: new FormControl<number | null>(null, [Validators.required, Validators.min(0), Validators.max(10)]),
+    this.movieForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      genre: ['', Validators.required], 
+      director: ['', Validators.required],
+      releaseYear: ['', Validators.required],
+      rating: ['', [Validators.required, Validators.min(0), Validators.max(10)]], 
+      cast: [[], Validators.required],
+      cover: [null],  // Control para la portada
+      clasification: ['G', Validators.required], 
+      posters: [[] as Poster[], Validators.required], 
     });
   }
 
   ngOnInit(): void {
-    this.movieForm = new FormGroup({
-      id: new FormControl<string>(''),
-      title: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-      description: new FormControl<string>('', [Validators.required]),
-      genre: new FormControl<string>('', [Validators.required]),
-      director: new FormControl<string>('', [Validators.required]),
-      cast: new FormControl<string>('', [Validators.required]),
-      releaseYear: new FormControl<number | null>(null, [Validators.required, Validators.min(1800)]),
-      rating: new FormControl<number | null>(null, [Validators.required, Validators.min(0), Validators.max(10)]),
-    });
-  
-    if (this.router.url.includes('edit')) {
-      this.formMode = 'edit';
-      this.activatedRoute.params.subscribe(({ id }) => {
-        this.moviesService.getMovieById(id).subscribe((movie) => {
-          if (!movie) {
-            this.router.navigateByUrl('/movies/list');
-            return; // Termina aquí si no hay película
-          }
-  
-          // Inicializa los datos del formulario
-          this.movieForm.setValue({
-            id: movie.id,
-            title: movie.title,
-            description: movie.description,
-            genre: movie.genre,
-            director: movie.director,
-            cast: movie.cast.join(', '), // Convertir array a string
-            releaseYear: movie.releaseYear,
-            rating: movie.rating,
-          });
-  
-          // Inicializar los posters en el formulario
-          this.posters = movie.posters.map((poster, i) => {
-            this.movieForm.addControl('poster' + i, new FormControl(poster.url)); // Añadir dinámicamente los controles para los posters
-            return {
-              url: poster.url,
-              isCover: poster.isCover || false,
-            };
-          });
-        });
-      });
-    }
-  }
-  
-  addPoster(): void {
-    const index = this.posters.length;
-    this.posters.push({ url: '', isCover: false });
-  
-    // Agregar un control dinámico para el nuevo poster
-    this.movieForm.addControl('poster' + index, new FormControl('')); // Crear el control para el nuevo poster
-  }
-  
-  
-  
-
-  // Eliminar un poster de la lista
-  removePoster(index: number): void {
-    // Elimina el poster en el índice especificado
-    this.posters.splice(index, 1);
-  }
-  
-
-  // Marca un solo poster como portada
-  toggleCover(index: number): void {
-    // Desmarcar todos los demás posters
-    this.posters.forEach((poster, i) => {
-      if (i !== index) {
-        poster.isCover = false;
+    this.isEditMode = this.route.snapshot.url[0].path === 'edit';
+    // Cargar todos los actores disponibles
+    this.loadActors();
+    if (this.isEditMode) {
+      const movieId = this.route.snapshot.paramMap.get('id');
+      if (movieId) {
+        this.movieId = movieId;
+        this.loadMovieData(movieId);
       }
-    });
+    }
+  }
   
-    // Cambiar el estado del poster actual
-    this.posters[index].isCover = !this.posters[index].isCover;
+  loadActors(): void {
+    this.actorApiService.getActors().subscribe(response => {
+      this.actors = response; 
+    });
+  }
+  
+  initForm(): void {
+    this.movieForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      genre: ['', Validators.required],
+      director: ['', Validators.required],
+      releaseYear: ['', Validators.required],
+      rating: ['', Validators.required],
+      cast: [[], Validators.required],
+      posters: [[], Validators.required], 
+      cover: [null],// Control para la portada
+    });
+  }
+
+  loadMovieData(id: string): void {
+    this.movieApiService.getMovieById(id).subscribe(movie => {
+      console.log("Movie data received:", movie);
+      const genresString = movie.genre ? movie.genre : '';  
+      const genresArray = genresString.split(',').map(g => g.trim()); 
+      this.movieData = movie;
+      this.movieForm.patchValue({
+        title: movie.title,
+        description: movie.description,
+        genre: genresArray.join(', '), 
+        director: movie.director,
+        releaseYear: movie.releaseYear,
+        rating: movie.rating,
+        cast: movie.cast.map(actor => actor._id),
+        posters: movie.posters,
+        clasification: movie.clasification ?? 'G',
+      });
+    });
   }
   
 
-  onSubmit(): void {
-    if (this.movieForm.invalid || this.posters.length === 0) {
-      this.snackBar.open('Formulario inválido o sin posters', 'Cerrar', { duration: 3000 });
-      return;
+  onSubmit() {
+    const formValue = this.movieForm.value;
+    const posters: Poster[] = formValue.posters;
+    // Si no hay una portada seleccionada, marca la primera imagen como portada
+    if (!formValue.cover) {
+      formValue.cover = posters[0]._id; 
     }
+    const movie: MovieApi = {
+      ...formValue,
+      posters: posters,  
+    };
+    console.log("Movie data", movie);
   
-    const movie: Movie = {
-      ...this.movieForm.value,
-      // Convertir el campo cast a array de actores (strings) y asegurar que actor es de tipo string
-      cast: (this.movieForm.value.cast || '')
-        .split(',')
-        .map((actor: string) => actor.trim()), // Especificar que actor es de tipo string
-      posters: this.posters, // Agregar posters al objeto movie
-    } as Movie;
-  
-    if (this.formMode === 'edit') {
-      this.moviesService.updateMovie(movie).subscribe(() => {
-        this.snackBar.open('Película actualizada correctamente', 'Cerrar', { duration: 3000 });
-        this.router.navigateByUrl('/movies/list');
-      });
+    if (this.isEditMode && this.movieId) {
+      // Si estamos en modo de edición, actualiza la película
+      movie._id = this.movieId;  // mantiene el id de la película
+      this.movieApiService.updateMovie(movie).subscribe(
+        response => {
+          console.log('Película actualizada con éxito:', response);
+          this.showSnackBar('Película actualizada con éxito');
+          this.router.navigate(['/movie/list']);  // Redirige después de la edición
+        },
+        error => {
+          console.error('Error al actualizar la película:', error);
+          this.showSnackBar('Error al actualizar la película');
+        }
+      );
     } else {
-      this.moviesService.addMovie(movie).subscribe(() => {
-        this.snackBar.open('Película creada correctamente', 'Cerrar', { duration: 3000 });
-        this.router.navigateByUrl('/movies/list');
-      });
+      // Si no estamos en modo de edición, creamos una nueva película
+      this.movieApiService.createMovie(movie).subscribe(
+        response => {
+          console.log('Película creada con éxito:', response);
+          this.showSnackBar('Película creada con éxito');
+          this.router.navigate(['/movie/list']);  // Redirige después de la creación
+        },
+        error => {
+          console.error('Error al crear la película:', error);
+          this.showSnackBar('Error al crear la película');
+        }
+      );
     }
   }
   
-  onDeleteMovie(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { title: this.movieForm.value.title },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result || !this.movieForm.value.id) return;
-
-      this.moviesService.deleteMovie(this.movieForm.value.id).subscribe(() => {
-        this.snackBar.open('Película eliminada correctamente', 'Cerrar', { duration: 3000 });
-        this.router.navigateByUrl('/movies/list');
-      });
+  
+  showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000
     });
   }
+
+  onDelete(): void {
+    if (this.movieId) {
+      this.movieApiService.deleteMovie(this.movieId).subscribe(
+        () => {
+          this.showSnackBar('Película eliminada con éxito');
+          // Redirigir a la página principal (movie/list) después de la eliminación
+          this.router.navigate(['/movie/list']);
+        },
+        error => {
+          this.showSnackBar('Error al eliminar la película');
+        }
+      );
+    }
+  }
+
+  onAddImage(): void {
+    if (this.movieForm.get('posters')?.value.length >= 12) return;
+  
+    const newUrl = prompt("Introduce la URL de la nueva imagen:");
+    if (newUrl) {
+      const posters: Poster[] = this.movieForm.get('posters')?.value || [];
+      // Si es la primera imagen, la marcamos como portada
+      const newPoster: Poster = { url: newUrl, isCover: posters.length === 0 };
+      posters.push(newPoster);
+      this.movieForm.get('posters')?.setValue(posters);
+    }
+  }
+  
+  onChangeImage(index: number): void {
+    const newUrl = prompt("Introduce la nueva URL de la imagen:");
+    if (newUrl) {
+      const posters: Poster[] = this.movieForm.get('posters')?.value;
+      if (posters && posters[index]) {
+        posters[index].url = newUrl;
+        posters.forEach((poster, idx) => {
+          poster.isCover = idx === index ? true : false;  // Marcar la imagen seleccionada como portada
+        });
+  
+        this.movieForm.get('posters')?.setValue(posters);
+      }
+    }
+  }
+  
+  
+  onDeleteImage(index: number): void {
+    const posters = this.movieForm.get('posters')?.value;
+    if (posters.length > 1) {
+      posters.splice(index, 1);
+      this.movieForm.get('posters')?.setValue(posters);
+    }
+  }
+  
+  // Validación de rating
+  validateRating(event: any): void {
+    let value = event.target.value;
+    if (value < 0) event.target.value = 0;
+    if (value > 10) event.target.value = 10;
+  }
+  
 }
