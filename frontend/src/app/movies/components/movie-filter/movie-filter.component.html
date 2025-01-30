@@ -1,1 +1,47 @@
-<p>movie-filter works!</p>
+<div  appearance="fill" class="filter-dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Filtrar por</mat-label>
+    <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterChange()">
+      <mat-option value="genre">Género</mat-option>
+      <mat-option value="year">Año</mat-option>
+      <mat-option value="rating">Clasificación</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'genre'">
+    <mat-label>Seleccionar Género</mat-label>
+    <input 
+      matInput 
+      [(ngModel)]="selectedValue" 
+      [matAutocomplete]="auto" 
+      (ngModelChange)="onFilterChange()"
+      (keyup.enter)="onEnterPress()"
+    />
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let genre of genres" [value]="genre">
+        {{ genre }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'year'">
+    <mat-label>Seleccionar Año</mat-label>
+    <input matInput type="number" [(ngModel)]="selectedValue" (ngModelChange)="onFilterChange()" [min]="1900" [max]="2025" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'rating'">
+    <mat-label>Seleccionar Clasificación</mat-label>
+    <input 
+      matInput 
+      [(ngModel)]="selectedValue" 
+      [matAutocomplete]="ratingAuto" 
+      (ngModelChange)="onFilterChange()"
+      (keyup.enter)="onEnterPress()"
+    />
+    <mat-autocomplete #ratingAuto="matAutocomplete">
+      <mat-option *ngFor="let rating of ratings" [value]="rating">
+        {{ rating }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+

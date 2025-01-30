@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { MovieApi, MovieResponse } from '../interfaces/movieApi.interfaces';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -44,5 +44,41 @@ export class MoviesApiService {
   // Eliminar una película por su ID
   deleteMovie(movieId: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/movies/${movieId}`);
+  }
+
+ 
+  getUniqueFilterOptions(): Observable<{ genres: string[]; years: string[]; ratings: string[] }> {
+    return this.httpClient.get<MovieResponse>(`${this.apiUrl}`).pipe(
+      map(response => {
+        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror']; 
+        const ratings = [...new Set(response.data.map(movie => movie.clasification || ''))];
+
+        return { genres, years: [], ratings }; // No cargamos años dinámicamente
+      })
+    );
+  }
+
+  getFilteredMovies(
+    genre?: string,
+    year?: string,
+    rating?: string,
+    limit: number = 10,
+    offset: number = 0
+  ): Observable<MovieResponse> {
+    let params = new HttpParams();
+
+    if (genre) {
+      params = params.set('genre', genre);
+    }
+    if (year) {
+      params = params.set('releaseYear', year);
+    }
+    if (rating) {
+      params = params.set('clasification', rating);
+    }
+
+    params = params.set('limit', limit.toString()).set('offset', offset.toString());
+
+    return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params });
   }
 }

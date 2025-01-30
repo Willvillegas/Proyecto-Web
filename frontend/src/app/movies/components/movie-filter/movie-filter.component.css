@@ -1,0 +1,26 @@
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .flex-col {
+    flex-direction: row;
+  }
+  
+  mat-form-field.filter-dropdown {
+    width: 150px; 
+    margin: 0;
+  }
+  
+  mat-form-field.search-input {
+    width: 250px; 
+    margin: 0;
+  }
+  
+  mat-form-field .mat-form-field-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  
