@@ -1,1 +1,38 @@
-<p>actor-page works!</p>
+<div class="container cont mx-auto p-6" *ngIf="actor">
+    <div class="flex flex-col md:flex-row gap-6 items-start">
+      <div class="carousel-container">
+        <img *ngIf="actor?.images?.[currentSlide]" 
+             [src]="actor.images[currentSlide].url" 
+             alt="Poster de la película" 
+             class="carousel-image" />
+        <button (click)="previousSlide()">
+          &#9664; 
+        </button>
+        <button (click)="nextSlide()">
+          &#9654; 
+        </button>
+      </div>
+      <div class="details-left flex flex-col space-y-4 h-full">
+        <h1 class="text-4xl font-bold text-gray-100">{{ actor.name }}</h1>
+        <div class="flex flex-col h-auto">
+          <div class="details-below mt-3 p-2 shadow-lg rounded-xl space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 text-base">
+              <p><strong>Fecha de nacimiento: </strong> {{ actor.birthday }}</p>
+            </div>
+            <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
+                {{ actor.biography }}
+              </p>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
+              <div class="flex flex-wrap gap-2">
+                <mat-chip *ngFor="let movie of actor.movies" class="bg-gray-200">
+                  {{ movie.title }}
+                </mat-chip>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

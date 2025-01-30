@@ -6,6 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
+import { Router } from '@angular/router';
 import { ActorApi } from '../../interfaces/actorApi.interfaces';
 
 @Component({
@@ -26,11 +27,17 @@ export class ActorCardComponent {
   @Input()
   public actor!: ActorApi;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     if (!this.actor) {
       throw new Error('Attribute actor is required');
     }
     console.log('Actor recibido:', this.actor);
+  }
+
+  moreOptions(movieId: string): void {
+    this.router.navigateByUrl(`/actors/${movieId}`);
   }
   
 
