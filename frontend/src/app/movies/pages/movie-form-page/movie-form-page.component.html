@@ -55,7 +55,7 @@
                 <mat-option value="NC-17">Solo adultos</mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="accent" (click)="onAddImage()" [disabled]="movieForm.get('posters')?.value.length >= 12">
+            <button mat-raised-button color="accent" (click)="onAddImage()" [disabled]="movieForm.get('posters')?.value.length >= 12" type="button">
               Agregar Imagen
             </button>
           </div>
@@ -83,7 +83,7 @@
           </div>
         </div>
         <div class="mt-4 flex justify-between">
-          <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" class="ml-4">Eliminar Película</button>
+          <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" [disabled]="isDeleting" class="ml-4">Eliminar Película</button>
           <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
             {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
           </button>

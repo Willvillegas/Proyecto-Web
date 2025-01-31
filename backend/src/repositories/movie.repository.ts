@@ -2,6 +2,7 @@
 import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
 import { Movie } from "../models/movie.model";
 import { Actor } from "../models/actor.model";
+import { Types } from "mongoose";
 
 export class MovieRepository {
     /**
@@ -91,8 +92,8 @@ export class MovieRepository {
             return null;
         }
         await Actor.updateMany(
-            { 'movies': { id } },
-            { $pull: { 'movies': id } }
+            { movies: new Types.ObjectId(id) }, // Filtra los actores que tienen la película en su array 'movies'
+            { $pull: { movies: new Types.ObjectId(id) } } // Elimina la referencia de la película del array 'movies'
         ).exec();
         return Movie.findByIdAndDelete(id).exec();
     }

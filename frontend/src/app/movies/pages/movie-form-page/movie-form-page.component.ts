@@ -50,6 +50,7 @@ export class MovieFormPageComponent implements OnInit {
   actors: ActorApi[] = [];
   movieData: MovieApi | null = null;
   genres: string[] = ['Action', 'Comedy', 'Drama', 'Science Fiction', 'Horror', 'Romance', 'Animation', 'Adventure'];
+  isDeleting = false;
   
   constructor(
     private fb: FormBuilder,
@@ -128,26 +129,30 @@ export class MovieFormPageComponent implements OnInit {
   
 
   onSubmit() {
+    if (this.isDeleting) {
+      console.warn("Intento de actualizar mientras se está eliminando la película.");
+      return; // Evita ejecutar el código si la película está en proceso de eliminación
+    }
+  
     const formValue = this.movieForm.value;
     const posters: Poster[] = formValue.posters;
-    // Si no hay una portada seleccionada, marca la primera imagen como portada
+  
     if (!formValue.cover) {
-      formValue.cover = posters[0]._id; 
+      formValue.cover = posters.length > 0 ? posters[0]._id : null;
     }
+  
     const movie: MovieApi = {
       ...formValue,
-      posters: posters,  
+      posters: posters,
     };
-    console.log("Movie data", movie);
   
     if (this.isEditMode && this.movieId) {
-      // Si estamos en modo de edición, actualiza la película
-      movie._id = this.movieId;  // mantiene el id de la película
+      movie._id = this.movieId;
       this.movieApiService.updateMovie(movie).subscribe(
         response => {
           console.log('Película actualizada con éxito:', response);
           this.showSnackBar('Película actualizada con éxito');
-          this.router.navigate(['/movie/list']);  // Redirige después de la edición
+          this.router.navigate(['movies/list']);
         },
         error => {
           console.error('Error al actualizar la película:', error);
@@ -155,12 +160,11 @@ export class MovieFormPageComponent implements OnInit {
         }
       );
     } else {
-      // Si no estamos en modo de edición, creamos una nueva película
       this.movieApiService.createMovie(movie).subscribe(
         response => {
           console.log('Película creada con éxito:', response);
           this.showSnackBar('Película creada con éxito');
-          this.router.navigate(['/movie/list']);  // Redirige después de la creación
+          this.router.navigate(['/movies/list']);
         },
         error => {
           console.error('Error al crear la película:', error);
@@ -179,18 +183,23 @@ export class MovieFormPageComponent implements OnInit {
 
   onDelete(): void {
     if (this.movieId) {
+      console.log("Intentando eliminar película con ID:", this.movieId);
+      this.isDeleting = true;
       this.movieApiService.deleteMovie(this.movieId).subscribe(
         () => {
+          this.isDeleting = false;
           this.showSnackBar('Película eliminada con éxito');
-          // Redirigir a la página principal (movie/list) después de la eliminación
-          this.router.navigate(['/movie/list']);
+          this.router.navigate(['/movies/list']); // Redirigir inmediatamente
         },
-        error => {
+        (error) => {
+          this.isDeleting = false;
+          console.error('Error al eliminar la película', error);
           this.showSnackBar('Error al eliminar la película');
         }
       );
     }
   }
+  
 
   onAddImage(): void {
     if (this.movieForm.get('posters')?.value.length >= 12) return;

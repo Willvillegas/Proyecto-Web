@@ -44,10 +44,10 @@ export class MoviesApiService {
   
   
   // Eliminar una película por su ID
-  deleteMovie(movieId: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/movies/${movieId}`);
+  deleteMovie(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
   }
-
+  
  
   getUniqueFilterOptions(): Observable<{ genres: string[]; years: string[]; ratings: string[] }> {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}`).pipe(
