@@ -50,7 +50,7 @@ export class UserController {
             if (token !== null) {
                 res.status(200).json(token);
             } else {
-                res.status(401).json("Invalid username or password");
+                res.status(401).json('Invalid username or password');
             }
         } catch (error) {
             res.status(500).json(error);

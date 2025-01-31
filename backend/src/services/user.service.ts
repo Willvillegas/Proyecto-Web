@@ -1,6 +1,11 @@
 import { IUser } from "../interfaces/user.interface";
 import { UserRepository } from "../repositories/user.repository";
-import { jwtGenerate } from "../utils/JWT";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = 'SECRET_KEY';
 
 export class UserService {
     static async create(user: IUser): Promise<IUser> {
@@ -19,17 +24,16 @@ export class UserService {
         return UserRepository.update(user);
     }
 
-    /**
-     * login user
-     */
     static async login(username: string, password: string): Promise<string | null> {
-        //find user by username
         const user = await UserRepository.findByUsername(username);
-        // if user is found, generate token
+        console.log(user);
         if (!user) return null;
-        //compare password
         if (user.password === password) {
-            const token = jwtGenerate(user);
+            const token = jwt.sign(
+                { id: user._id, isAdmin: user.isAdmin },
+                JWT_SECRET,
+                { expiresIn: '1h' }
+            );
             return token;
         }
         return null;

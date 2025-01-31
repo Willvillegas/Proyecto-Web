@@ -1,16 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [CommonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -19,26 +20,27 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
-  LoginForm!: FormGroup;
+export class RegisterComponent {
+  studentForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.createLoginForm();
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.createStudentForm();
   }
 
-  createLoginForm() {
-    this.LoginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
+  createStudentForm() {
+    this.studentForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    if (this.LoginForm.valid) {
-      const formData = this.LoginForm.value;
+    if (this.studentForm.valid) {
+      const formData = this.studentForm.value;
       console.log('Form Submitted:');
       for (const [key, value] of Object.entries(formData)) {
         console.log(`${key}: ${value}`);
@@ -46,6 +48,10 @@ export class LoginComponent {
     } else {
       console.log('Form is invalid.');
     }
+  }
+
+  goToLogin() {
+    this.router.navigate(['/']);
   }
 
 }
