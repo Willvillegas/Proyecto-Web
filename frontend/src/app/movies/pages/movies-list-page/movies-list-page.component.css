@@ -1,35 +1,35 @@
 .pagination-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-  }
-  
-  .pagination-button {
-    background-color: #E50000; 
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .pagination-button:disabled {
-    background-color: #cccccc; 
-    cursor: not-allowed;
-  }
-  
-  .pagination-button:hover:not(:disabled) {
-    background-color: #b20000; 
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.pagination-button {
+  background-color: #E50000; 
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc; 
+  cursor: not-allowed;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #b20000; 
+}
+
 .header-container {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Para alinear los elementos */
   margin-bottom: 1rem;
 }
-
 
 .title-container {
   display: flex;
@@ -40,13 +40,11 @@
   gap: 1rem; 
 }
 
-
 .filter-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 
 .filter-container mat-form-field {
   width: 130px; 
@@ -56,3 +54,27 @@
 .filter-container input {
   width: 180px; 
 }
+
+
+.add-movie-btn {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+  border: solid 2px #E50000; 
+  border-radius: 4px; 
+  padding: 6px 12px; 
+  color: white;
+  background-color: #E50000; 
+  transition: all 0.3s ease-in-out;
+}
+
+.add-movie-btn:hover {
+  background-color: white;
+  color: #E50000;
+}
+
+.add-icon {
+  margin-top: 2px; 
+}
+

@@ -4,10 +4,12 @@ import { MovieCardComponent } from "../../components/movie-card/movie-card.compo
 import { MoviesApiService } from '../../services/movies-api.service';
 import { MovieApi } from '../../interfaces/movieApi.interfaces';
 import { MovieFilterComponent } from "../../components/movie-filter/movie-filter.component";
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'movies-list-page',
-  imports: [CommonModule, MovieCardComponent, MovieFilterComponent],
+  imports: [CommonModule, MovieCardComponent, MovieFilterComponent, RouterModule,MatIconModule,],
   templateUrl: './movies-list-page.component.html',
   styleUrl: './movies-list-page.component.css'
 })
