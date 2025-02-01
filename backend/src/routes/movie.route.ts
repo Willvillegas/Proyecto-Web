@@ -21,5 +21,10 @@ router.route("/movies/:id")
 router.post("/movies/:id/actors", MovieController.addActor as any);
 router.delete("/movies/:id/actors/:actorId", MovieController.removeActor as any);
 
+/**
+ * Get all actors from a movie
+ */
+router.get("/movies/:id/actors", MovieController.getActors as any);
+
 
 export default router;

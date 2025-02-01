@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
+import { IFilterMovie, IImage, IMovie } from "../interfaces/movie.interface";
 import { Movie } from "../models/movie.model";
 import { Actor } from "../models/actor.model";
 
@@ -96,4 +96,34 @@ export class MovieRepository {
         ).exec();
         return Movie.findByIdAndDelete(id).exec();
     }
+    /**
+     * Dado un id de una pelicula, 
+     * recupera todos los actores que participaron en ella
+     * y luego devuelve el id,nombre, y la imagen que es cover de cada actor
+     * @param id string
+     * @returns Promise<{_id:string,name:string,imageCover:IImage}[]>
+     */
+    static async getActors(id: string): Promise<{ _id: string, name: string, imageCover: IImage }[]> {
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return [];
+        }
+        const actorsInMovie: { _id: string, name: string, imageCover: IImage }[] = []
+        for (const actorId of movie.cast) {
+            const actor = await Actor.findById(actorId);
+            if (actor) {
+                const imageCover: IImage = actor.images.find((image) => image.isCover)!;
+                actorsInMovie.push({
+                    _id: actor._id?.toString() || '',
+                    name: actor.name,
+                    imageCover: imageCover!,
+                });
+            }
+        }
+        return actorsInMovie;
+
+    }
+
+
+
 }

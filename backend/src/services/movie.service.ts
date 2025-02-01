@@ -1,4 +1,4 @@
-import { IFilterMovie, IMovie } from "../interfaces/movie.interface";
+import { IFilterMovie, IImage, IMovie } from "../interfaces/movie.interface";
 import { ActorRepository } from "../repositories/actor.repository";
 import { MovieRepository } from "../repositories/movie.repository";
 
@@ -126,5 +126,14 @@ export class MovieService {
      */
     static async remove(id: string): Promise<IMovie | null> {
         return MovieRepository.remove(id);
+    }
+
+    /**
+     * get all actors from a movie
+     * @param id 
+     * @returns 
+     */
+    static async getActors(id: string): Promise<{ _id: string, name: string, imageCover: IImage }[] | null> {
+        return MovieRepository.getActors(id);
     }
 }
