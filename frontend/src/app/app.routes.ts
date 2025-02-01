@@ -5,8 +5,8 @@ import { ActorsListPageComponent } from './movies/pages/actors-list-page/actors-
 import { MoviePageComponent } from './movies/pages/movie-page/movie-page.component';
 import { MovieFormPageComponent } from './movies/pages/movie-form-page/movie-form-page.component';
 import { MoviesListPageComponent } from './movies/pages/movies-list-page/movies-list-page.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './users/pages/login/login.component';
+import { RegisterComponent } from './users/pages/register/register.component';
 import { ActorFormPageComponent } from './movies/pages/actor-form-page/actor-form-page.component';
 import { ActorPageComponent } from './movies/pages/actor-page/actor-page.component';
 

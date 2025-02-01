@@ -1,6 +1,7 @@
 import { Actor } from "../models/actor.model";
 import { Movie } from "../models/movie.model";
 import { IActor } from "../interfaces/actor.interface";
+import { Types } from "mongoose";
 
 export class ActorRepository {
     /**
@@ -54,8 +55,8 @@ export class ActorRepository {
     static async remove(id: string): Promise<IActor | null> {
         if (!Actor.findById(id)) return null;
         await Movie.updateMany(
-            { cast: id },
-            { $pull: { cast: id } }
+            { cast: new Types.ObjectId(id) },
+            { $pull: { cast: new Types.ObjectId(id) } }
         ).exec();
 
         return Actor.findByIdAndDelete(id).exec();

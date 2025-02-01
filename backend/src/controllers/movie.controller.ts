@@ -237,4 +237,28 @@ export class MovieController {
             return res.status(500).json({ message: "An unknown error occurred" });
         }
     }
+
+    /**
+     * Get all actors from a movie
+     * @param req Request
+     * @param res Response
+     * @returns Promise<Response>
+     * 
+     */
+    static async getActors(req: Request, res: Response): Promise<Response> {
+        try {
+            const { id } = req.params;
+            const actors = await MovieService.getActors(id);
+            if (!actors) {
+                return res.status(404).json({ message: "Movie not found" });
+            }
+            return res.status(200).json(actors);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                return res.status(500).json({ message: error.message });
+            }
+            return res.status(500).json({ message: "An unknown error occurred" });
+        }
+    }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,7 +26,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   studentForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.createStudentForm();
   }
 
@@ -48,6 +49,10 @@ export class RegisterComponent {
     } else {
       console.log('Form is invalid.');
     }
+  }
+
+  goToLogin() {
+    this.router.navigate(['/']);
   }
 
 }

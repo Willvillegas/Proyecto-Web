@@ -5,14 +5,10 @@
             <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
                 <mat-form-field class="w-full">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter your first name" formControlName="firstName" required>
+                    <input matInput placeholder="Enter your full name" formControlName="fullName" required>
                     <mat-error *ngIf="studentForm.get('firstName')?.invalid && studentForm.get('firstName')?.touched">
                         First Name is required.
                     </mat-error>
-                </mat-form-field>
-                <mat-form-field class="w-full">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Enter your last name" formControlName="lastName">
                 </mat-form-field>
                 <mat-form-field class="w-full">
                     <mat-label>Email</mat-label>
