@@ -8,8 +8,14 @@ export class UserRepository {
      * @returns Promise<IUser>
      */
     static async create(user: IUser): Promise<IUser> {
+        const existingUser = await User.findOne({ username: user.username }).exec();
+        if (existingUser) {
+            throw new Error('User already exists');
+        }
+        
         const newUser = new User(user);
-        return newUser.save();
+        const savedUser = await newUser.save();
+        return savedUser;
     }
 
     /**

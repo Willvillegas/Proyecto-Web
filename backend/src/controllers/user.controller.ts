@@ -10,7 +10,12 @@ export class UserController {
             const newUser = await UserService.create(user);
             res.status(201).json(newUser);
         } catch (error) {
-            res.status(500).json(error);
+            const err = error as Error;
+            if (err.message === 'User already exists') {
+                res.status(409).json({ message: 'User already exists' });
+            } else {
+                res.status(500).json({ message: 'An error occurred while creating the user' });
+            }
         }
     }
 

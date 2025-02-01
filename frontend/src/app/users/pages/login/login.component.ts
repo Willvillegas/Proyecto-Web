@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import * as jwt_decode from 'jwt-decode';
 import { UserApiService } from '../../services/userApi.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -47,9 +46,12 @@ export class LoginComponent {
       const { username, password } = this.LoginForm.value;
       this.userApiService.login(username, password).subscribe(
         (user) => {
-          console.log('Login successful:', user);
-          // Navigate to another page or perform other actions upon successful login
-          this.router.navigate(['/movies']);
+          const userRole = user.isAdmin ? 'admin' : 'user';
+          if (userRole === 'admin') {
+            this.router.navigate(['/movies']);
+          } else {
+            this.router.navigate(['/movies']);
+          }
         },
         (error) => {
           console.error('Login failed:', error);

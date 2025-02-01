@@ -1,15 +1,18 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
-import { catchError, tap, throwError } from 'rxjs';
+import { inject } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
+import { UserApiService } from '../../users/services/userApi.service';
+
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = AuthService.getToken();
+  const userApiService = inject(UserApiService);
+  const user = UserApiService.getUser();
   let newRequest = req;
-  if (token) {
+
+  if (user) {
     newRequest = req.clone({
-      headers: req.headers.append('Authorization', `Bearer ${token}`)
+      headers: req.headers.append('Authorization', `Bearer ${user.username}`)
     });
   }
-
 
   return next(newRequest).pipe(
     catchError((error: HttpErrorResponse) => {

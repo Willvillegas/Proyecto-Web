@@ -7,7 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SearchComponent } from "../../components/search/search.component";
-
+import { UserApiService } from '../../../users/services/userApi.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'layout-page',
@@ -30,5 +31,11 @@ export class LayoutPageComponent {
     { label: 'Actores', icon: 'groups', url: '/actors/list' },   // RUTA ABSOLUTA
     { label: 'Reparto', icon: 'badge', url: '/movies/list' },     // RUTA ABSOLUTA
   ]
+
+  constructor(private userApiService: UserApiService, private router: Router) {}
+
+  logout() {
+    this.userApiService.logout();
+  }
 }
 

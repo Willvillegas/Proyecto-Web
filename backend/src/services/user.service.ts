@@ -1,15 +1,20 @@
 import { IUser } from "../interfaces/user.interface";
 import { UserRepository } from "../repositories/user.repository";
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const JWT_SECRET = 'SECRET_KEY';
-
 export class UserService {
     static async create(user: IUser): Promise<IUser> {
-        return UserRepository.create(user);
+        try {
+            return await UserRepository.create(user);
+        } catch (error) {
+            const err = error as Error;
+            if (err.message === 'User already exists') {
+                throw new Error('User already exists');
+            }
+            throw new Error('An error occurred while creating the user');
+        }
     }
 
     static async findAll(): Promise<IUser[]> {
@@ -24,18 +29,11 @@ export class UserService {
         return UserRepository.update(user);
     }
 
-    static async login(username: string, password: string): Promise<string | null> {
+    static async login(username: string, password: string): Promise<IUser | null> {
         const user = await UserRepository.findByUsername(username);
-        console.log(user);
         if (!user) return null;
-        if (user.password === password) {
-            const token = jwt.sign(
-                { id: user._id, isAdmin: user.isAdmin },
-                JWT_SECRET,
-                { expiresIn: '1h' }
-            );
-            return token;
-        }
-        return null;
+        const isPasswordValid = password===user.password?true:false;
+        if (!isPasswordValid) return null;
+        return user;
     }
 }

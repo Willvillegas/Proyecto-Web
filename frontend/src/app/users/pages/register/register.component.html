@@ -5,21 +5,21 @@
             <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
                 <mat-form-field class="w-full">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter your full name" formControlName="fullName" required>
+                    <input matInput placeholder="Enter your full name" formControlName="name" required>
                     <mat-error *ngIf="studentForm.get('firstName')?.invalid && studentForm.get('firstName')?.touched">
                         First Name is required.
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-full">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
+                    <input matInput type="email" placeholder="Enter your email" formControlName="username" required>
                     <mat-error *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched">
                         Please enter a valid email address.
                     </mat-error>
                 </mat-form-field> 
                 <mat-form-field class="w-full">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="Enter your password" formControlName="password">
+                    <input matInput type="password" placeholder="Enter your password" formControlName="password">
                 </mat-form-field>  
                 <div class="flex justify-between mt-2">
                     <button mat-flat-button color="primary" type="submit" [disabled]="studentForm.invalid">

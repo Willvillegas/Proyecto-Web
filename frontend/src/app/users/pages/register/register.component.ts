@@ -8,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-
+import { UserApiService } from '../../services/userApi.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -26,25 +27,45 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   studentForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.createStudentForm();
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userApiService: UserApiService,
+    private snackBar: MatSnackBar // Inject MatSnackBar
+  ) {
+    this.createUserForm();
   }
 
-  createStudentForm() {
+  createUserForm() {
     this.studentForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      name: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      isAdmin: [false]
     });
   }
 
   onSubmit() {
     if (this.studentForm.valid) {
       const formData = this.studentForm.value;
-      console.log('Form Submitted:');
-      for (const [key, value] of Object.entries(formData)) {
-        console.log(`${key}: ${value}`);
-      }
+      this.userApiService.register(formData).subscribe(
+        (response) => {
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          let errorMessage = 'Registration failed:';
+          if (error.status === 409) {
+            errorMessage = 'Registration failed: User already exists';
+          } else if (error.status === 500) {
+            errorMessage = 'Registration failed: An error occurred while creating the user';
+          } else {
+            errorMessage = `Registration failed: ${error.message}`;
+          }
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      );
     } else {
       console.log('Form is invalid.');
     }
