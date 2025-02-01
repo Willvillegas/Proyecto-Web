@@ -1,0 +1,22 @@
+.sort-container {
+  display: flex;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 250px; 
+}
+
+mat-form-field.small-width {
+  width: 150px; 
+}
+
+mat-form-field .mat-form-field-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+mat-form-field input {
+  font-size: 16px; 
+}
+

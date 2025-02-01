@@ -1,0 +1,18 @@
+<div class="sort-container">
+  <mat-form-field appearance="fill" class="small-width">
+    <mat-label>Ordenar por</mat-label>
+    <mat-select [(value)]="sortBy" (selectionChange)="onSortChange()">
+      <mat-option value="genre">Género</mat-option>
+      <mat-option value="releaseYear">Año de lanzamiento</mat-option>
+      <mat-option value="clasification">Clasificación</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Orden</mat-label>
+    <mat-select [(value)]="order" (selectionChange)="onSortChange()">
+      <mat-option value="asc">Ascendente</mat-option>
+      <mat-option value="desc">Descendente</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
