@@ -1,45 +1,68 @@
+
 <div class="container cont mx-auto p-6" *ngIf="movie">
-  <div class="flex flex-col md:flex-row gap-6 items-start">
-    <div class="carousel-container">
-      <img *ngIf="movie?.posters?.[currentSlide]" 
-           [src]="movie.posters[currentSlide].url" 
-           alt="Poster de la película" 
-           class="carousel-image" />
-      <button (click)="previousSlide()">
-        &#9664; 
-      </button>
-      <button (click)="nextSlide()">
-        &#9654; 
-      </button>
-    </div>
-    <div class="details-left flex flex-col space-y-4 h-full">
-      <h1 class="text-4xl font-bold text-gray-100">{{ movie.title }}</h1>
-      <div>
-        <mat-icon class="text-yellow-400 text-2xl">star</mat-icon>
-        <span class="text-lg font-semibold">{{ (movie.rating | number:'1.1-1') }}/10</span>
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col md:flex-row gap-6 items-start">
+      <div class="carousel-container">
+        <img *ngIf="movie?.posters?.[currentSlide]" 
+             [src]="movie.posters[currentSlide].url" 
+             alt="Poster de la película" 
+             class="carousel-image" />
+        <button (click)="previousSlide()" class="carousel-btn">&#9664;</button>
+        <button (click)="nextSlide()" class="carousel-btn">&#9654;</button>
       </div>
-      <div class="flex flex-col h-auto">
-        <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
-          {{ movie.description }}
-        </p>
-        <div class="details-below mt-3 p-2 shadow-lg rounded-xl space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 text-base">
-            <p><strong>Género:</strong> {{ movie.genre }}</p>
-            <p><strong>Director:</strong> {{ movie.director }}</p>
-            <p><strong>Año de estreno:</strong> {{ movie.releaseYear }}</p>
-            <p><strong>Clasificación:</strong> {{ movie.clasification }}</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold text-gray-100 mb-2">Reparto</h3>
-            <div class="flex flex-wrap gap-2">
-              <mat-chip *ngFor="let actor of movie.cast" class="bg-gray-200">
-                {{ actor.name }}
-              </mat-chip>
+      <div class="details-left flex flex-col space-y-4 h-full">
+        <h1 class="text-4xl font-bold text-gray-100">{{ movie.title }}</h1>
+        <div>
+          <mat-icon class="text-yellow-400 text-2xl">star</mat-icon>
+          <span class="text-lg font-semibold">{{ (movie.rating | number:'1.1-1') }}/10</span>
+        </div>
+        <div class="flex flex-col h-auto">
+          <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
+            {{ movie.description }}
+          </p>
+          <div class="details-below mt-3 p-2 shadow-lg rounded-xl space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 text-base">
+              <p><strong>Género:</strong> {{ movie.genre }}</p>
+              <p><strong>Director:</strong> {{ movie.director }}</p>
+              <p><strong>Año de estreno:</strong> {{ movie.releaseYear }}</p>
+              <p><strong>Clasificación:</strong> {{ movie.clasification }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div>
+      <div>
+        <div class="cast-section mt-6 p-6 bg-gray-900 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold text-gray-100 mb-4 text-center">Reparto</h3>
+          <div class="actors-carousel-container">
+            <button 
+              (click)="previousActorSlide()" 
+              [disabled]="currentActorSlide === 0" 
+              class="carousel-btn left-btn">
+              &#9664;
+            </button>
+            <div class="actors-images-wrapper">
+              <div class="actors-images-container">
+                <div *ngFor="let actor of movie.cast.slice(currentActorSlide, currentActorSlide + actorsPerPage)" 
+                     class="actor-image">
+                  <img *ngIf="actor._id && actorsImages[actor._id]" 
+                       [src]="actorsImages[actor._id]" 
+                       alt="{{ actor.name }}" 
+                       class="actor-image-img" />
+                  <p class="text-gray-400 text-center">{{ actor.name }}</p>
+                </div>
+              </div>
+            </div>
+            <button 
+              (click)="nextActorSlide()" 
+              [disabled]="currentActorSlide >= movie.cast.length - actorsPerPage" 
+              class="carousel-btn right-btn">
+              &#9654;
+            </button>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 

@@ -29,7 +29,6 @@ export class LayoutPageComponent {
   public sidebarItems = [
     { label: 'Películas', icon: 'movie', url: '/movies/list' }, // RUTA ABSOLUTA
     { label: 'Actores', icon: 'groups', url: '/actors/list' },   // RUTA ABSOLUTA
-    { label: 'Reparto', icon: 'badge', url: '/movies/list' },     // RUTA ABSOLUTA
   ]
 
   constructor(private userApiService: UserApiService, private router: Router) {}
