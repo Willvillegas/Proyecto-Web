@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { ActorApi, ActorResponse } from '../interfaces/actorApi.interfaces';
 
@@ -24,8 +24,13 @@ export class ActorsApiService {
     return this.httpClient.post<ActorApi>(`${this.apiUrl}`, actor);
   }
 
-  getActors(): Observable<ActorApi[]> {
-    return this.httpClient.get<ActorResponse>(`${this.apiUrl}`)
+  getActors(limit?: number): Observable<ActorApi[]> {
+    let query = new HttpParams();
+    if (limit) {
+      query = query.set('limit', limit.toString());
+    }
+
+    return this.httpClient.get<ActorResponse>(`${this.apiUrl}`, { params: query })
       .pipe(
         map(response => response.data) // Extrae solo la lista de actores
       );
