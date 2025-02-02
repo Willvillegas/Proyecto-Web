@@ -51,7 +51,7 @@ export class MovieFormPageComponent implements OnInit {
   movieData: MovieApi | null = null;
   genres: string[] = ['Action', 'Comedy', 'Drama', 'Science Fiction', 'Horror', 'Romance', 'Animation', 'Adventure'];
   isDeleting = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private movieApiService: MoviesApiService,
@@ -63,14 +63,14 @@ export class MovieFormPageComponent implements OnInit {
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      genre: ['', Validators.required], 
+      genre: ['', Validators.required],
       director: ['', Validators.required],
       releaseYear: ['', Validators.required],
-      rating: ['', [Validators.required, Validators.min(0), Validators.max(10)]], 
+      rating: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
       cast: [[], Validators.required],
       cover: [null],  // Control para la portada
-      clasification: ['G', Validators.required], 
-      posters: [[] as Poster[], Validators.required], 
+      clasification: ['G', Validators.required],
+      posters: [[] as Poster[], Validators.required],
     });
   }
 
@@ -86,13 +86,13 @@ export class MovieFormPageComponent implements OnInit {
       }
     }
   }
-  
+
   loadActors(): void {
-    this.actorApiService.getActors().subscribe(response => {
-      this.actors = response; 
+    this.actorApiService.getActors(50).subscribe(response => {
+      this.actors = response;
     });
   }
-  
+
   initForm(): void {
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
@@ -102,7 +102,7 @@ export class MovieFormPageComponent implements OnInit {
       releaseYear: ['', Validators.required],
       rating: ['', Validators.required],
       cast: [[], Validators.required],
-      posters: [[], Validators.required], 
+      posters: [[], Validators.required],
       cover: [null],// Control para la portada
     });
   }
@@ -110,13 +110,13 @@ export class MovieFormPageComponent implements OnInit {
   loadMovieData(id: string): void {
     this.movieApiService.getMovieById(id).subscribe(movie => {
       console.log("Movie data received:", movie);
-      const genresString = movie.genre ? movie.genre : '';  
-      const genresArray = genresString.split(',').map(g => g.trim()); 
+      const genresString = movie.genre ? movie.genre : '';
+      const genresArray = genresString.split(',').map(g => g.trim());
       this.movieData = movie;
       this.movieForm.patchValue({
         title: movie.title,
         description: movie.description,
-        genre: genresArray.join(', '), 
+        genre: genresArray.join(', '),
         director: movie.director,
         releaseYear: movie.releaseYear,
         rating: movie.rating,
@@ -126,26 +126,26 @@ export class MovieFormPageComponent implements OnInit {
       });
     });
   }
-  
+
 
   onSubmit() {
     if (this.isDeleting) {
       console.warn("Intento de actualizar mientras se está eliminando la película.");
       return; // Evita ejecutar el código si la película está en proceso de eliminación
     }
-  
+
     const formValue = this.movieForm.value;
     const posters: Poster[] = formValue.posters;
-  
+
     if (!formValue.cover) {
       formValue.cover = posters.length > 0 ? posters[0]._id : null;
     }
-  
+
     const movie: MovieApi = {
       ...formValue,
       posters: posters,
     };
-  
+
     if (this.isEditMode && this.movieId) {
       movie._id = this.movieId;
       this.movieApiService.updateMovie(movie).subscribe(
@@ -173,8 +173,8 @@ export class MovieFormPageComponent implements OnInit {
       );
     }
   }
-  
-  
+
+
   showSnackBar(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
       duration: 3000
@@ -199,11 +199,11 @@ export class MovieFormPageComponent implements OnInit {
       );
     }
   }
-  
+
 
   onAddImage(): void {
     if (this.movieForm.get('posters')?.value.length >= 12) return;
-  
+
     const newUrl = prompt("Introduce la URL de la nueva imagen:");
     if (newUrl) {
       const posters: Poster[] = this.movieForm.get('posters')?.value || [];
@@ -213,7 +213,7 @@ export class MovieFormPageComponent implements OnInit {
       this.movieForm.get('posters')?.setValue(posters);
     }
   }
-  
+
   onChangeImage(index: number): void {
     const newUrl = prompt("Introduce la nueva URL de la imagen:");
     if (newUrl) {
@@ -223,26 +223,26 @@ export class MovieFormPageComponent implements OnInit {
         posters.forEach((poster, idx) => {
           poster.isCover = idx === index ? true : false;  // Marcar la imagen seleccionada como portada
         });
-  
+
         this.movieForm.get('posters')?.setValue(posters);
       }
     }
   }
 
   onCoverChange(event: any): void {
-    const selectedCoverId = event.value;  
+    const selectedCoverId = event.value;
     const posters: Poster[] = this.movieForm.get('posters')?.value;
     posters.forEach((poster: Poster) => {
       poster.isCover = (poster._id === selectedCoverId);
     });
-  
+
     // Actualiza el valor de los posters en el formulario
     this.movieForm.get('posters')?.setValue(posters);
-    this.movieForm.get('cover')?.setValue(selectedCoverId);  
-}
+    this.movieForm.get('cover')?.setValue(selectedCoverId);
+  }
 
-  
-  
+
+
   onDeleteImage(index: number): void {
     const posters = this.movieForm.get('posters')?.value;
     if (posters.length > 1) {
@@ -250,12 +250,12 @@ export class MovieFormPageComponent implements OnInit {
       this.movieForm.get('posters')?.setValue(posters);
     }
   }
-  
+
   // Validación de rating
   validateRating(event: any): void {
     let value = event.target.value;
     if (value < 0) event.target.value = 0;
     if (value > 10) event.target.value = 10;
   }
-  
+
 }
