@@ -19,17 +19,26 @@
             <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
                 {{ actor.biography }}
               </p>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
-              <div class="flex flex-wrap gap-2">
-                <mat-chip *ngFor="let movie of actor.movies" class="bg-gray-200 flex items-center space-x-2 p-2">
-                  <div>
-                    <div class="font-bold">{{ movie.title }}</div>
-                  </div>
-                </mat-chip>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
+                
+                <div class="flex flex-wrap gap-4">
+                  <mat-card *ngFor="let movie of actor.movies" class="w-60 bg-gray-800 text-white p-2 rounded shadow-md">
+                                      
+                    <mat-card-content>
+                      <img *ngIf="movie._id && movieImages[movie._id]" 
+                       [src]="movieImages[movie._id]" 
+                       alt="{{ movie.title }}" 
+                       class="actor-image-img" />  
+                      <div class="font-bold text-lg">{{ movie.title }}</div>
+                      <p class="text-sm text-gray-300 mt-1">
+                        {{ movie.releaseYear || 'Sin descripción disponible' }}
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
               </div>
               
-            </div>
           </div>
         </div>
       </div>
