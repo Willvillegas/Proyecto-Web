@@ -61,7 +61,7 @@ export class ActorFormPageComponent implements OnInit {
       birthday: [''],
       biography: [''],
       movies: [[]],
-      images: [[]], // Se usa `isCover` en imágenes en lugar de `cover`
+      images: [[]],
     });
   }
 
@@ -71,6 +71,14 @@ export class ActorFormPageComponent implements OnInit {
       this.actorId = this.route.snapshot.paramMap.get('id');
       if (this.actorId) this.loadActorData(this.actorId);
     }
+
+    this.loadMovies();
+  }
+
+  loadMovies(): void {
+    this.movieApiService.getMovies().subscribe(response => {
+      this.movies = response;
+    });
   }
 
   loadActorData(id: string): void {

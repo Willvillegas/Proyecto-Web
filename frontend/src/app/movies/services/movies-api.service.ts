@@ -17,8 +17,16 @@ export class MoviesApiService {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}`);
   }
 
-  getMovies(): Observable<MovieApi[]> {
-    return this.httpClient.get<MovieApi[]>(`${this.apiUrl}`)
+  getMovies(limit?: number): Observable<MovieApi[]> {
+    let query = new HttpParams();
+        if (limit) {
+          query = query.set('limit', limit.toString());
+        }
+    
+        return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params: query })
+          .pipe(
+            map(response => response.data) // Extrae solo la lista de actores
+          );
   }
 
   getMovieById(id: string): Observable<MovieApi> {

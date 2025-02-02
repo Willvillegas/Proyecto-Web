@@ -23,11 +23,8 @@
               <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
               <div class="flex flex-wrap gap-2">
                 <mat-chip *ngFor="let movie of actor.movies" class="bg-gray-200 flex items-center space-x-2 p-2">
-                
-                  
                   <div>
                     <div class="font-bold">{{ movie.title }}</div>
-                    <div class="text-sm text-gray-600">{{ movie.description }}</div>
                   </div>
                 </mat-chip>
               </div>
