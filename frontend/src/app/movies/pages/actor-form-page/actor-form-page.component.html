@@ -38,20 +38,29 @@
             </button>
           </div>
   
-          <div class="mt-4">
+          <div class="mt-4 w-full">
             <label>Imágenes</label>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6">
-              <div *ngFor="let image of actorForm.get('images')?.value; let i = index" class="flex flex-col items-center space-y-2">
-                <img [src]="image.url" alt="Imagen" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
+              <div *ngFor="let image of actorForm.get('images')?.value; let i = index" class="flex flex-col items-center space-y-2 w-full">
+                <img [src]="image.url" alt="Foto del actor" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+                
+                <mat-radio-group formControlName="cover" (change)="onCoverChange(i)">
+                  <mat-radio-button [value]="image._id" [checked]="image.isCover">
+                    Foto de portada
+                  </mat-radio-button>
+                </mat-radio-group>
+          
                 <div class="flex flex-col gap-2 w-full">
                   <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full">Cambiar</button>
-                  <button mat-raised-button color="warn" (click)="onDeleteImage(i)" class="w-full">
+                  <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
+                          [disabled]="actorForm.get('images')?.value.length <= 1" class="w-full">
                     Eliminar
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          
   
           <div class="mt-4 flex justify-between">
             <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" [disabled]="isDeleting" class="ml-4">

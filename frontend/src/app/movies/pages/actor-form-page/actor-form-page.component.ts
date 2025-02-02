@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActorApi } from '../../interfaces/actorApi.interfaces';
+import { ActorApi, Image } from '../../interfaces/actorApi.interfaces';
 import { MovieApi } from '../../interfaces/movieApi.interfaces';
 import { ActorsApiService } from '../../services/actors-api.service';
 import { MoviesApiService } from '../../services/movies-api.service';
@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -33,7 +33,6 @@ import { MatRadioModule } from '@angular/material/radio';
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
-    FormsModule,
     MatCheckboxModule,
     MatRadioModule,
   ],
@@ -46,7 +45,6 @@ export class ActorFormPageComponent implements OnInit {
   isEditMode = false;
   actorId: string | null = null;
   movies: MovieApi[] = [];
-  actors: ActorApi[] = [];
   actorData: ActorApi | null = null;
   isDeleting = false;
 
@@ -63,26 +61,16 @@ export class ActorFormPageComponent implements OnInit {
       birthday: [''],
       biography: [''],
       movies: [[]],
-      images: [[]],
+      images: [[]], // Se usa `isCover` en imágenes en lugar de `cover`
     });
   }
 
   ngOnInit(): void {
     this.isEditMode = this.route.snapshot.url[0]?.path === 'edit';
-    this.loadActors();
     if (this.isEditMode) {
-      const actorId = this.route.snapshot.paramMap.get('id');
-      if (actorId) {
-        this.actorId = actorId;
-        this.loadActorData(actorId);
-      }
+      this.actorId = this.route.snapshot.paramMap.get('id');
+      if (this.actorId) this.loadActorData(this.actorId);
     }
-  }
-
-  loadActors(): void {
-    this.actorApiService.getActors().subscribe(response => {
-      this.actors = response;
-    });
   }
 
   loadActorData(id: string): void {
@@ -109,25 +97,19 @@ export class ActorFormPageComponent implements OnInit {
     if (this.isEditMode && this.actorId) {
       actor._id = this.actorId;
       this.actorApiService.updateActor(actor).subscribe(
-        response => {
+        () => {
           this.showSnackBar('Actor actualizado con éxito');
           this.router.navigate(['/actors/list']);
         },
-        error => {
-          console.error('Error al actualizar el actor:', error);
-          this.showSnackBar('Error al actualizar el actor');
-        }
+        () => this.showSnackBar('Error al actualizar el actor')
       );
     } else {
       this.actorApiService.createActor(actor).subscribe(
-        response => {
+        () => {
           this.showSnackBar('Actor creado con éxito');
           this.router.navigate(['/actors/list']);
         },
-        error => {
-          console.error('Error al crear el actor:', error);
-          this.showSnackBar('Error al crear el actor');
-        }
+        () => this.showSnackBar('Error al crear el actor')
       );
     }
   }
@@ -140,14 +122,13 @@ export class ActorFormPageComponent implements OnInit {
     if (this.actorId) {
       this.isDeleting = true;
       this.actorApiService.deleteActor(this.actorId).subscribe(
-        (data) => {
+        () => {
           this.isDeleting = false;
           this.showSnackBar('Actor eliminado con éxito');
           this.router.navigate(['/actors/list']);
         },
-        error => {
+        () => {
           this.isDeleting = false;
-          console.error('Error al eliminar el actor', error);
           this.showSnackBar('Error al eliminar el actor');
         }
       );
@@ -158,7 +139,7 @@ export class ActorFormPageComponent implements OnInit {
     const newUrl = prompt("Introduce la URL de la nueva imagen:");
     if (newUrl) {
       const images = this.actorForm.get('images')?.value || [];
-      images.push({ url: newUrl, isCover: true });
+      images.push({ url: newUrl, isCover: images.length === 0 }); // La primera imagen es la portada
       this.actorForm.get('images')?.setValue(images);
     }
   }
@@ -174,12 +155,31 @@ export class ActorFormPageComponent implements OnInit {
     }
   }
 
+  onCoverChange(event: any): void {
+    const selectedCoverId = event.value;
+    const images: Image[] = this.actorForm.get('images')?.value || [];
+
+    images.forEach((image: Image) => {
+      image.isCover = image._id === selectedCoverId;
+    });
+
+    this.actorForm.get('images')?.setValue(images);
+  }
+
   onDeleteImage(index: number): void {
-    const images = this.actorForm.get('images')?.value;
-    if (images.length > 0) {
+    const images: Image[] = this.actorForm.get('images')?.value;
+    if (images.length > 1) {
+      const wasCover = images[index].isCover;
       images.splice(index, 1);
+
+      // Si se eliminó la portada, asignar `isCover: true` a otra imagen
+      if (wasCover && images.length > 0) {
+        images[0].isCover = true;
+      }
+
       this.actorForm.get('images')?.setValue(images);
     }
   }
 }
+
 

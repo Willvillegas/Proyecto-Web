@@ -1,16 +1,13 @@
 <div class="container cont mx-auto p-6" *ngIf="actor">
+  <div class="flex flex-col gap-6">
     <div class="flex flex-col md:flex-row gap-6 items-start">
       <div class="carousel-container">
         <img *ngIf="actor?.images?.[currentSlide]" 
              [src]="actor.images[currentSlide].url" 
-             alt="Poster de la película" 
+             alt="Poster del actor" 
              class="carousel-image" />
-        <button (click)="previousSlide()">
-          &#9664; 
-        </button>
-        <button (click)="nextSlide()">
-          &#9654; 
-        </button>
+        <button (click)="previousSlide()">&#9664;</button>
+        <button (click)="nextSlide()">&#9654;</button>
       </div>
       <div class="details-left flex flex-col space-y-4 h-full">
         <h1 class="text-4xl font-bold text-gray-100">{{ actor.name }}</h1>
@@ -25,14 +22,22 @@
             <div>
               <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
               <div class="flex flex-wrap gap-2">
-                <mat-chip *ngFor="let movie of actor.movies" class="bg-gray-200">
-                  {{ movie.title }}
+                <mat-chip *ngFor="let movie of actor.movies" class="bg-gray-200 flex items-center space-x-2 p-2">
+                
+                  
+                  <div>
+                    <div class="font-bold">{{ movie.title }}</div>
+                    <div class="text-sm text-gray-600">{{ movie.description }}</div>
+                  </div>
                 </mat-chip>
               </div>
+              
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
   

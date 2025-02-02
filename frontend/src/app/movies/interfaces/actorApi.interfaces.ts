@@ -23,7 +23,8 @@ export interface Image {
 }
 
 export interface MoviePreview {
-    _id: string;
+    _id?: string;
     title: string;
     releaseYear: number;
+    description: string;
 }

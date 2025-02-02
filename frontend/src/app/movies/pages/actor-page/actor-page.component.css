@@ -1,0 +1,168 @@
+.cont {
+    max-width: auto !important;
+    max-height: auto !important;
+  }
+  
+  .carousel-container {
+    height: 600px; 
+    width: auto !important; 
+    min-width: 500px; 
+    margin: 0 auto; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #2c2b2b;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+  }
+  
+  button {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  button:first-of-type {
+    left: 15px;
+  }
+  
+  button:last-of-type {
+    right: 15px;
+  }
+  
+  .details-container h1 {
+    color: #1a202c;
+  }
+  
+  .details-container p {
+    color: #4a5568;
+  }
+  
+  .details-below {
+    margin-top: 20px !important;
+    text-decoration-color: #f9f9f9;
+    flex-grow: 1;
+  }
+  
+  .details-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  
+  /* Contenedor de la descripción con desplazamiento */
+  .description-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem; /* Espaciado para separar la descripción del resto */
+  }
+  
+  .text-lg {
+    margin-bottom: 1rem;
+  }
+  
+  /* Sección de reparto */
+  .cast-section {
+    width: 100%;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  /* Contenedor de actores */
+  .actors-carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  
+  /* Carrusel de actores */
+  .actors-images-container {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  
+  .actor-image-img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Botones del carrusel */
+  .carousel-btn {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+
+  
+
+  
+  /* Contenedor flexible para imágenes */
+  .actors-images-wrapper {
+    overflow-x: hidden;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Carrusel de imágenes */
+  .actors-images-container {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  /* Imagen de actor */
+  .actor-image {
+    width: 120px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  
+  .actor-image-img {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .actor-image-img:hover {
+    transform: scale(1.05);
+  }
+  
