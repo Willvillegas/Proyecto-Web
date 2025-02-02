@@ -21,22 +21,22 @@ import { MatRadioModule } from '@angular/material/radio';
 @Component({
   selector: 'actor-form-page',
   imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatSnackBarModule,
-      MatDialogModule,
-      MatIconModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-      MatButtonModule,
-      MatCardModule,
-      MatDividerModule,
-      FormsModule,
-      MatCheckboxModule,
-      MatRadioModule,
-    ],
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatRadioModule,
+  ],
   templateUrl: './actor-form-page.component.html',
   styleUrls: ['./actor-form-page.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -140,7 +140,7 @@ export class ActorFormPageComponent implements OnInit {
     if (this.actorId) {
       this.isDeleting = true;
       this.actorApiService.deleteActor(this.actorId).subscribe(
-        () => {
+        (data) => {
           this.isDeleting = false;
           this.showSnackBar('Actor eliminado con éxito');
           this.router.navigate(['/actors/list']);
@@ -158,7 +158,7 @@ export class ActorFormPageComponent implements OnInit {
     const newUrl = prompt("Introduce la URL de la nueva imagen:");
     if (newUrl) {
       const images = this.actorForm.get('images')?.value || [];
-      images.push({ url: newUrl });
+      images.push({ url: newUrl, isCover: true });
       this.actorForm.get('images')?.setValue(images);
     }
   }

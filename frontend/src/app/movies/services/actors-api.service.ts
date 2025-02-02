@@ -30,7 +30,7 @@ export class ActorsApiService {
         map(response => response.data) // Extrae solo la lista de actores
       );
   }
-  
+
   // Método para buscar actores por nombre 
   searchActors(query: string): Observable<ActorApi[]> {
     return this.httpClient
@@ -38,8 +38,8 @@ export class ActorsApiService {
       .pipe(map(response => response.data));
   }
 
-   // Método para obtener actores con paginación
-   getActorsPage(limit: number, offset: number): Observable<ActorResponse> {
+  // Método para obtener actores con paginación
+  getActorsPage(limit: number, offset: number): Observable<ActorResponse> {
     return this.httpClient.get<ActorResponse>(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
   }
 
@@ -48,9 +48,9 @@ export class ActorsApiService {
   }
 
   // Eliminar un actor por su ID
-  deleteActor(id: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  deleteActor(id: string): Observable<ActorApi> {
+    return this.httpClient.delete<ActorApi>(`${this.apiUrl}/${id}`);
   }
 
-  
+
 }

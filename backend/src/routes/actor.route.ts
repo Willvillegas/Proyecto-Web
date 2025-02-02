@@ -7,11 +7,11 @@ const router: Router = express.Router();
 
 router.route("/actors/:id")
     .get(ActorController.getById as any)
-    .delete(ActorController.delete as any);
+    .delete(ActorController.delete as any)
+    .put(ActorController.update as any);
 router.route("/actors")
     .get(ActorController.getAll as any)
-    .post(ActorController.create as any)
-    .put(ActorController.update as any);
+    .post(ActorController.create as any);
 
 /**
  * Images upload for actors
