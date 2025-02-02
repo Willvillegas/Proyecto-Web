@@ -12,7 +12,9 @@
     </mat-card-content>
   
     <mat-card-actions>
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" 
+            *ngIf="actor._id" 
+            (click)="editActor(actor._id)">
          Editar
       <mat-icon>edit</mat-icon>
       </button>

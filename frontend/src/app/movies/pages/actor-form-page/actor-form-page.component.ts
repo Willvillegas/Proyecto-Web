@@ -1,11 +1,185 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActorApi } from '../../interfaces/actorApi.interfaces';
+import { MovieApi } from '../../interfaces/movieApi.interfaces';
+import { ActorsApiService } from '../../services/actors-api.service';
+import { MoviesApiService } from '../../services/movies-api.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'actor-form-page',
-  imports: [],
+  imports: [
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatSnackBarModule,
+      MatDialogModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      MatButtonModule,
+      MatCardModule,
+      MatDividerModule,
+      FormsModule,
+      MatCheckboxModule,
+      MatRadioModule,
+    ],
   templateUrl: './actor-form-page.component.html',
-  styleUrl: './actor-form-page.component.css'
+  styleUrls: ['./actor-form-page.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class ActorFormPageComponent {
+export class ActorFormPageComponent implements OnInit {
+  actorForm: FormGroup;
+  isEditMode = false;
+  actorId: string | null = null;
+  movies: MovieApi[] = [];
+  actors: ActorApi[] = [];
+  actorData: ActorApi | null = null;
+  isDeleting = false;
 
+  constructor(
+    private fb: FormBuilder,
+    private actorApiService: ActorsApiService,
+    private movieApiService: MoviesApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.actorForm = this.fb.group({
+      name: ['', Validators.required],
+      birthday: [''],
+      biography: [''],
+      movies: [[]],
+      images: [[]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.isEditMode = this.route.snapshot.url[0]?.path === 'edit';
+    this.loadActors();
+    if (this.isEditMode) {
+      const actorId = this.route.snapshot.paramMap.get('id');
+      if (actorId) {
+        this.actorId = actorId;
+        this.loadActorData(actorId);
+      }
+    }
+  }
+
+  loadActors(): void {
+    this.actorApiService.getActors().subscribe(response => {
+      this.actors = response;
+    });
+  }
+
+  loadActorData(id: string): void {
+    this.actorApiService.getActorById(id).subscribe(actor => {
+      this.actorData = actor;
+      this.actorForm.patchValue({
+        name: actor.name,
+        birthday: actor.birthday,
+        biography: actor.biography,
+        movies: actor.movies.map(movie => movie._id),
+        images: actor.images || [],
+      });
+    });
+  }
+
+  onSubmit(): void {
+    const formValue = this.actorForm.value;
+
+    const actor: ActorApi = {
+      ...formValue,
+      images: formValue.images,
+    };
+
+    if (this.isEditMode && this.actorId) {
+      actor._id = this.actorId;
+      this.actorApiService.updateActor(actor).subscribe(
+        response => {
+          this.showSnackBar('Actor actualizado con éxito');
+          this.router.navigate(['/actors/list']);
+        },
+        error => {
+          console.error('Error al actualizar el actor:', error);
+          this.showSnackBar('Error al actualizar el actor');
+        }
+      );
+    } else {
+      this.actorApiService.createActor(actor).subscribe(
+        response => {
+          this.showSnackBar('Actor creado con éxito');
+          this.router.navigate(['/actors/list']);
+        },
+        error => {
+          console.error('Error al crear el actor:', error);
+          this.showSnackBar('Error al crear el actor');
+        }
+      );
+    }
+  }
+
+  showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', { duration: 3000 });
+  }
+
+  onDelete(): void {
+    if (this.actorId) {
+      this.isDeleting = true;
+      this.actorApiService.deleteActor(this.actorId).subscribe(
+        () => {
+          this.isDeleting = false;
+          this.showSnackBar('Actor eliminado con éxito');
+          this.router.navigate(['/actors/list']);
+        },
+        error => {
+          this.isDeleting = false;
+          console.error('Error al eliminar el actor', error);
+          this.showSnackBar('Error al eliminar el actor');
+        }
+      );
+    }
+  }
+
+  onAddImage(): void {
+    const newUrl = prompt("Introduce la URL de la nueva imagen:");
+    if (newUrl) {
+      const images = this.actorForm.get('images')?.value || [];
+      images.push({ url: newUrl });
+      this.actorForm.get('images')?.setValue(images);
+    }
+  }
+
+  onChangeImage(index: number): void {
+    const newUrl = prompt("Introduce la nueva URL de la imagen:");
+    if (newUrl) {
+      const images = this.actorForm.get('images')?.value;
+      if (images && images[index]) {
+        images[index].url = newUrl;
+        this.actorForm.get('images')?.setValue(images);
+      }
+    }
+  }
+
+  onDeleteImage(index: number): void {
+    const images = this.actorForm.get('images')?.value;
+    if (images.length > 0) {
+      images.splice(index, 1);
+      this.actorForm.get('images')?.setValue(images);
+    }
+  }
 }
+

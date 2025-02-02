@@ -36,6 +36,10 @@ export class ActorCardComponent {
     console.log('Actor recibido:', this.actor);
   }
 
+  editActor(actorId: string): void {
+    this.router.navigateByUrl(`/actors/edit/${actorId}`);
+  }
+
   moreOptions(movieId: string): void {
     this.router.navigateByUrl(`/actors/${movieId}`);
   }

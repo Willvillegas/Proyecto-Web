@@ -43,5 +43,14 @@ export class ActorsApiService {
     return this.httpClient.get<ActorResponse>(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
   }
 
+  updateActor(actor: ActorApi): Observable<ActorApi> {
+    return this.httpClient.put<ActorApi>(`${this.apiUrl}/${actor._id}`, actor);
+  }
+
+  // Eliminar un actor por su ID
+  deleteActor(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   
 }

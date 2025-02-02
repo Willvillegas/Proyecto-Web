@@ -1,1 +1,68 @@
-<p>actor-form-page works!</p>
+<div class="p-5">
+    <mat-card class="shadow-lg">
+      <mat-card-header>
+        <mat-card-title>{{ isEditMode ? 'Editar Actor' : 'Crear Nuevo Actor' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="actorForm" (ngSubmit)="onSubmit()">
+          <div class="grid gap-5 grid-cols-1 sm:grid-cols-2">
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="name" />
+              <mat-error *ngIf="actorForm.get('name')?.hasError('required')">
+                El nombre es requerido
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput formControlName="birthday" type="date" />
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Biografía</mat-label>
+              <textarea matInput formControlName="biography"></textarea>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+              <mat-label>Películas</mat-label>
+              <mat-select formControlName="movies" multiple>
+                <mat-option *ngFor="let movie of movies" [value]="movie._id">
+                  {{ movie.title }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <button mat-raised-button color="accent" (click)="onAddImage()" type="button">
+              Agregar Imagen
+            </button>
+          </div>
+  
+          <div class="mt-4">
+            <label>Imágenes</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6">
+              <div *ngFor="let image of actorForm.get('images')?.value; let i = index" class="flex flex-col items-center space-y-2">
+                <img [src]="image.url" alt="Imagen" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+                <div class="flex flex-col gap-2 w-full">
+                  <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full">Cambiar</button>
+                  <button mat-raised-button color="warn" (click)="onDeleteImage(i)" class="w-full">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="mt-4 flex justify-between">
+            <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" [disabled]="isDeleting" class="ml-4">
+              Eliminar Actor
+            </button>
+            <button mat-raised-button color="primary" [disabled]="actorForm.invalid" type="submit">
+              {{ isEditMode ? 'Guardar Cambios' : 'Crear Actor' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

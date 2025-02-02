@@ -22,4 +22,18 @@ export class ActorsService {
   searchActors(query: string): Observable<Actor[]> {
     return this.httpClient.get<Actor[]>(`${this.url}/actors?q=${query}`);
   }
+
+  addActor(actor: Actor): Observable<Actor> {
+    return this.httpClient.post<Actor>(`${this.url}/actors`, actor);
+  }
+
+  // Actualizar un actor existente
+  updateActor(actor: Actor): Observable<Actor> {
+    return this.httpClient.put<Actor>(`${this.url}/actors/${actor.id}`, actor);
+  }
+
+  // Eliminar un actor por su ID
+  deleteActor(actorId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/actors/${actorId}`);
+  }
 }
