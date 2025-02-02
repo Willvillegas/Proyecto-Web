@@ -27,8 +27,8 @@ export class ActorService {
      * Retrieves all actors from the database
      * @returns Promise<IActor[]>
      */
-    static async findAll(): Promise<IActor[]> {
-        return ActorRepository.findAll();
+    static async findAll(offset: number, limit: number): Promise<IActor[]> {
+        return ActorRepository.findAll(offset, limit);
     }
 
     /**

@@ -33,7 +33,7 @@ export class ActorController {
         try {
             const limit = parseInt(req.query.limit as string) || 10;
             const offset = parseInt(req.query.offset as string) || 0;
-            const actors = await ActorService.findAll();
+            const actors = await ActorService.findAll(offset, limit);
             const total = await ActorService.count();
             return res.status(200).json({
                 data: actors,

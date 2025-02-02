@@ -18,8 +18,12 @@ export class ActorRepository {
      * Retrieves all actors from the database
      * @returns Promise<IActor[]>
      */
-    static async findAll(): Promise<IActor[]> {
-        return Actor.find().populate('movies', ['title', 'releaseYear']).exec();
+    static async findAll(offset: number, limit: number): Promise<IActor[]> {
+        return Actor.find()
+            .skip(offset)
+            .limit(limit)
+            .populate('movies', ['title', 'releaseYear'])
+            .exec();
     }
 
     /**
