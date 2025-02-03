@@ -4,7 +4,7 @@
       <mat-card-title>{{ isEditMode ? 'Editar Película' : 'Crear Nueva Película' }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="movieForm" (ngSubmit)="onSubmit()"> 
+      <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
         <div>
           <div class="grid gap-5 grid-cols-1 sm:grid-cols-2">
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
@@ -34,7 +34,8 @@
             </mat-form-field>
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Calificación</mat-label>
-              <input matInput formControlName="rating" type="number" min="0" max="10" step="0.1" (input)="validateRating($event)">
+              <input matInput formControlName="rating" type="number" min="0" max="10" step="0.1"
+                (input)="validateRating($event)">
             </mat-form-field>
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Reparto (Actores)</mat-label>
@@ -55,7 +56,8 @@
                 <mat-option value="NC-17">Solo adultos</mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="accent" (click)="onAddImage()" [disabled]="movieForm.get('posters')?.value.length >= 12" type="button">
+            <button mat-raised-button color="accent" (click)="onAddImage()"
+              [disabled]="movieForm.get('posters')?.value.length >= 12" type="button">
               Agregar Imagen
             </button>
           </div>
@@ -63,27 +65,31 @@
             <div class="mt-4 w-full">
               <label>Imágenes</label>
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
-                  <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index" class="flex flex-col items-center space-y-2 w-full">
-                    <img [src]="poster.url" alt="Poster" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
-                    <mat-radio-group formControlName="cover" (change)="onCoverChange($event)">
+                <mat-radio-group formControlName="cover" (change)="onCoverChange($event)">
+                  <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index"
+                    class="flex flex-col items-center space-y-2 w-full">
+                    <img [src]="poster.url" alt="Poster"
+                      class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
                     <mat-radio-button [value]="poster._id" [checked]="poster._id === movieForm.get('cover')?.value">
                       Portada
                     </mat-radio-button>
                     <div class="flex flex-col gap-2 w-full">
-                      <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full">Cambiar</button>
-                      <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
-                              [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full">
+                      <button type="button" mat-raised-button color="primary" (click)="onChangeImage(i)"
+                        class="w-full">Cambiar</button>
+                      <button type="button" mat-raised-button color="warn" (click)="onDeleteImage(i)"
+                        [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full">
                         Eliminar
                       </button>
                     </div>
-                  </mat-radio-group>
-                </div>
+                  </div>
+                </mat-radio-group>
               </div>
             </div>
           </div>
         </div>
         <div class="mt-4 flex justify-between">
-          <button mat-raised-button color="primary" *ngIf="isEditMode" (click)="openDeleteDialog()" [disabled]="isDeleting" class="ml-4" type="button">Eliminar Película</button>
+          <button mat-raised-button color="primary" *ngIf="isEditMode" (click)="openDeleteDialog()"
+            [disabled]="isDeleting" class="ml-4" type="button">Eliminar Película</button>
           <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
             {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
           </button>
