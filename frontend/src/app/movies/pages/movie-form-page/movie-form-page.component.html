@@ -83,7 +83,7 @@
           </div>
         </div>
         <div class="mt-4 flex justify-between">
-          <button mat-raised-button color="warn" *ngIf="isEditMode" (click)="onDelete()" [disabled]="isDeleting" class="ml-4">Eliminar Película</button>
+          <button mat-raised-button color="primary" *ngIf="isEditMode" (click)="openDeleteDialog()" [disabled]="isDeleting" class="ml-4" type="button">Eliminar Película</button>
           <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
             {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
           </button>

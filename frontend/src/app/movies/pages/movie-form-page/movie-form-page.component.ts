@@ -58,7 +58,9 @@ export class MovieFormPageComponent implements OnInit {
     private actorApiService: ActorsApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+
   ) {
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
@@ -128,24 +130,24 @@ export class MovieFormPageComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.isDeleting) {
       console.warn("Intento de actualizar mientras se está eliminando la película.");
       return; // Evita ejecutar el código si la película está en proceso de eliminación
     }
-
+  
     const formValue = this.movieForm.value;
     const posters: Poster[] = formValue.posters;
-
+  
     if (!formValue.cover) {
       formValue.cover = posters.length > 0 ? posters[0]._id : null;
     }
-
+  
     const movie: MovieApi = {
       ...formValue,
       posters: posters,
     };
-
+  
     if (this.isEditMode && this.movieId) {
       movie._id = this.movieId;
       this.movieApiService.updateMovie(movie).subscribe(
@@ -173,7 +175,7 @@ export class MovieFormPageComponent implements OnInit {
       );
     }
   }
-
+  
 
   showSnackBar(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
@@ -183,13 +185,13 @@ export class MovieFormPageComponent implements OnInit {
 
   onDelete(): void {
     if (this.movieId) {
-      console.log("Intentando eliminar película con ID:", this.movieId);
+      const movieIdString: string = this.movieId; // Aseguramos que es un string
+      console.log("Intentando eliminar película con ID:", movieIdString);
       this.isDeleting = true;
-      this.movieApiService.deleteMovie(this.movieId).subscribe(
+      this.movieApiService.deleteMovie(movieIdString).subscribe(
         () => {
           this.isDeleting = false;
           this.showSnackBar('Película eliminada con éxito');
-          this.router.navigate(['/movies/list']); // Redirigir inmediatamente
         },
         (error) => {
           this.isDeleting = false;
@@ -197,9 +199,32 @@ export class MovieFormPageComponent implements OnInit {
           this.showSnackBar('Error al eliminar la película');
         }
       );
+    } else {
+      console.warn("No se puede eliminar la película. ID no válido.");
     }
   }
-
+  
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `¿Estás seguro de eliminar "${this.movieData?.title}"?`,
+        message: 'Este proceso no es reversible. Está a punto de eliminar la película.'
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Si el usuario confirma, se llama al método onDelete()
+        this.onDelete();
+        // La redirección a la lista de películas 
+        this.router.navigate(['/movies/list']);
+      } else {
+        console.log("Eliminación cancelada");
+      }
+    });
+  }
+  
+  
 
   onAddImage(): void {
     if (this.movieForm.get('posters')?.value.length >= 12) return;

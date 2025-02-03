@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'actor-form-page',
@@ -54,7 +55,8 @@ export class ActorFormPageComponent implements OnInit {
     private movieApiService: MoviesApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.actorForm = this.fb.group({
       name: ['', Validators.required],
@@ -140,7 +142,27 @@ export class ActorFormPageComponent implements OnInit {
           this.showSnackBar('Error al eliminar el actor');
         }
       );
+    } else {
+      console.warn("No se puede eliminar el actor. ID no válido.");
     }
+  }
+
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `¿Estás seguro de eliminar "${this.actorData?.name}"?`,
+        message: 'Este proceso no es reversible. Está a punto de eliminar al actor.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Si el usuario confirma, se llama al método onDelete()
+        this.onDelete();
+      } else {
+        console.log("Eliminación cancelada");
+      }
+    });
   }
 
   onAddImage(): void {
