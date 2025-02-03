@@ -42,8 +42,16 @@ export class MovieController {
             const offset = parseInt(req.query.offset as string) || 0;
             const limit = parseInt(req.query.limit as string) || 10;
 
+            // Nuevos parámetros de ordenamiento
+            const sortBy = req.query.sortBy as string || 'releaseYear';
+            const order = req.query.order as 'asc' | 'desc' || 'desc';
+
             //Filters
-            const filters: IFilterMovie = req.query as any;
+            const filters: IFilterMovie = {
+                ...req.query,
+                sortBy,
+                order
+            };
 
             const movies = await MovieService.findAll(filters, offset, limit);
             const total = await MovieService.count(filters);

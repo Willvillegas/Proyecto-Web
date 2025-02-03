@@ -36,9 +36,20 @@ export class MovieRepository {
             query['title'] = { $regex: filters.search, $options: 'i' };
         }
 
+        // Configurar ordenamiento
+        const sortOptions: any = {};
+        const validSortFields = ['title', 'releaseYear', 'clasification', 'genre'];
+        const sortField = validSortFields.includes(filters.sortBy || '')
+            ? filters.sortBy
+            : 'releaseYear'; // Campo por defecto
 
+        const sortOrder = filters.order === 'asc' ? 1 : -1;
+        if (sortField) {
+            sortOptions[sortField] = sortOrder;
+        }
 
         return Movie.find(query)
+            .sort(sortOptions)
             .skip(offset)
             .limit(limit)
             .populate('cast', 'name')

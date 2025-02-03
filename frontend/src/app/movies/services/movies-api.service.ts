@@ -17,16 +17,24 @@ export class MoviesApiService {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}`);
   }
 
-  getMovies(limit?: number): Observable<MovieApi[]> {
-    let query = new HttpParams();
-    if (limit) {
-      query = query.set('limit', limit.toString());
-    }
-
-    return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params: query })
-      .pipe(
-        map(response => response.data) // Extrae solo la lista de actores
-      );
+  getMovies(params: {
+    genre?: string,
+    releaseYear?: string,
+    clasification?: string,
+    sortBy?: string,
+    order?: string,
+    limit?: number,
+    offset?: number
+  }): Observable<MovieResponse> {
+    const queryParams = new HttpParams()
+      .set('genre', params.genre || '')
+      .set('releaseYear', params.releaseYear || '')
+      .set('clasification', params.clasification || '')
+      .set('sortBy', params.sortBy || '')
+      .set('order', params.order || '')
+      .set('limit', params.limit?.toString() || '')
+      .set('offset', params.offset?.toString() || '');
+    return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params: queryParams })
   }
 
   getMovieById(id: string): Observable<MovieApi> {

@@ -15,11 +15,18 @@ export class SortMoviesComponent {
 
   public sortBy: string = 'genre';
   public order: string = 'asc';
+  public sortOptions = [
+    { value: 'genre', display: 'Género' },
+    { value: 'releaseYear', display: 'Año de lanzamiento' },
+    { value: 'clasification', display: 'Clasificación' }
+  ];
 
   onSortChange(): void {
-    this.sortChange.emit({
-      sortBy: this.sortBy,
-      order: this.order
-    });
+    if (this.sortOptions.some(opt => opt.value === this.sortBy) && ['asc', 'desc'].includes(this.order)) {
+      this.sortChange.emit({
+        sortBy: this.sortBy,
+        order: this.order
+      });
+    }
   }
 }

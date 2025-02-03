@@ -1,7 +1,8 @@
-<div  appearance="fill" class="filter-dropdown">
-  <mat-form-field appearance="fill"  class="small-width">
+<div appearance="fill" class="filter-dropdown">
+  <mat-form-field appearance="fill" class="small-width">
     <mat-label>Filtrar por</mat-label>
     <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterChange()">
+      <mat-option>Sin filtro</mat-option> <!-- Nueva opción -->
       <mat-option value="genre">Género</mat-option>
       <mat-option value="year">Año</mat-option>
       <mat-option value="rating">Clasificación</mat-option>
@@ -9,13 +10,8 @@
   </mat-form-field>
   <mat-form-field appearance="fill" *ngIf="selectedFilter === 'genre'">
     <mat-label>Seleccionar Género</mat-label>
-    <input 
-      matInput 
-      [(ngModel)]="selectedValue" 
-      [matAutocomplete]="auto" 
-      (ngModelChange)="onFilterChange()"
-      (keyup.enter)="onEnterPress()"
-    />
+    <input matInput [(ngModel)]="selectedValue" [matAutocomplete]="auto" (ngModelChange)="onFilterChange()"
+      (keyup.enter)="onEnterPress()" />
 
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let genre of genres" [value]="genre">
@@ -25,7 +21,8 @@
   </mat-form-field>
   <mat-form-field appearance="fill" *ngIf="selectedFilter === 'year'">
     <mat-label>Seleccionar Año</mat-label>
-    <input matInput type="number" [(ngModel)]="selectedValue" (ngModelChange)="onFilterChange()" [min]="1900" [max]="2025" />
+    <input matInput type="number" [(ngModel)]="selectedValue" (ngModelChange)="onFilterChange()" [min]="1900"
+      [max]="2025" />
   </mat-form-field>
   <mat-form-field appearance="fill" *ngIf="selectedFilter === 'rating'">
     <mat-label>Seleccionar Clasificación</mat-label>
@@ -38,7 +35,5 @@
       <mat-option value="NC-17">Solo adultos</mat-option>
     </mat-select>
   </mat-form-field>
-  
+
 </div>
-
-
