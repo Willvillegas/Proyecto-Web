@@ -62,29 +62,34 @@
             </button>
           </div>
           <div>
+
+
             <div class="mt-4 w-full">
               <label>Imágenes</label>
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
-                <mat-radio-group formControlName="cover" (change)="onCoverChange($event)">
-                  <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index"
-                    class="flex flex-col items-center space-y-2 w-full">
-                    <img [src]="poster.url" alt="Poster"
-                      class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
-                    <mat-radio-button [value]="poster._id" [checked]="poster._id === movieForm.get('cover')?.value">
-                      Portada
+                <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index" class="flex flex-col items-center space-y-2 w-full">
+                  <img [src]="poster.url" alt="Foto del actor" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+                  
+                  <mat-radio-group formControlName="cover" (change)="onCoverChange(i)">
+                    <mat-radio-button [value]="poster._id" [checked]="poster.isCover">
+                      Foto de portada
                     </mat-radio-button>
-                    <div class="flex flex-col gap-2 w-full">
-                      <button type="button" mat-raised-button color="primary" (click)="onChangeImage(i)"
-                        class="w-full">Cambiar</button>
-                      <button type="button" mat-raised-button color="warn" (click)="onDeleteImage(i)"
-                        [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full">
-                        Eliminar
-                      </button>
-                    </div>
+                  </mat-radio-group>
+            
+                  <div class="flex flex-col gap-2 w-full">
+                    <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full" type ="button">Cambiar</button>
+                    <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
+                            [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full" type ="button">
+                      Eliminar
+                    </button>
                   </div>
-                </mat-radio-group>
+                </div>
               </div>
             </div>
+
+
+
+
           </div>
         </div>
         <div class="mt-4 flex justify-between">

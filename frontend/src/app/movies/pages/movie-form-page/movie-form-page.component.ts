@@ -254,19 +254,15 @@ export class MovieFormPageComponent implements OnInit {
     }
   }
 
-  onCoverChange(event: any): void {
-    const selectedCoverId = event.value;
+
+  onCoverChange(index: number): void {
     const posters: Poster[] = this.movieForm.get('posters')?.value;
-    posters.forEach((poster: Poster) => {
-      poster.isCover = (poster._id === selectedCoverId);
+    posters.forEach((poster, i) => {
+      poster.isCover = i === index; // Se marca solo la seleccionada
     });
-
-    // Actualiza el valor de los posters en el formulario
-    this.movieForm.get('posters')?.setValue(posters);
-    this.movieForm.get('cover')?.setValue(selectedCoverId);
+  
+    this.movieForm.patchValue({ posters });
   }
-
-
 
   onDeleteImage(index: number): void {
     const posters = this.movieForm.get('posters')?.value;
