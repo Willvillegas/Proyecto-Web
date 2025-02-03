@@ -24,7 +24,7 @@ export class MovieRepository {
     static async findAll(filters: IFilterMovie, offset: number, limit: number): Promise<IMovie[]> {
         const query: any = {};
         if (filters.clasification) {
-            query['clasification'] = { $regex: filters.clasification, $options: 'i' };
+            query['clasification'] = filters.clasification;
         }
         if (filters.genre) {
             query['genre'] = { $regex: filters.genre, $options: 'i' };
@@ -71,7 +71,7 @@ export class MovieRepository {
     static async count(filters: IFilterMovie): Promise<number> {
         const query: any = {};
         if (filters.clasification) {
-            query['clasification'] = { $regex: filters.clasification, $options: 'i' };
+            query['clasification'] = filters.clasification;
         }
         if (filters.genre) {
             query['genre'] = { $regex: filters.genre, $options: 'i' };
