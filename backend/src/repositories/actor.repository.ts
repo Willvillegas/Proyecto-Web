@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Actor } from "../models/actor.model";
 import { Movie } from "../models/movie.model";
-import { IActor } from "../interfaces/actor.interface";
+import { IActor, IFilterActor } from "../interfaces/actor.interface";
 import { Types } from "mongoose";
 
 export class ActorRepository {
@@ -18,8 +19,11 @@ export class ActorRepository {
      * Retrieves all actors from the database
      * @returns Promise<IActor[]>
      */
-    static async findAll(offset: number, limit: number): Promise<IActor[]> {
-        return Actor.find()
+    static async findAll(filters: IFilterActor, offset: number, limit: number): Promise<IActor[]> {
+        const query: any = {};
+        if (filters.search)
+            query['name'] = { $regex: filters.search, $options: 'i' };
+        return Actor.find(query)
             .skip(offset)
             .limit(limit)
             .populate('movies', ['title', 'releaseYear'])
@@ -47,8 +51,12 @@ export class ActorRepository {
     /**
      * Counts the number of actors in the database
      */
-    static async count(): Promise<number> {
-        return Actor.countDocuments().exec();
+    static async count(filters: IFilterActor): Promise<number> {
+        const query: any = {};
+        if (filters.search)
+            query['name'] = { $regex: filters.search, $options: 'i' };
+
+        return Actor.countDocuments(query).exec();
     }
 
     /**

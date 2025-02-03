@@ -19,14 +19,14 @@ export class MoviesApiService {
 
   getMovies(limit?: number): Observable<MovieApi[]> {
     let query = new HttpParams();
-        if (limit) {
-          query = query.set('limit', limit.toString());
-        }
-    
-        return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params: query })
-          .pipe(
-            map(response => response.data) // Extrae solo la lista de actores
-          );
+    if (limit) {
+      query = query.set('limit', limit.toString());
+    }
+
+    return this.httpClient.get<MovieResponse>(`${this.apiUrl}`, { params: query })
+      .pipe(
+        map(response => response.data) // Extrae solo la lista de actores
+      );
   }
 
   getMovieById(id: string): Observable<MovieApi> {
@@ -35,32 +35,36 @@ export class MoviesApiService {
   createMovie(movie: MovieApi): Observable<MovieApi> {
     return this.httpClient.post<MovieApi>(`${this.apiUrl}`, movie);
   }
-  
+
   getMoviesPage(limit: number, offset: number): Observable<MovieResponse> {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
   }
-  
-  searchMovies(query: string): Observable<MovieApi[]> {
+
+  searchMovies(query: string, limit?: number): Observable<MovieApi[]> {
+    const params = new HttpParams().set('search', query);
+
+    if (limit) params.set('limit', limit.toString());
+
     return this.httpClient
-      .get<{ data: MovieApi[] }>(`${this.apiUrl}?search=${query}`)
+      .get<{ data: MovieApi[] }>(`${this.apiUrl}`, { params: params })
       .pipe(map(response => response.data));
   }
-  
+
   updateMovie(movie: MovieApi): Observable<MovieApi> {
     return this.httpClient.put<MovieApi>(`${this.apiUrl}/${movie._id}`, movie);
   }
-  
-  
+
+
   // Eliminar una película por su ID
   deleteMovie(id: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
   }
-  
- 
+
+
   getUniqueFilterOptions(): Observable<{ genres: string[]; years: string[]; ratings: string[] }> {
     return this.httpClient.get<MovieResponse>(`${this.apiUrl}`).pipe(
       map(response => {
-        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance']; 
+        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance'];
         const ratings = [...new Set(response.data.map(movie => movie.clasification || ''))];
 
         return { genres, years: [], ratings }; // No cargamos años dinámicamente

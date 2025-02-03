@@ -24,13 +24,16 @@ export class MovieRepository {
     static async findAll(filters: IFilterMovie, offset: number, limit: number): Promise<IMovie[]> {
         const query: any = {};
         if (filters.clasification) {
-            query['clasification'] = filters.clasification;
+            query['clasification'] = { $regex: filters.clasification, $options: 'i' };
         }
         if (filters.genre) {
             query['genre'] = { $regex: filters.genre, $options: 'i' };
         }
         if (filters.releaseYear) {
             query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
+        }
+        if (filters.search) {
+            query['title'] = { $regex: filters.search, $options: 'i' };
         }
 
 
@@ -68,13 +71,16 @@ export class MovieRepository {
     static async count(filters: IFilterMovie): Promise<number> {
         const query: any = {};
         if (filters.clasification) {
-            query['clasification'] = filters.clasification;
+            query['clasification'] = { $regex: filters.clasification, $options: 'i' };
         }
         if (filters.genre) {
-            query['genre'] = filters.genre;
+            query['genre'] = { $regex: filters.genre, $options: 'i' };
         }
         if (filters.releaseYear) {
             query['releaseYear'] = parseInt(filters.releaseYear as string, 10);
+        }
+        if (filters.search) {
+            query['title'] = { $regex: filters.search, $options: 'i' };;
         }
         return Movie.countDocuments(query).exec();
     }
@@ -98,32 +104,32 @@ export class MovieRepository {
         return Movie.findByIdAndDelete(id).exec();
     }
 
-        /**
-     * Dado un id de una pelicula, 
-     * recupera todos los actores que participaron en ella
-     * y luego devuelve el id,nombre, y la imagen que es cover de cada actor
-     * @param id string
-     * @returns Promise<{_id:string,name:string,imageCover:IImage}[]>
-     */
-        static async getActors(id: string): Promise<{ _id: string, name: string, imageCover: IImage }[]> {
-            const movie = await Movie.findById(id);
-            if (!movie) {
-                return [];
-            }
-            const actorsInMovie: { _id: string, name: string, imageCover: IImage }[] = []
-            for (const actorId of movie.cast) {
-                const actor = await Actor.findById(actorId);
-                if (actor) {
-                    const imageCover: IImage = actor.images.find((image) => image.isCover)!;
-                    actorsInMovie.push({
-                        _id: actor._id?.toString() || '',
-                        name: actor.name,
-                        imageCover: imageCover!,
-                    });
-                }
-            }
-            return actorsInMovie;
-    
+    /**
+ * Dado un id de una pelicula, 
+ * recupera todos los actores que participaron en ella
+ * y luego devuelve el id,nombre, y la imagen que es cover de cada actor
+ * @param id string
+ * @returns Promise<{_id:string,name:string,imageCover:IImage}[]>
+ */
+    static async getActors(id: string): Promise<{ _id: string, name: string, imageCover: IImage }[]> {
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return [];
         }
-    
+        const actorsInMovie: { _id: string, name: string, imageCover: IImage }[] = []
+        for (const actorId of movie.cast) {
+            const actor = await Actor.findById(actorId);
+            if (actor) {
+                const imageCover: IImage = actor.images.find((image) => image.isCover)!;
+                actorsInMovie.push({
+                    _id: actor._id?.toString() || '',
+                    name: actor.name,
+                    imageCover: imageCover!,
+                });
+            }
+        }
+        return actorsInMovie;
+
+    }
+
 }

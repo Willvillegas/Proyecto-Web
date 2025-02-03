@@ -88,7 +88,7 @@ export class MovieFormPageComponent implements OnInit {
   }
 
   loadActors(): void {
-    this.actorApiService.getActors(50).subscribe(response => {
+    this.actorApiService.getActors(70).subscribe(response => {
       this.actors = response;
     });
   }

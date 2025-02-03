@@ -18,6 +18,7 @@ export interface IImage {
 }
 
 export interface IFilterMovie {
+    search?: string;
     genre?: string;
     releaseYear?: string;
     clasification?: string;

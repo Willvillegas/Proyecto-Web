@@ -35,7 +35,7 @@ export type SearchOption = {
 })
 export class SearchComponent implements OnInit {
   searchInput = new FormControl(''); // Iniciar con una cadena vacía
-  searchResults: SearchOption[] = []; 
+  searchResults: SearchOption[] = [];
   selectedOption?: SearchOption; // Resultado seleccionado
   formMode: 'movies' | 'actors' = 'movies'; // Modo actual (películas o actores)
 
@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
     private actorsService: ActorsApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.detectRouteMode();
@@ -71,14 +71,14 @@ export class SearchComponent implements OnInit {
   // Detectar en qué página está el usuario
   private detectRouteMode(): void {
     const url = this.router.url;
-    
+
     if (url.startsWith('/movies/') || url.includes('/movies')) {
       this.formMode = 'movies';
     } else if (url.startsWith('/actors/') || url.includes('/actors')) {
       this.formMode = 'actors';
     }
   }
-  
+
   // Método para buscar películas o actores
   search(value: string): Observable<SearchOption[]> {
     if (!value.trim()) {
@@ -86,7 +86,7 @@ export class SearchComponent implements OnInit {
     }
 
     if (this.formMode === 'movies') {
-      return this.moviesService.searchMovies(value).pipe(
+      return this.moviesService.searchMovies(value, 70).pipe(
         map((movies: MovieApi[]) =>
           movies
             .map(movie => ({ id: movie._id || '', title: movie.title })) // Asegurar que 'id' sea string
@@ -94,7 +94,7 @@ export class SearchComponent implements OnInit {
         )
       );
     } else {
-      return this.actorsService.searchActors(value).pipe(
+      return this.actorsService.searchActors(value, 70).pipe(
         map((actors: ActorApi[]) =>
           actors
             .map(actor => ({ id: actor._id || '', name: actor.name })) // Asegurar que 'id' sea string
@@ -104,7 +104,7 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  
+
   // Manejar la selección de una opción en el autocompletado
   onSelectedOption(event: MatAutocompleteSelectedEvent): void {
     const selectedValue = event.option.value;

@@ -1,4 +1,4 @@
-import { IActor } from "../interfaces/actor.interface";
+import { IActor, IFilterActor } from "../interfaces/actor.interface";
 import { ActorService } from "../services/actor.service";
 import { Request, Response } from "express";
 
@@ -33,8 +33,12 @@ export class ActorController {
         try {
             const limit = parseInt(req.query.limit as string) || 10;
             const offset = parseInt(req.query.offset as string) || 0;
-            const actors = await ActorService.findAll(offset, limit);
-            const total = await ActorService.count();
+
+            //Filters
+            const filters: IFilterActor = req.query as IFilterActor;
+
+            const actors = await ActorService.findAll(filters, offset, limit);
+            const total = await ActorService.count(filters);
             return res.status(200).json({
                 data: actors,
                 total,

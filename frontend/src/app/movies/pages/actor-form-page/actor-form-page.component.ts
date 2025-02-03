@@ -76,7 +76,7 @@ export class ActorFormPageComponent implements OnInit {
   }
 
   loadMovies(): void {
-    this.movieApiService.getMovies().subscribe(response => {
+    this.movieApiService.getMovies(70).subscribe(response => {
       this.movies = response;
     });
   }

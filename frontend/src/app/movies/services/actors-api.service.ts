@@ -37,9 +37,13 @@ export class ActorsApiService {
   }
 
   // Método para buscar actores por nombre 
-  searchActors(query: string): Observable<ActorApi[]> {
+  searchActors(query: string, limit?: number): Observable<ActorApi[]> {
+    const params = new HttpParams().set('search', query);
+
+    if (limit) params.set('limit', limit.toString());
+
     return this.httpClient
-      .get<{ data: ActorApi[] }>(`${this.apiUrl}?search=${query}`)
+      .get<{ data: ActorApi[] }>(`${this.apiUrl}`, { params: params })
       .pipe(map(response => response.data));
   }
 

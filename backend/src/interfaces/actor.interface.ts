@@ -7,4 +7,7 @@ export interface IActor extends Document {
     movies: string[];
     images: IImage[];
 }
+export interface IFilterActor {
+    search?: string;
+}
 

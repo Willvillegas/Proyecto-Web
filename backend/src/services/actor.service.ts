@@ -1,4 +1,4 @@
-import { IActor } from "../interfaces/actor.interface";
+import { IActor, IFilterActor } from "../interfaces/actor.interface";
 import { ActorRepository } from "../repositories/actor.repository";
 import { MovieRepository } from "../repositories/movie.repository";
 
@@ -27,8 +27,8 @@ export class ActorService {
      * Retrieves all actors from the database
      * @returns Promise<IActor[]>
      */
-    static async findAll(offset: number, limit: number): Promise<IActor[]> {
-        return ActorRepository.findAll(offset, limit);
+    static async findAll(filters: IFilterActor, offset: number, limit: number): Promise<IActor[]> {
+        return ActorRepository.findAll(filters, offset, limit);
     }
 
     /**
@@ -53,8 +53,8 @@ export class ActorService {
      * COunts the number of actors in the database
      * @returns Promise<number>
      */
-    static async count(): Promise<number> {
-        return ActorRepository.count();
+    static async count(filters: IFilterActor): Promise<number> {
+        return ActorRepository.count(filters);
     }
 
     /**
