@@ -1,0 +1,1189 @@
+{
+	"info": {
+		"_postman_id": "ffd066a4-d248-4849-8934-60ad2328b80b",
+		"name": "API Documentación",
+		"description": "Documentación de la API del proyecto web IMBD para el curso de desarrollo de páginas web. Verano 2024-2025\n\nCreadores:\n\n- Natasha Calderón\n    \n- Angélica Díaz\n    \n- Wilfredo Villegas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41716676"
+	},
+	"item": [
+		{
+			"name": "Peliculas",
+			"item": [
+				{
+					"name": "Obtener peliculas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "(Int) Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "(Int) Especifica cuántos documentos queremos obtener en una sola consulta.",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "(string) [Opcional] buscar por genero",
+									"disabled": true
+								},
+								{
+									"key": "releaseYear",
+									"value": "(string) : [Opcional] buscar por año",
+									"disabled": true
+								},
+								{
+									"key": "clasification",
+									"value": "(string) : [Opcional] buscar por clasificación",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "(string) : [Opcional] clasificar por ( releaseYear, genre , clasification ) ",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "(string) : [Opcional] buscar por el title(titulo) de la pelicula",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "(string) : [Opcional] ordenar por ( asc , desc )",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Recupera una lista de las películas que hay en la base de datos."
+					},
+					"response": [
+						{
+							"name": "Obtener todas las peliculas sin parametros",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/movies/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movies",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "7697",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e11-CiAcYLv6mC9ypAYejC3TDJsYHfE\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 05:45:14 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"67913b497e284a0cac1661ee\",\n            \"title\": \"Inception\",\n            \"description\": \"A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind. A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.A skilled thief is offered a chance to erase his criminal record by planting an idea in someone's mind.\",\n            \"genre\": \"Science Fiction\",\n            \"director\": \"Christopher Nolan\",\n            \"cast\": [\n                {\n                    \"_id\": \"6796b40bb55bad824e69f138\",\n                    \"name\": \"Elliot Page\"\n                },\n                {\n                    \"_id\": \"6796b32cb55bad824e69f136\",\n                    \"name\": \"Joseph Gordon-Levitt\"\n                },\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2010,\n            \"rating\": \"8.8\",\n            \"posters\": [\n                {\n                    \"url\": \"https://flxt.tmsimg.com/assets/p7825626_p_v8_af.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"67913b497e284a0cac1661ef\"\n                },\n                {\n                    \"url\": \"https://www.escapistmagazine.com/wp-content/uploads/2020/07/inception1.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"67913b497e284a0cac1661f0\"\n                },\n                {\n                    \"url\": \"https://example.com/inception_2.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"67913b497e284a0cac1661f1\"\n                }\n            ],\n            \"__v\": 0,\n            \"clasification\": \"PG-15\"\n        },\n        {\n            \"_id\": \"67913c1f7e284a0cac1661f8\",\n            \"title\": \"The Dark Knight la noches....\",\n            \"description\": \"Batman faces the Joker, a criminal mastermind who wreaks havoc in Gotham City.\",\n            \"genre\": \"Drama\",\n            \"director\": \"Christopher Nolan\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2008,\n            \"rating\": \"9\",\n            \"posters\": [\n                {\n                    \"url\": \"https://th.bing.com/th/id/R.34df6b287faf65b160b47e05ba85bb3b?rik=o5LsP1up4eGlXA&pid=ImgRaw&r=0\",\n                    \"isCover\": true,\n                    \"_id\": \"67913c1f7e284a0cac1661f9\"\n                },\n                {\n                    \"url\": \"https://example.com/darkknight_1.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"67913c1f7e284a0cac1661fa\"\n                },\n                {\n                    \"url\": \"https://example.com/darkknight_2.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"67913c1f7e284a0cac1661fb\"\n                }\n            ],\n            \"__v\": 0,\n            \"clasification\": \"PG-13\"\n        },\n        {\n            \"_id\": \"679596fdf25535ece8577428\",\n            \"title\": \"The Revenant\",\n            \"description\": \"A frontiersman on a quest for survival after being mauled by a bear and left for dead by members of his own hunting team.\",\n            \"genre\": \"Drama\",\n            \"director\": \"Alejandro González Iñárritu\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2015,\n            \"rating\": \"8\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.themoviedb.org/t/p/original/47CPtrJri6T9roxbs38Pdq54g41.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7e6418e9aff78b20fd08\"\n                }\n            ],\n            \"clasification\": \"PG-13\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"67959757f25535ece857742a\",\n            \"title\": \"Interstellar\",\n            \"description\": \"A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.\",\n            \"genre\": \"Horror\",\n            \"director\": \"Christopher Nolan\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2014,\n            \"rating\": \"8.6\",\n            \"posters\": [\n                {\n                    \"url\": \"https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7e7b18e9aff78b20fd5a\"\n                }\n            ],\n            \"clasification\": \"PG-13\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"67959786f25535ece857742c\",\n            \"title\": \"Fight Club\",\n            \"description\": \"An insomniac office worker forms an underground fight club with soap salesman Tyler Durden.\",\n            \"genre\": \"Drama\",\n            \"director\": \"David Fincher\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1999,\n            \"rating\": \"8.8\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.new-video.de/co/fightclu.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7ce018e9aff78b20fbca\"\n                }\n            ],\n            \"clasification\": \"NC-17\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"679597aef25535ece857742e\",\n            \"title\": \"The Matrix\",\n            \"description\": \"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\n            \"genre\": \"Action\",\n            \"director\": \"Lana Wachowski, Lilly Wachowski\",\n            \"cast\": [\n                {\n                    \"_id\": \"6796b209b55bad824e69f134\",\n                    \"name\": \"Leonardo DiCaprio\"\n                },\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1999,\n            \"rating\": \"8.7\",\n            \"posters\": [\n                {\n                    \"url\": \"images-1737870415915-921066565.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6795cc50ab3aa6f5a4c86f46\"\n                },\n                {\n                    \"url\": \"images-1737870415920-995662911.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6795cc50ab3aa6f5a4c86f47\"\n                },\n                {\n                    \"url\": \"https://pics.filmaffinity.com/Matrix-155050517-large.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"6795cd40ab3aa6f5a4c86f5b\"\n                }\n            ],\n            \"clasification\": \"PG-15\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"679597cdf25535ece8577430\",\n            \"title\": \"Pulp Fiction\",\n            \"description\": \"The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.\",\n            \"genre\": \"Science Fiction\",\n            \"director\": \"Quentin Tarantino\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1994,\n            \"rating\": \"8.9\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.themoviedb.org/t/p/original/pbWgQPC6l9pkpEpi3WNRSfWYNP6.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7aa718e9aff78b20f9d3\"\n                }\n            ],\n            \"clasification\": \"NC-17\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6795982ff25535ece8577434\",\n            \"title\": \"Gladiator\",\n            \"description\": \"A betrayed Roman general seeks revenge against the corrupt emperor who murdered his family and sent him into slavery.\",\n            \"genre\": \"Action\",\n            \"director\": \"Ridley Scott\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2000,\n            \"rating\": \"8.5\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.themoviedb.org/t/p/original/ixsPIb7dIiZlrqbV1QVdqA9XWxm.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7a3018e9aff78b20f908\"\n                }\n            ],\n            \"clasification\": \"PG-15\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"67959865f25535ece8577436\",\n            \"title\": \"Ice Age\",\n            \"description\": \"Set during the ice age, a group of prehistoric animals embark on a journey to return a human baby to its tribe.\",\n            \"genre\": \"Animation\",\n            \"director\": \"Chris Wedge, Carlos Saldanha\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2002,\n            \"rating\": \"7.5\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.ecartelera.com/carteles/700/700/001_m.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7a7218e9aff78b20f998\"\n                },\n                {\n                    \"url\": \"https://2.bp.blogspot.com/-rENIQHA2uMQ/UoRJTDuRakI/AAAAAAAADsw/D9EiK3BGnhk/s640/La+era+de+hielo-401311.jpeg\",\n                    \"isCover\": false,\n                    \"_id\": \"679d7a7218e9aff78b20f999\"\n                }\n            ],\n            \"clasification\": \"G\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6795987ef25535ece8577438\",\n            \"title\": \"The Godfather\",\n            \"description\": \"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.\",\n            \"genre\": \"Science Fiction\",\n            \"director\": \"Francis Ford Coppola\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1972,\n            \"rating\": \"9.2\",\n            \"posters\": [\n                {\n                    \"url\": \"https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7ac318e9aff78b20fa03\"\n                }\n            ],\n            \"clasification\": \"R\",\n            \"__v\": 0\n        }\n    ],\n    \"total\": 12,\n    \"offset\": 0,\n    \"limit\": 10,\n    \"pages\": 2\n}"
+						},
+						{
+							"name": "Obtener todas las peliculas con pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/movies/?limit=20&offset=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movies",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5169",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1431-xoABwiGgQBWw9z6vPumzkSMf9FI\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 05:59:33 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"679597aef25535ece857742e\",\n            \"title\": \"The Matrix\",\n            \"description\": \"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\n            \"genre\": \"Action\",\n            \"director\": \"Lana Wachowski, Lilly Wachowski\",\n            \"cast\": [\n                {\n                    \"_id\": \"6796b209b55bad824e69f134\",\n                    \"name\": \"Leonardo DiCaprio\"\n                },\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1999,\n            \"rating\": \"8.7\",\n            \"posters\": [\n                {\n                    \"url\": \"images-1737870415915-921066565.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6795cc50ab3aa6f5a4c86f46\"\n                },\n                {\n                    \"url\": \"images-1737870415920-995662911.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6795cc50ab3aa6f5a4c86f47\"\n                },\n                {\n                    \"url\": \"https://pics.filmaffinity.com/Matrix-155050517-large.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"6795cd40ab3aa6f5a4c86f5b\"\n                }\n            ],\n            \"clasification\": \"PG-15\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"679597cdf25535ece8577430\",\n            \"title\": \"Pulp Fiction\",\n            \"description\": \"The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.\",\n            \"genre\": \"Science Fiction\",\n            \"director\": \"Quentin Tarantino\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1994,\n            \"rating\": \"8.9\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.themoviedb.org/t/p/original/pbWgQPC6l9pkpEpi3WNRSfWYNP6.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7aa718e9aff78b20f9d3\"\n                }\n            ],\n            \"clasification\": \"NC-17\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6795982ff25535ece8577434\",\n            \"title\": \"Gladiator\",\n            \"description\": \"A betrayed Roman general seeks revenge against the corrupt emperor who murdered his family and sent him into slavery.\",\n            \"genre\": \"Action\",\n            \"director\": \"Ridley Scott\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2000,\n            \"rating\": \"8.5\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.themoviedb.org/t/p/original/ixsPIb7dIiZlrqbV1QVdqA9XWxm.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7a3018e9aff78b20f908\"\n                }\n            ],\n            \"clasification\": \"PG-15\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"67959865f25535ece8577436\",\n            \"title\": \"Ice Age\",\n            \"description\": \"Set during the ice age, a group of prehistoric animals embark on a journey to return a human baby to its tribe.\",\n            \"genre\": \"Animation\",\n            \"director\": \"Chris Wedge, Carlos Saldanha\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 2002,\n            \"rating\": \"7.5\",\n            \"posters\": [\n                {\n                    \"url\": \"https://www.ecartelera.com/carteles/700/700/001_m.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7a7218e9aff78b20f998\"\n                },\n                {\n                    \"url\": \"https://2.bp.blogspot.com/-rENIQHA2uMQ/UoRJTDuRakI/AAAAAAAADsw/D9EiK3BGnhk/s640/La+era+de+hielo-401311.jpeg\",\n                    \"isCover\": false,\n                    \"_id\": \"679d7a7218e9aff78b20f999\"\n                }\n            ],\n            \"clasification\": \"G\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6795987ef25535ece8577438\",\n            \"title\": \"The Godfather\",\n            \"description\": \"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.\",\n            \"genre\": \"Science Fiction\",\n            \"director\": \"Francis Ford Coppola\",\n            \"cast\": [\n                {\n                    \"_id\": \"67988b7c535dabf6a6384a56\",\n                    \"name\": \"Actor In ALL MOVIES\"\n                }\n            ],\n            \"releaseYear\": 1972,\n            \"rating\": \"9.2\",\n            \"posters\": [\n                {\n                    \"url\": \"https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679d7ac318e9aff78b20fa03\"\n                }\n            ],\n            \"clasification\": \"R\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"679878688e40003f561c5175\",\n            \"title\": \"All Actors In One Movie\",\n            \"description\": \"all actors\",\n            \"genre\": \"Action\",\n            \"director\": \"Leonardo\",\n            \"cast\": [\n                {\n                    \"_id\": \"6796b209b55bad824e69f134\",\n                    \"name\": \"Leonardo DiCaprio\"\n                },\n                {\n                    \"_id\": \"6796b32cb55bad824e69f136\",\n                    \"name\": \"Joseph Gordon-Levitt\"\n                },\n                {\n                    \"_id\": \"6796b40bb55bad824e69f138\",\n                    \"name\": \"Elliot Page\"\n                },\n                {\n                    \"_id\": \"6796b53ab55bad824e69f13a\",\n                    \"name\": \"Christian Bale\"\n                },\n                {\n                    \"_id\": \"6796b559b55bad824e69f13c\",\n                    \"name\": \"Heath Ledger\"\n                },\n                {\n                    \"_id\": \"6796b61ab55bad824e69f13e\",\n                    \"name\": \"Aaron Eckhart\"\n                },\n                {\n                    \"_id\": \"6796b646b55bad824e69f140\",\n                    \"name\": \"Matthew McConaughey\"\n                },\n                {\n                    \"_id\": \"6796b6cfb55bad824e69f142\",\n                    \"name\": \"Anne Hathaway\"\n                },\n                {\n                    \"_id\": \"6796b6ebb55bad824e69f144\",\n                    \"name\": \"Jessica Chastain\"\n                },\n                {\n                    \"_id\": \"6796b736b55bad824e69f147\",\n                    \"name\": \"Brad Pitt\"\n                },\n                {\n                    \"_id\": \"6796b759b55bad824e69f149\",\n                    \"name\": \"Edward Norton\"\n                },\n                {\n                    \"_id\": \"6796b777b55bad824e69f14b\",\n                    \"name\": \"Helena Bonham Carter\"\n                },\n                {\n                    \"_id\": \"6796b79bb55bad824e69f14d\",\n                    \"name\": \"Keanu Reeves\"\n                },\n                {\n                    \"_id\": \"6796b7bcb55bad824e69f14f\",\n                    \"name\": \"Laurence Fishburne\"\n                },\n                {\n                    \"_id\": \"6796b7d5b55bad824e69f151\",\n                    \"name\": \"Carrie-Anne Moss\"\n                }\n            ],\n            \"releaseYear\": 2025,\n            \"rating\": \"8.9\",\n            \"posters\": [\n                {\n                    \"url\": \"https://hips.hearstapps.com/hmg-prod/images/thunderbolts-67640c8b27991.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"679878688e40003f561c5176\"\n                },\n                {\n                    \"url\": \"https://img.lovepik.com/photo/48014/4129.jpg_wh860.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"679878688e40003f561c5177\"\n                }\n            ],\n            \"clasification\": \"R\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"679d628018e9aff78b20f6b4\",\n            \"title\": \"jjjj\",\n            \"description\": \"hhhjj\",\n            \"genre\": \"Comedy\",\n            \"director\": \"ghhj\",\n            \"cast\": [\n                {\n                    \"_id\": \"6796b40bb55bad824e69f138\",\n                    \"name\": \"Elliot Page\"\n                },\n                {\n                    \"_id\": \"6796b53ab55bad824e69f13a\",\n                    \"name\": \"Christian Bale\"\n                }\n            ],\n            \"releaseYear\": 2001,\n            \"rating\": \"6\",\n            \"posters\": [\n                {\n                    \"url\": \"https://png.pngtree.com/png-clipart/20210121/ourmid/pngtree-blue-number-6-3d-png-image_2775986.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"679d628018e9aff78b20f6b5\"\n                },\n                {\n                    \"url\": \"https://www.adobe.com/in/express/feature/image/media_16ad2258cac6171d66942b13b8cd4839f0b6be6f3.png?width=750&format=png&optimize=medium\",\n                    \"isCover\": true,\n                    \"_id\": \"679d967b18e9aff78b21053b\"\n                }\n            ],\n            \"clasification\": \"G\",\n            \"__v\": 0\n        }\n    ],\n    \"total\": 12,\n    \"offset\": 5,\n    \"limit\": 20,\n    \"pages\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener pelicula por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador de la pelicula a recuperar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Con este endpoint recupera una pelicula, por su identificador unico"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear pelicula",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Dummy Movie\",\r\n    \"description\": \"A dummy Movie description\",\r\n    \"genre\": \"List, of , genres\",\r\n    \"director\": \"Directors name\",\r\n    \"cast\": [\r\n        \"ActorID1\",\r\n        \"ActorID2\"\r\n    ],\r\n    \"releaseYear\": 2050,\r\n    \"rating\": \"10\",\r\n    \"posters\": [\r\n        {\r\n            \"url\": \"URL in JPG\",\r\n            \"isCover\": true\r\n        },\r\n        {\r\n            \"url\": \"URL in JPG\",\r\n            \"isCover\": false\r\n        }\r\n    ],\r\n    \"clasification\": \"PG-22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								""
+							]
+						},
+						"description": "Crea una pelicula con el siguiente formato:\n\n- **title:** (string) Titulo de la pelicula\n    \n- **description:** (string) Descripción de la pelicula\n    \n- **genre:** (string) Generos pertencientes a la pelicula (un solo string separado por comas)\n    \n- **cast:** (string \\[ \\] ) Lista con los identificadores unicos de los actores que participaron en la pelicula.\n    \n- **releaseYear:** (number) Año de su lanzamiento\n    \n- **posters:** ({ url: string, isCover: boolean } \\[ \\] ) Lista de las imagenes que contiene la pelicula, su url e indicación si es una portada.\n    \n- **clasification:** (String) Clasificación de la pelicula."
+					},
+					"response": [
+						{
+							"name": "Crear una pelicula respuesta",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Dummy Movie\",\r\n    \"description\": \"A dummy Movie description\",\r\n    \"genre\": \"List, of , genres\",\r\n    \"director\": \"Directors name\",\r\n    \"cast\": [\r\n        \"6796b209b55bad824e69f134\",\r\n        \"6796b32cb55bad824e69f136\"\r\n    ],\r\n    \"releaseYear\": 2050,\r\n    \"rating\": \"10\",\r\n    \"posters\": [\r\n        {\r\n            \"url\": \"https://hips.hearstapps.com/hmg-prod/images/thunderbolts-67640c8b27991.jpg\",\r\n            \"isCover\": true\r\n        },\r\n        {\r\n            \"url\": \"https://img.lovepik.com/photo/48014/4129.jpg_wh860.jpg\",\r\n            \"isCover\": false\r\n        }\r\n    ],\r\n    \"clasification\": \"PG-22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/movies/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movies",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "541",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21d-4SakFW9+z5pfru5LTicvjz4bcPc\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 06:23:09 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"Dummy Movie\",\n    \"description\": \"A dummy Movie description\",\n    \"genre\": \"List, of , genres\",\n    \"director\": \"Directors name\",\n    \"cast\": [\n        \"6796b209b55bad824e69f134\",\n        \"6796b32cb55bad824e69f136\"\n    ],\n    \"releaseYear\": 2050,\n    \"rating\": \"10\",\n    \"posters\": [\n        {\n            \"url\": \"https://hips.hearstapps.com/hmg-prod/images/thunderbolts-67640c8b27991.jpg\",\n            \"isCover\": true,\n            \"_id\": \"679dbdccd687fd6a99d2a456\"\n        },\n        {\n            \"url\": \"https://img.lovepik.com/photo/48014/4129.jpg_wh860.jpg\",\n            \"isCover\": false,\n            \"_id\": \"679dbdccd687fd6a99d2a457\"\n        }\n    ],\n    \"clasification\": \"PG-22\",\n    \"_id\": \"679dbdccd687fd6a99d2a455\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar pelicula por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"Id de la pelucula\",\r\n    \"title\": \"Dummy Movie\",\r\n    \"description\": \"A dummy Movie description\",\r\n    \"genre\": \"List, of , genres\",\r\n    \"director\": \"Directors name\",\r\n    \"cast\": [\r\n        \"ActorId1\",\r\n        \"ActorId2\"\r\n    ],\r\n    \"releaseYear\": 2050,\r\n    \"rating\": \"10\",\r\n    \"posters\": [\r\n        {\r\n            \"url\": \"https://hips.hearstapps.com/hmg-prod/images/thunderbolts-67640c8b27991.jpg\",\r\n            \"isCover\": true\r\n        },\r\n        {\r\n            \"url\": \"https://img.lovepik.com/photo/48014/4129.jpg_wh860.jpg\",\r\n            \"isCover\": false\r\n        }\r\n    ],\r\n    \"clasification\": \"PG-22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador de la pelicula por actualizar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Actualiza el contenido de una pelicula por su identificador único"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar pelicula por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "El identificador de la pelicula.",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Elimina una pelicula por su identificador unico"
+					},
+					"response": [
+						{
+							"name": "Eliminar pelicula por id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/movies/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"movies",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "679dbdccd687fd6a99d2a455",
+											"type": "text"
+										}
+									]
+								},
+								"description": "Elimina una pelicula por su identificador unico"
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "API endpoints pertenecientes a la entidad pelicula con operaciones de:\n\n- Crear Pelicula\n    \n- Ver Pelicula\n    \n- Actualizar Pelicula\n    \n- Eliminar Pelicula"
+		},
+		{
+			"name": "Actores",
+			"item": [
+				{
+					"name": "Obtener actores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/actors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"actors"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "(Int) : Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "(Int) : Especifica cuántos documentos queremos obtener en una sola consulta.",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "(string) : [Opcional] buscar por el nombre  del actor",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Recupera una lista de las actores que hay en la base de datos."
+					},
+					"response": [
+						{
+							"name": "Obtener actores",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/actors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"actors"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "(Int) Indica desde qué documento empezar a devolver los resultados. En otras palabras, es la cantidad de documentos a omitir antes de empezar a devolver los resultados.",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "(Int) Especifica cuántos documentos queremos obtener en una sola consulta.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8291",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2063-yIUtLaoXRfQ7aQh51GdfDBL/u20\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 07:09:19 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"6796b209b55bad824e69f134\",\n            \"name\": \"Leonardo DiCaprio\",\n            \"birthday\": \"1974-11-11\",\n            \"biography\": \"Leonardo DiCaprio is an American actor known for his performances in Titanic, Inception, and The Revenant.\",\n            \"movies\": [\n                {\n                    \"_id\": \"679597aef25535ece857742e\",\n                    \"title\": \"The Matrix\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                },\n                {\n                    \"_id\": \"679dbdccd687fd6a99d2a455\",\n                    \"title\": \"Dummy Movie\",\n                    \"releaseYear\": 2050\n                }\n            ],\n            \"images\": [\n                {\n                    \"url\": \"principal-1737931560409-353603952.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"6796bb28b55bad824e69f155\"\n                },\n                {\n                    \"url\": \"images-1737931847289-76604152.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6796bc47b55bad824e69f15c\"\n                }\n            ],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b32cb55bad824e69f136\",\n            \"name\": \"Joseph Gordon-Levitt\",\n            \"birthday\": \"1981-02-17\",\n            \"biography\": \"Joseph Gordon-Levitt is an American actor known for his roles in 500 Days of Summer, Inception, and The Dark Knight Rises.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913b497e284a0cac1661ee\",\n                    \"title\": \"Inception\",\n                    \"releaseYear\": 2010\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                },\n                {\n                    \"_id\": \"679dbdccd687fd6a99d2a455\",\n                    \"title\": \"Dummy Movie\",\n                    \"releaseYear\": 2050\n                }\n            ],\n            \"images\": [\n                {\n                    \"url\": \"images-1737932121072-805795256.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6796bd59b55bad824e69f164\"\n                },\n                {\n                    \"url\": \"images-1737932121072-740891263.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"6796bd59b55bad824e69f165\"\n                },\n                {\n                    \"url\": \"principal-1737932168544-77984259.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"6796bd88b55bad824e69f16f\"\n                }\n            ],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b40bb55bad824e69f138\",\n            \"name\": \"Elliot Page\",\n            \"birthday\": \"1987-02-21\",\n            \"biography\": \"Elliot Page is a Canadian actor, known for his roles in Juno, Inception, and The Umbrella Academy.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913b497e284a0cac1661ee\",\n                    \"title\": \"Inception\",\n                    \"releaseYear\": 2010\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                },\n                {\n                    \"_id\": \"679d628018e9aff78b20f6b4\",\n                    \"title\": \"jjjj\",\n                    \"releaseYear\": 2001\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b53ab55bad824e69f13a\",\n            \"name\": \"Christian Bale\",\n            \"birthday\": \"1974-01-30\",\n            \"biography\": \"Christian Bale is an English actor known for his versatility and starring roles in The Dark Knight and American Psycho.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913c1f7e284a0cac1661f8\",\n                    \"title\": \"The Dark Knight la noches....\",\n                    \"releaseYear\": 2008\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                },\n                {\n                    \"_id\": \"679d628018e9aff78b20f6b4\",\n                    \"title\": \"jjjj\",\n                    \"releaseYear\": 2001\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b559b55bad824e69f13c\",\n            \"name\": \"Heath Ledger\",\n            \"birthday\": \"1979-04-04\",\n            \"biography\": \"Heath Ledger was an Australian actor best known for his role as the Joker in The Dark Knight.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913c1f7e284a0cac1661f8\",\n                    \"title\": \"The Dark Knight la noches....\",\n                    \"releaseYear\": 2008\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b61ab55bad824e69f13e\",\n            \"name\": \"Aaron Eckhart\",\n            \"birthday\": \"1968-03-12\",\n            \"biography\": \"Aaron Eckhart is an American actor, known for his roles in The Dark Knight, Thank You for Smoking, and Olympus Has Fallen.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913c1f7e284a0cac1661f8\",\n                    \"title\": \"The Dark Knight la noches....\",\n                    \"releaseYear\": 2008\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b646b55bad824e69f140\",\n            \"name\": \"Matthew McConaughey\",\n            \"birthday\": \"1969-11-04\",\n            \"biography\": \"Matthew McConaughey is an American actor known for his roles in Interstellar, Dallas Buyers Club, and True Detective.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959757f25535ece857742a\",\n                    \"title\": \"Interstellar\",\n                    \"releaseYear\": 2014\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b6cfb55bad824e69f142\",\n            \"name\": \"Anne Hathaway\",\n            \"birthday\": \"1982-11-12\",\n            \"biography\": \"Anne Hathaway is an American actress, known for her roles in Les Misérables, The Devil Wears Prada, and Interstellar.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959757f25535ece857742a\",\n                    \"title\": \"Interstellar\",\n                    \"releaseYear\": 2014\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b6ebb55bad824e69f144\",\n            \"name\": \"Jessica Chastain\",\n            \"birthday\": \"1977-03-24\",\n            \"biography\": \"Jessica Chastain is an American actress known for her roles in Interstellar, Zero Dark Thirty, and The Martian.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959757f25535ece857742a\",\n                    \"title\": \"Interstellar\",\n                    \"releaseYear\": 2014\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b736b55bad824e69f147\",\n            \"name\": \"Brad Pitt\",\n            \"birthday\": \"1963-12-18\",\n            \"biography\": \"Brad Pitt is an American actor and producer, known for his roles in Fight Club, Fight Club, and Once Upon a Time in Hollywood.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959786f25535ece857742c\",\n                    \"title\": \"Fight Club\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b759b55bad824e69f149\",\n            \"name\": \"Edward Norton\",\n            \"birthday\": \"1969-08-18\",\n            \"biography\": \"Edward Norton is an American actor, known for his roles in Fight Club, American History X, and Primal Fear.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959786f25535ece857742c\",\n                    \"title\": \"Fight Club\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b777b55bad824e69f14b\",\n            \"name\": \"Helena Bonham Carter\",\n            \"birthday\": \"1966-05-26\",\n            \"biography\": \"Helena Bonham Carter is an English actress known for her roles in Fight Club, Sweeney Todd, and The King's Speech.\",\n            \"movies\": [\n                {\n                    \"_id\": \"67959786f25535ece857742c\",\n                    \"title\": \"Fight Club\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b79bb55bad824e69f14d\",\n            \"name\": \"Keanu Reeves\",\n            \"birthday\": \"1964-09-02\",\n            \"biography\": \"Keanu Reeves is a Canadian actor known for his roles in The Matrix, John Wick, and Speed.\",\n            \"movies\": [\n                {\n                    \"_id\": \"679597aef25535ece857742e\",\n                    \"title\": \"The Matrix\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b7bcb55bad824e69f14f\",\n            \"name\": \"Laurence Fishburne\",\n            \"birthday\": \"1961-07-30\",\n            \"biography\": \"Laurence Fishburne is an American actor, known for his roles in The Matrix, Apocalypse Now, and Mystic River.\",\n            \"movies\": [\n                {\n                    \"_id\": \"679597aef25535ece857742e\",\n                    \"title\": \"The Matrix\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6796b7d5b55bad824e69f151\",\n            \"name\": \"Carrie-Anne Moss\",\n            \"birthday\": \"1967-08-21\",\n            \"biography\": \"Carrie-Anne Moss is a Canadian actress known for her role as Trinity in The Matrix trilogy.\",\n            \"movies\": [\n                {\n                    \"_id\": \"679597aef25535ece857742e\",\n                    \"title\": \"The Matrix\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679878688e40003f561c5175\",\n                    \"title\": \"All Actors In One Movie\",\n                    \"releaseYear\": 2025\n                }\n            ],\n            \"images\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"67988b7c535dabf6a6384a56\",\n            \"name\": \"Actor In ALL MOVIES\",\n            \"birthday\": \"2025-01-01\",\n            \"biography\": \"actor in all movies\",\n            \"movies\": [\n                {\n                    \"_id\": \"67913b497e284a0cac1661ee\",\n                    \"title\": \"Inception\",\n                    \"releaseYear\": 2010\n                },\n                {\n                    \"_id\": \"67913c1f7e284a0cac1661f8\",\n                    \"title\": \"The Dark Knight la noches....\",\n                    \"releaseYear\": 2008\n                },\n                {\n                    \"_id\": \"679596fdf25535ece8577428\",\n                    \"title\": \"The Revenant\",\n                    \"releaseYear\": 2015\n                },\n                {\n                    \"_id\": \"67959757f25535ece857742a\",\n                    \"title\": \"Interstellar\",\n                    \"releaseYear\": 2014\n                },\n                {\n                    \"_id\": \"67959786f25535ece857742c\",\n                    \"title\": \"Fight Club\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679597aef25535ece857742e\",\n                    \"title\": \"The Matrix\",\n                    \"releaseYear\": 1999\n                },\n                {\n                    \"_id\": \"679597cdf25535ece8577430\",\n                    \"title\": \"Pulp Fiction\",\n                    \"releaseYear\": 1994\n                },\n                {\n                    \"_id\": \"6795982ff25535ece8577434\",\n                    \"title\": \"Gladiator\",\n                    \"releaseYear\": 2000\n                },\n                {\n                    \"_id\": \"67959865f25535ece8577436\",\n                    \"title\": \"Ice Age\",\n                    \"releaseYear\": 2002\n                },\n                {\n                    \"_id\": \"6795987ef25535ece8577438\",\n                    \"title\": \"The Godfather\",\n                    \"releaseYear\": 1972\n                }\n            ],\n            \"images\": [\n                {\n                    \"url\": \"https://render.fineartamerica.com/images/rendered/default/poster/6/8/break/images/artworkimages/medium/3/keanu-reeves-john-wick-bo-kev.jpg\",\n                    \"isCover\": true,\n                    \"_id\": \"67988b7c535dabf6a6384a57\"\n                },\n                {\n                    \"url\": \"https://people.com/thmb/vqAer3rk4Wo7VxMdMA5Ln4FU8NQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(736x176:738x178)/keanu-reeves-john-wick-1-2014-386038374db54a48b0085051ee384be3.jpg\",\n                    \"isCover\": false,\n                    \"_id\": \"67988b7c535dabf6a6384a58\"\n                }\n            ],\n            \"__v\": 0\n        }\n    ],\n    \"total\": 16,\n    \"offset\": 0,\n    \"limit\": 10,\n    \"pages\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener actor por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api//:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador de la actor a recuperar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Con este endpoint recupera el actor, por su identificador unico"
+					},
+					"response": [
+						{
+							"name": "Obtener actor por id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/actors/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"actors",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6796b209b55bad824e69f134",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "664",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"298-HaO3jgIWvpnuO4zGorBFhmxKOSU\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 07:15:11 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6796b209b55bad824e69f134\",\n    \"name\": \"Leonardo DiCaprio\",\n    \"birthday\": \"1974-11-11\",\n    \"biography\": \"Leonardo DiCaprio is an American actor known for his performances in Titanic, Inception, and The Revenant.\",\n    \"movies\": [\n        {\n            \"_id\": \"679597aef25535ece857742e\",\n            \"title\": \"The Matrix\",\n            \"releaseYear\": 1999\n        },\n        {\n            \"_id\": \"679878688e40003f561c5175\",\n            \"title\": \"All Actors In One Movie\",\n            \"releaseYear\": 2025\n        },\n        {\n            \"_id\": \"679dbdccd687fd6a99d2a455\",\n            \"title\": \"Dummy Movie\",\n            \"releaseYear\": 2050\n        }\n    ],\n    \"images\": [\n        {\n            \"url\": \"principal-1737931560409-353603952.jpg\",\n            \"isCover\": true,\n            \"_id\": \"6796bb28b55bad824e69f155\"\n        },\n        {\n            \"url\": \"images-1737931847289-76604152.jpg\",\n            \"isCover\": false,\n            \"_id\": \"6796bc47b55bad824e69f15c\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Crear actor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dummy Actor\",\r\n    \"birthday\": \"YYYY-MM-DD\",\r\n    \"biography\": \"Dummy biography actor\",\r\n    \"movies\": [\r\n        \"MovieID1\",\r\n        \"MovieID2\"\r\n    ],\r\n    \"images\": [\r\n        {\r\n            \"url\": \"URL in JPG\",\r\n            \"isCover\": true\r\n        },\r\n        {\r\n            \"url\": \"URL in JPG\",\r\n            \"isCover\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/actors/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"actors",
+								""
+							]
+						},
+						"description": "Crea una pelicula con el siguiente formato:\n\n- **name:** (string) Nombre del actor\n- **birthday:** (string) Fecha de nacimiento formato: YYYY-MM-DD\n- **movies:** (string \\[ \\]) Lista con los identificadores de las peliculas que ha participado\n- **images:** ( \\[ { url : string, isCover : boolean }\\] ) Lista de las imágenes correspondientes al actor (conteniendo su url y su indicador si es una imagen de portada )"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar actor por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"Id de la pelucula\",\r\n    \"title\": \"Dummy Movie\",\r\n    \"description\": \"A dummy Movie description\",\r\n    \"genre\": \"List, of , genres\",\r\n    \"director\": \"Directors name\",\r\n    \"cast\": [\r\n        \"ActorId1\",\r\n        \"ActorId2\"\r\n    ],\r\n    \"releaseYear\": 2050,\r\n    \"rating\": \"10\",\r\n    \"posters\": [\r\n        {\r\n            \"url\": \"https://hips.hearstapps.com/hmg-prod/images/thunderbolts-67640c8b27991.jpg\",\r\n            \"isCover\": true\r\n        },\r\n        {\r\n            \"url\": \"https://img.lovepik.com/photo/48014/4129.jpg_wh860.jpg\",\r\n            \"isCover\": false\r\n        }\r\n    ],\r\n    \"clasification\": \"PG-22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/actor/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"actor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador del actor por actualizar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Actualiza el contenido de una actor por su identificador único"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar actor por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/actors/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"actors",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "El identificador del actor.",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Elimina una actor por su identificador unico"
+					},
+					"response": [
+						{
+							"name": "Eliminar pelicula por id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/actors/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"actors",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "679dbdccd687fd6a99d2a455",
+											"type": "text"
+										}
+									]
+								},
+								"description": "Elimina una pelicula por su identificador unico"
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "API endpoints pertenecientes a la entidad **actor** con operaciones de:\n\n- Crear Actor\n- Ver Actor\n- Actualizar Actor\n- Eliminar Actor"
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Recupera una lista de las usuarios que hay en la base de datos."
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api//:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador del usuario a recuperar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Con este endpoint recupera un usuario , por su identificador unico"
+					},
+					"response": [
+						{
+							"name": "Obtener actor por id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/actors/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"actors",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6796b209b55bad824e69f134",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "664",
+									"type": "text"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"298-HaO3jgIWvpnuO4zGorBFhmxKOSU\"",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 07:15:11 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"type": "text"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6796b209b55bad824e69f134\",\n    \"name\": \"Leonardo DiCaprio\",\n    \"birthday\": \"1974-11-11\",\n    \"biography\": \"Leonardo DiCaprio is an American actor known for his performances in Titanic, Inception, and The Revenant.\",\n    \"movies\": [\n        {\n            \"_id\": \"679597aef25535ece857742e\",\n            \"title\": \"The Matrix\",\n            \"releaseYear\": 1999\n        },\n        {\n            \"_id\": \"679878688e40003f561c5175\",\n            \"title\": \"All Actors In One Movie\",\n            \"releaseYear\": 2025\n        },\n        {\n            \"_id\": \"679dbdccd687fd6a99d2a455\",\n            \"title\": \"Dummy Movie\",\n            \"releaseYear\": 2050\n        }\n    ],\n    \"images\": [\n        {\n            \"url\": \"principal-1737931560409-353603952.jpg\",\n            \"isCover\": true,\n            \"_id\": \"6796bb28b55bad824e69f155\"\n        },\n        {\n            \"url\": \"images-1737931847289-76604152.jpg\",\n            \"isCover\": false,\n            \"_id\": \"6796bc47b55bad824e69f15c\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"string\",\r\n    \"username\": \"string\",\r\n    \"password\": \"string\",\r\n    \"isAdmin\": true || false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						},
+						"description": "Crea un usuario con el siguiente formato:\n\n- **name:** (string) Nombre del usuario\n    \n- **username:** (string) Nickname\n    \n- **password:** (string) Contraseña del usuario\n    \n- **isAdmin:** (boolean) Bandera identificadora si es administrador o no"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"Id del usuario\",\r\n    \"name\": \"Nombre del usuario\",\r\n    \"username\": \"Nickname del usuario\",\r\n    \"password\": \"Contraseña\",\r\n    \"isAdmin\": \"boolean\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "Identificador del usuario por actualizar",
+									"type": "string"
+								}
+							]
+						},
+						"description": "Actualiza el contenido de una usuario por su identificador único"
+					},
+					"response": []
+				},
+				{
+					"name": "Login del usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"NameOfUsename\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Hace el login del usuario, si es existoso, devuelve el objeto del usuario, de lo contrario devuelve error de acceso (HTTP 401)"
+					},
+					"response": []
+				}
+			],
+			"description": "API endpoints pertenecientes a la entidad **actor** con operaciones de:\n\n- Crear Usuario\n- Ver Usuario\n- Actualizar Usuario"
+		}
+	]
+}
