@@ -99,7 +99,7 @@ export class MovieFormPageComponent implements OnInit {
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      genre: ['', Validators.required],
+      genre: [[], Validators.required],
       director: ['', Validators.required],
       releaseYear: ['', Validators.required],
       rating: ['', Validators.required],
@@ -112,13 +112,12 @@ export class MovieFormPageComponent implements OnInit {
   loadMovieData(id: string): void {
     this.movieApiService.getMovieById(id).subscribe(movie => {
       console.log("Movie data received:", movie);
-      const genresString = movie.genre ? movie.genre : '';
-      const genresArray = genresString.split(',').map(g => g.trim());
+      const genresArray = movie.genre ? movie.genre.split(',').map(g => g.trim()) : []; // Asegúrate de tener un array de géneros.
       this.movieData = movie;
       this.movieForm.patchValue({
         title: movie.title,
         description: movie.description,
-        genre: genresArray.join(', '),
+        genre: genresArray, // Aquí asignas el array de géneros directamente
         director: movie.director,
         releaseYear: movie.releaseYear,
         rating: movie.rating,
@@ -128,6 +127,7 @@ export class MovieFormPageComponent implements OnInit {
       });
     });
   }
+  
 
 
   onSubmit(): void {
@@ -146,6 +146,7 @@ export class MovieFormPageComponent implements OnInit {
     const movie: MovieApi = {
       ...formValue,
       posters: posters,
+      genre: formValue.genre.join(', '), // Convertir array en string
     };
   
     if (this.isEditMode && this.movieId) {

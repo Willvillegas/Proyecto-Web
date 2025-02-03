@@ -16,14 +16,15 @@
               <mat-label>Descripción</mat-label>
               <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+
+            <mat-form-field>
               <mat-label>Género</mat-label>
-              <mat-select formControlName="genre">
-                <mat-option *ngFor="let genre of genres" [value]="genre">
-                  {{ genre }}
-                </mat-option>
+              <mat-select formControlName="genre" multiple>
+                <mat-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</mat-option>
               </mat-select>
             </mat-form-field>
+             
+
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Director</mat-label>
               <input matInput formControlName="director" />
@@ -86,8 +87,6 @@
                 </div>
               </div>
             </div>
-
-
 
 
           </div>
