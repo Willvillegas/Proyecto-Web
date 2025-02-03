@@ -2,13 +2,40 @@
     flex: 1 1 auto;
   }
 
-  mat-toolbar{
-    background-color: #980303;
-  }
 
   .search-field{
     min-width: 100px;
   }
 
+  /* Barra superior */
+mat-toolbar {
+  position: fixed; /* Fija la barra en la parte superior */
+  top: 0;
+  left: 0;
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  background-color: #980303; 
+  color: white;
+  padding: 0 16px; /* Añade un poco de espacio en los lados */
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
+  align-items: center; /* Centra verticalmente los elementos */
+  height: 64px; /* Ajusta la altura de la barra */
+}
 
-  
+/* Asegura que el contenedor del sidenav no quede cubierto por la barra */
+.mat-sidenav {
+  padding-top: 64px; /* Agrega un margen superior igual a la altura de la barra */
+}
+
+/* Contenedor principal del contenido */
+.container {
+  margin-top: 64px; /* Asegura que el contenido principal no esté cubierto por la barra */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Ajustes para el listado de navegación (mat-nav-list) */
+.mat-nav-list {
+  margin-top: 64px; /* Asegura que el menú no esté cubierto por la barra */
+}
