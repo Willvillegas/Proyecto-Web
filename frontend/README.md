@@ -43,7 +43,7 @@ Esto arrancará el servidor en el puerto **3000** y creará los siguientes endpo
 Este proyecto está utilizando el tema de **Angular Material** con los colores **Cyan & Orange**.
 
 - El color de fondo es **negro**.
-- El color rojo usado en la **toolbar** es: **#E50000**.
+- El color rojo usado en la **toolbar** es: **#980303**.
 
 ### 5. Instalación de Herramientas Adicionales
 

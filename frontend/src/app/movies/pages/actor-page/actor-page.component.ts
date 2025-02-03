@@ -21,6 +21,8 @@ export class ActorPageComponent {
   public actor: ActorApi | null = null; // Inicializa como null
   public currentSlide: number = 0;
   public movieImages: { [key: string]: string } = {};
+  public currentMovieSlide: number = 0;
+  public moviesPerPage = 5; 
 
 
 
@@ -80,6 +82,19 @@ export class ActorPageComponent {
   previousSlide(): void {
     if (this.currentSlide > 0) {
       this.currentSlide--;
+    }
+  }
+
+   // Métodos para el carrusel de películas
+   nextMovieSlide(): void {
+    if (this.actor && this.currentMovieSlide < this.actor.movies.length - this.moviesPerPage) {
+      this.currentMovieSlide++;
+    }
+  }
+
+  previousMovieSlide(): void {
+    if (this.currentMovieSlide > 0) {
+      this.currentMovieSlide--;
     }
   }
 }

@@ -5,7 +5,7 @@
 }
 
 .pagination-button {
-  background-color: #E50000; 
+  background-color: #980303; 
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
@@ -21,7 +21,7 @@
 }
 
 .pagination-button:hover:not(:disabled) {
-  background-color: #b20000; 
+  background-color: #620606; 
 }
 
 .header-container {
@@ -61,17 +61,17 @@
   display: flex;
   align-items: center;
   gap: 0.5rem; 
-  border: solid 2px #E50000; 
+  border: solid 2px #980303; 
   border-radius: 4px; 
   padding: 6px 12px; 
   color: white;
-  background-color: #E50000; 
+  background-color: #980303; 
   transition: all 0.3s ease-in-out;
 }
 
 .add-movie-btn:hover {
   background-color: white;
-  color: #E50000;
+  color: #980303;
 }
 
 .add-icon {

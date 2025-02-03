@@ -1,49 +1,70 @@
 <div class="container cont mx-auto p-6" *ngIf="actor">
   <div class="flex flex-col gap-6">
     <div class="flex flex-col md:flex-row gap-6 items-start">
+      <!-- Carrusel de imágenes del actor -->
       <div class="carousel-container">
         <img *ngIf="actor?.images?.[currentSlide]" 
              [src]="actor.images[currentSlide].url" 
              alt="Poster del actor" 
              class="carousel-image" />
-        <button (click)="previousSlide()">&#9664;</button>
-        <button (click)="nextSlide()">&#9654;</button>
+        <button (click)="previousSlide()" class="carousel-btn">&#9664;</button>
+        <button (click)="nextSlide()" class="carousel-btn">&#9654;</button>
       </div>
       <div class="details-left flex flex-col space-y-4 h-full">
         <h1 class="text-4xl font-bold text-gray-100">{{ actor.name }}</h1>
         <div class="flex flex-col h-auto">
+          <div class="description-container">
+            <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
+              {{ actor.biography }}
+            </p>
+          </div>
+
           <div class="details-below mt-3 p-2 shadow-lg rounded-xl space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 text-base">
               <p><strong>Fecha de nacimiento: </strong> {{ actor.birthday }}</p>
             </div>
-            <p class="text-lg text-gray-600 max-h-[200px] overflow-y-auto">
-                {{ actor.biography }}
-              </p>
-              <div>
-                <h3 class="text-xl font-semibold text-gray-100 mb-2">Movies</h3>
-                
-                <div class="flex flex-wrap gap-4">
-                  <mat-card *ngFor="let movie of actor.movies" class="w-60 bg-gray-800 text-white p-2 rounded shadow-md">
-                                      
-                    <mat-card-content>
-                      <img *ngIf="movie._id && movieImages[movie._id]" 
-                       [src]="movieImages[movie._id]" 
-                       alt="{{ movie.title }}" 
-                       class="actor-image-img" />  
-                      <div class="font-bold text-lg">{{ movie.title }}</div>
-                      <p class="text-sm text-gray-300 mt-1">
-                        {{ movie.releaseYear || 'Sin descripción disponible' }}
-                      </p>
-                    </mat-card-content>
-                  </mat-card>
-                </div>
-              </div>
-              
           </div>
         </div>
       </div>
     </div>
+  <div>
+  <div>
+    <!-- Sección de películas del actor -->
+    <div class="cast-section mt-6 p-6 bg-gray-900 rounded-lg shadow-lg">
+      <h3 class="text-2xl font-semibold text-gray-100 mb-4 text-center">Películas</h3>
+      <div class="actors-carousel-container relative">
+        <button 
+          (click)="previousMovieSlide()" 
+          [disabled]="currentMovieSlide === 0" 
+          class="carousel-btn left-btn absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
+          &#9664;
+        </button>
+        <div class="actors-images-wrapper">
+          <div class="actors-images-container">
+            <div *ngFor="let movie of actor.movies.slice(currentMovieSlide, currentMovieSlide + moviesPerPage)" 
+                 class="actor-image">
+              <img *ngIf="movie._id && movieImages[movie._id]" 
+                   [src]="movieImages[movie._id]" 
+                   alt="{{ movie.title }}" 
+                   class="actor-image-img" />
+                   <p class="text-gray-400 text-center">
+                    {{ movie.title }} ({{ movie.releaseYear }})
+                  </p>
+            </div>
+          </div>
+        </div>
+        <button 
+          (click)="nextMovieSlide()" 
+          [disabled]="currentMovieSlide >= actor.movies.length - moviesPerPage" 
+          class="carousel-btn right-btn absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
+          &#9654;
+        </button>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
+
+
 
   

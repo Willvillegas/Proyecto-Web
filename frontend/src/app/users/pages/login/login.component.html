@@ -1,7 +1,7 @@
 <div class="flex justify-center items-center h-screen bg-[#141414]">
   <mat-card appearance="outlined" class="w-96 bg-[#141414] text-white p-6 rounded-lg shadow-lg">
     <div class="text-center mb-6">
-      <h1 class="text-3xl font-semibold text-[#E50000]">Welcome!</h1>
+      <h1 class="text-3xl font-semibold text-[#980303]">Welcome!</h1>
     </div>
     <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" class="space-y-4">
       <mat-form-field class="w-full">
@@ -21,13 +21,13 @@
       </mat-form-field>
 
       <div class="flex justify-center">
-        <button mat-flat-button type="submit" class="w-full py-2 rounded-lg bg-[#E50000] text-white font-bold hover:bg-red-700" [disabled]="LoginForm.invalid">
+        <button mat-flat-button type="submit" class="w-full py-2 rounded-lg bg-[#980303] text-white font-bold hover:bg-red-400" [disabled]="LoginForm.invalid">
           Log in
         </button>
       </div>
     </form>
     <div class="text-center mt-2">
-      <a href="/register" class="text-sm text-[#E50000] hover:text-red-700">Don't have an account? Register here</a>
+      <a href="/register" class="text-sm text-[#980303] hover:text-red-400">Don't have an account? Register here</a>
     </div>
   </mat-card>
 </div>
