@@ -22,4 +22,6 @@ export interface IFilterMovie {
     genre?: string;
     releaseYear?: string;
     clasification?: string;
+    sortBy?: string;
+    order?: 'asc' | 'desc';
 }

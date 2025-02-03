@@ -1,15 +1,17 @@
 <div class="flex flex-col p-8 rounded-lg shadow-xl">
   <div class="header-container">
     <h1 class="title-container">
-      Películas 
+      Películas
       <span class="filter-container">
-        <movie-filter (filterChanged)="onFilterChange($event)"></movie-filter>
+        <movie-filter
+          (filterChanged)="onFilterChange({ filter: $event.filter || '', value: $event.value })"></movie-filter>
         <sort-movies (sortChange)="onSortChange($event)"></sort-movies>
       </span>
     </h1>
-    
-    <button *ngIf="isAdmin" mat-stroked-button color="primary" [routerLink]="['/movies/new-movie']" class="add-movie-btn">
-      <mat-icon class ="add-icon">add</mat-icon>
+
+    <button *ngIf="isAdmin" mat-stroked-button color="primary" [routerLink]="['/movies/new-movie']"
+      class="add-movie-btn">
+      <mat-icon class="add-icon">add</mat-icon>
       Añadir
     </button>
   </div>
@@ -30,4 +32,3 @@
     </button>
   </div>
 </div>
-

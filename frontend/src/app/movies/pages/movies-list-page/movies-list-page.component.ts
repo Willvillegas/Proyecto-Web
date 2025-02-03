@@ -12,7 +12,7 @@ import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
   selector: 'movies-list-page',
-  imports: [CommonModule, MovieCardComponent, MovieFilterComponent, RouterModule,MatIconModule, SortMoviesComponent],
+  imports: [CommonModule, MovieCardComponent, MovieFilterComponent, RouterModule, MatIconModule, SortMoviesComponent],
   templateUrl: './movies-list-page.component.html',
   styleUrl: './movies-list-page.component.css'
 })
@@ -28,7 +28,9 @@ export class MoviesListPageComponent {
   public order: string = 'asc'; // Por defecto, en orden ascendente
   public isAdmin: boolean = false;
 
-  constructor(private moviesService: MoviesApiService) {}
+
+
+  constructor(private moviesService: MoviesApiService) { }
 
   ngOnInit(): void {
     this.loadMovies();  // Cargar películas al inicio
@@ -41,8 +43,28 @@ export class MoviesListPageComponent {
   loadMovies(): void {
     const offset = (this.currentPage - 1) * this.limit;
 
+    const filterParams = {
+      genre: this.selectedFilter === 'genre' ? this.selectedValue || undefined : undefined,
+      releaseYear: this.selectedFilter === 'year' ? this.selectedValue || undefined : undefined,
+      clasification: this.selectedFilter === 'rating' ? this.selectedValue || undefined : undefined,
+      sortBy: this.sortBy,
+      order: this.order,
+      limit: this.limit,
+      offset: offset
+    };
+
+    this.moviesService.getMovies(filterParams).subscribe({
+      next: (value) => {
+        this.movies = value.data;
+        this.totalMovies = value.total;
+      },
+      error(err) {
+        console.error('Error al cargar las películas en el componente movies-list-page', err);
+      },
+    });
+
     // Si no se ha seleccionado ningún filtro, cargamos todas las películas
-    if (!this.selectedFilter || !this.selectedValue) {
+    /*if (!this.selectedFilter || !this.selectedValue) {
       this.moviesService.getMoviesPage(this.limit, offset).subscribe(response => {
         const sortedMovies = this.sortMovies(response.data, this.sortBy, this.order);
         this.movies = sortedMovies;
@@ -72,13 +94,22 @@ export class MoviesListPageComponent {
             this.totalMovies = response.total;
           });
       }
-    }
+    }*/
   }
 
   onFilterChange(event: { filter: string, value: string | null }): void {
-    this.selectedFilter = event.filter;
-    this.selectedValue = event.value;
-    this.currentPage = 1; // Reiniciar a la primera página al aplicar un filtro
+    // Resetear filtros previos
+    this.selectedFilter = event.filter || '';
+    this.selectedValue = event.value || '';
+
+    // Validación adicional para números (año)
+    if (this.selectedFilter === 'year' && this.selectedValue) {
+      if (isNaN(Number(this.selectedValue))) {
+        this.selectedValue = '';
+      }
+    }
+
+    this.currentPage = 1;
     this.loadMovies();
   }
 
@@ -87,7 +118,7 @@ export class MoviesListPageComponent {
     this.order = event.order;
     this.loadMovies();
   }
-  
+
 
   sortMovies(movies: MovieApi[], sortBy: string, order: string): MovieApi[] {
     return movies.sort((a, b) => {
@@ -101,15 +132,15 @@ export class MoviesListPageComponent {
 
       if (sortBy === 'clasification') {
         const clasificationOrder = ['G', 'PG', 'PG-13', 'PG-15', 'R', 'NC-17']; // Orden de clasificaciones
-  
+
         // Obtener el índice de la clasificación
-        const indexA = clasificationOrder.indexOf(a.clasification || ''); 
-        const indexB = clasificationOrder.indexOf(b.clasification || ''); 
-  
+        const indexA = clasificationOrder.indexOf(a.clasification || '');
+        const indexB = clasificationOrder.indexOf(b.clasification || '');
+
         // Si alguna clasificación no existe en el arreglo, asignamos un índice más alto
         if (indexA === -1) return order === 'asc' ? 1 : -1;
         if (indexB === -1) return order === 'asc' ? -1 : 1;
-  
+
         // Ordenar dependiendo del tipo de orden (ascendente o descendente)
         if (order === 'asc') {
           return indexA - indexB;
@@ -117,7 +148,7 @@ export class MoviesListPageComponent {
           return indexB - indexA;
         }
       }
-  
+
       return 0; // En caso de que no coincida con ninguno de los campos
     });
   }
@@ -126,6 +157,7 @@ export class MoviesListPageComponent {
     if ((this.currentPage * this.limit) < this.totalMovies) {
       this.currentPage++;
       this.loadMovies();
+      window.scrollTo(0, 0);
     }
   }
 
@@ -133,6 +165,7 @@ export class MoviesListPageComponent {
     if (this.currentPage > 1) {
       this.currentPage--;
       this.loadMovies();
+      window.scrollTo(0, 0);
     }
   }
 }

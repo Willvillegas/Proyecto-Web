@@ -78,8 +78,13 @@ export class ActorFormPageComponent implements OnInit {
   }
 
   loadMovies(): void {
-    this.movieApiService.getMovies(70).subscribe(response => {
-      this.movies = response;
+    this.movieApiService.getMovies({ limit: 70 }).subscribe({
+      next: (value) => {
+        this.movies = value.data;
+      },
+      error(err) {
+        console.error('Error al cargar las películas en actor-form-page', err);
+      },
     });
   }
 
