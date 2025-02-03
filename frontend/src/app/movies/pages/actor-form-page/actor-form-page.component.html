@@ -51,9 +51,9 @@
                 </mat-radio-group>
           
                 <div class="flex flex-col gap-2 w-full">
-                  <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full">Cambiar</button>
+                  <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full" type ="button">Cambiar</button>
                   <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
-                          [disabled]="actorForm.get('images')?.value.length <= 1" class="w-full">
+                          [disabled]="actorForm.get('images')?.value.length <= 1" class="w-full" type ="button">
                     Eliminar
                   </button>
                 </div>

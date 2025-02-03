@@ -179,27 +179,30 @@ export class ActorFormPageComponent implements OnInit {
     }
   }
 
-  onChangeImage(index: number): void {
+  onChangeImage(index: number, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  
     const newUrl = prompt("Introduce la nueva URL de la imagen:");
     if (newUrl) {
-      const images = this.actorForm.get('images')?.value;
-      if (images && images[index]) {
-        images[index].url = newUrl;
-        this.actorForm.get('images')?.setValue(images);
-      }
+      const images = [...this.actorForm.get('images')?.value];
+      images[index] = { ...images[index], url: newUrl };
+  
+      this.actorForm.patchValue({ images });
     }
   }
-
-  onCoverChange(event: any): void {
-    const selectedCoverId = event.value;
-    const images: Image[] = this.actorForm.get('images')?.value || [];
-
-    images.forEach((image: Image) => {
-      image.isCover = image._id === selectedCoverId;
+  
+  onCoverChange(index: number): void {
+    const images = [...this.actorForm.get('images')?.value]; // Clonamos el array
+    images.forEach((image, i) => {
+      image.isCover = i === index; // Se marca solo la seleccionada
     });
-
-    this.actorForm.get('images')?.setValue(images);
+  
+    this.actorForm.patchValue({ images });
   }
+  
 
   onDeleteImage(index: number): void {
     const images: Image[] = this.actorForm.get('images')?.value;
