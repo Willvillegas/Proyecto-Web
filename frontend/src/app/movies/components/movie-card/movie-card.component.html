@@ -20,7 +20,7 @@
   </mat-card-content>
   <mat-card-actions class="actions-container">
     <button mat-raised-button color="primary" 
-            *ngIf="movie._id" 
+            *ngIf="isAdmin && movie._id" 
             (click)="editMovie(movie._id)">
       <mat-icon>edit</mat-icon>
       Editar
@@ -32,4 +32,5 @@
       <mat-icon>more_horiz</mat-icon>
     </button>
   </mat-card-actions>
+  
 </mat-card>

@@ -1,7 +1,7 @@
 <div class="flex flex-col p-8 rounded-lg shadow-xl">
   <div class="header-container">
     <h1 class="title-container">Actores</h1>
-    <button  mat-stroked-button color="primary" [routerLink]="['/actors/new-actor']" class="add-actor-btn">
+    <button *ngIf="isAdmin" mat-stroked-button color="primary" [routerLink]="['/actors/new-actor']" class="add-actor-btn">
       <mat-icon class ="add-icon">add</mat-icon>
       Añadir
     </button>

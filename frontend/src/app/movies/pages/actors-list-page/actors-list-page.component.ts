@@ -5,6 +5,7 @@ import { ActorCardComponent } from "../../components/actor-card/actor-card.compo
 import { ActorApi } from '../../interfaces/actorApi.interfaces';
 import { ActorsApiService } from '../../services/actors-api.service';
 import { MatIcon } from '@angular/material/icon';
+import { UserApiService } from '../../../users/services/userApi.service';
 
 
 @Component({
@@ -18,11 +19,15 @@ export class ActorsListPageComponent {
   public totalActors: number = 0;  // Total de actores disponibles
   public currentPage: number = 1; // Página actual
   public limit: number = 10; // Número de actores por página
+  public isAdmin: boolean = false;
 
   constructor(private actorsService: ActorsApiService) {}
 
   ngOnInit(): void {
     this.loadActors();
+    // Obtener el usuario autenticado y verificar si es administrador
+    const user = UserApiService.getUser();
+    this.isAdmin = user?.isAdmin || false;
   }
 
   loadActors(): void {

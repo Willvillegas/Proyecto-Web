@@ -7,6 +7,7 @@ import { MovieFilterComponent } from "../../components/movie-filter/movie-filter
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SortMoviesComponent } from '../../components/sort-movies/sort-movies.component';
+import { UserApiService } from '../../../users/services/userApi.service';
 
 
 @Component({
@@ -25,11 +26,15 @@ export class MoviesListPageComponent {
 
   public sortBy: string = 'genre'; // Por defecto, ordenar por género
   public order: string = 'asc'; // Por defecto, en orden ascendente
+  public isAdmin: boolean = false;
 
   constructor(private moviesService: MoviesApiService) {}
 
   ngOnInit(): void {
     this.loadMovies();  // Cargar películas al inicio
+    // Obtener el usuario autenticado y verificar si es administrador
+    const user = UserApiService.getUser();
+    this.isAdmin = user?.isAdmin || false;
   }
 
   // Método para cargar películas basadas en el filtro y orden

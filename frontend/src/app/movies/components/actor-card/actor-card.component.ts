@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { ActorApi } from '../../interfaces/actorApi.interfaces';
+import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
   selector: 'actor-card',
@@ -26,6 +27,8 @@ import { ActorApi } from '../../interfaces/actorApi.interfaces';
 export class ActorCardComponent {
   @Input()
   public actor!: ActorApi;
+  public isAdmin: boolean = false; 
+
 
   constructor(private router: Router) {}
 
@@ -33,7 +36,11 @@ export class ActorCardComponent {
     if (!this.actor) {
       throw new Error('Attribute actor is required');
     }
-    console.log('Actor recibido:', this.actor);
+
+    // Obtener el usuario autenticado y verificar si es administrador
+    const user = UserApiService.getUser();
+    this.isAdmin = user?.isAdmin || false;
+     console.log('Actor recibido:', this.actor);
   }
 
   editActor(actorId: string): void {

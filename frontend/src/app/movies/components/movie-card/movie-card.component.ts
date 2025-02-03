@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
   selector: 'movie-card',
@@ -21,13 +22,20 @@ import { CommonModule } from '@angular/common';
 })
 export class MovieCardComponent {
   @Input()
-  public movie!: MovieApi;  
+  public movie!: MovieApi; 
+  public isAdmin: boolean = false;  
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     if (!this.movie) {
       throw new Error('Attribute movie is required');
+    }
+
+    // Obtener el usuario autenticado y verificar si es administrador
+    const user = UserApiService.getUser();
+    if (user) {
+      this.isAdmin = user.isAdmin;
     }
   }
 
