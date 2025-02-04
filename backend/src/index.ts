@@ -7,6 +7,10 @@ import path from 'path';
 import cors from 'cors';
 import userRoute from './routes/user.route';
 
+if (process.env.NODE_ENV !== 'production') {
+    const { error } = dotenv.config();
+    if (error) throw error;
+}
 const app: Express = express();
 const PORT: number = 3000;
 
@@ -18,15 +22,10 @@ app.use(cors(
     }
 ));
 
-//const result = dotenv.config();
-//if (result.error) {
- //   throw result.error;
-//} else
- //   console.log(result.parsed);
-//const { BD_URL } = process.env;
-connectBD(`mongodb+srv://admin:admin12345@proyectoweb.v67qs.mongodb.net/ProyectoWeb`).then(() => {
+
+const { BD_URL } = process.env;
+connectBD(BD_URL || '').then(() => {
     app.listen(PORT, () => {
-        console.log(path.join(__dirname, "..", 'uploads'));
         console.log(`Server is running on http://localhost:${PORT}`);
     })
 }).catch((e) => console.log(e));
