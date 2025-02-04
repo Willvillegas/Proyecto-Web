@@ -1,5 +1,5 @@
 <h1 align="center">
-Proyecto Web  IMBD-mini 🎞🎟
+Proyecto Web  IMDB-mini 🎞🎟
 </h1>
 <div align="left">
 Realizado por: 👨‍🎓👩‍🎓
