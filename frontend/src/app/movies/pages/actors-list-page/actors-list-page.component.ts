@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { ActorCardComponent } from "../../components/actor-card/actor-card.component";
 import { ActorApi } from '../../interfaces/actorApi.interfaces';
@@ -10,7 +10,7 @@ import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
   selector: 'actors-list-page',
-  imports: [CommonModule, ActorCardComponent, MatIcon, RouterModule],
+  imports: [ActorCardComponent, MatIcon, RouterModule],
   templateUrl: './actors-list-page.component.html',
   styleUrls: ['./actors-list-page.component.css']
 })

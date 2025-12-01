@@ -5,7 +5,7 @@ import { ActorApi, Image } from '../../interfaces/actorApi.interfaces';
 import { MovieApi } from '../../interfaces/movieApi.interfaces';
 import { ActorsApiService } from '../../services/actors-api.service';
 import { MoviesApiService } from '../../services/movies-api.service';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -22,7 +22,6 @@ import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-
 @Component({
   selector: 'actor-form-page',
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
@@ -35,8 +34,8 @@ import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-
     MatCardModule,
     MatDividerModule,
     MatCheckboxModule,
-    MatRadioModule,
-  ],
+    MatRadioModule
+],
   templateUrl: './actor-form-page.component.html',
   styleUrls: ['./actor-form-page.component.css'],
   encapsulation: ViewEncapsulation.None,

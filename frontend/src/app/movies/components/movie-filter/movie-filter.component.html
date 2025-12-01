@@ -8,32 +8,39 @@
       <mat-option value="rating">Clasificación</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'genre'">
-    <mat-label>Seleccionar Género</mat-label>
-    <input matInput [(ngModel)]="selectedValue" [matAutocomplete]="auto" (ngModelChange)="onFilterChange()"
-      (keyup.enter)="onEnterPress()" />
+  @if (selectedFilter === 'genre') {
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccionar Género</mat-label>
+      <input matInput [(ngModel)]="selectedValue" [matAutocomplete]="auto" (ngModelChange)="onFilterChange()"
+        (keyup.enter)="onEnterPress()" />
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (genre of genres; track genre) {
+            <mat-option [value]="genre">
+              {{ genre }}
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    }
+    @if (selectedFilter === 'year') {
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar Año</mat-label>
+        <input matInput type="number" [(ngModel)]="selectedValue" (ngModelChange)="onFilterChange()" [min]="1900"
+          [max]="2025" />
+        </mat-form-field>
+      }
+      @if (selectedFilter === 'rating') {
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccionar Clasificación</mat-label>
+          <mat-select [(value)]="selectedValue" (selectionChange)="onFilterChange()">
+            <mat-option value="G">Todo público</mat-option>
+            <mat-option value="PG">Supervisión de padres</mat-option>
+            <mat-option value="PG-13">Mayores de 13 años</mat-option>
+            <mat-option value="PG-15">Mayores de 15 años</mat-option>
+            <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
+            <mat-option value="NC-17">Solo adultos</mat-option>
+          </mat-select>
+        </mat-form-field>
+      }
 
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let genre of genres" [value]="genre">
-        {{ genre }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'year'">
-    <mat-label>Seleccionar Año</mat-label>
-    <input matInput type="number" [(ngModel)]="selectedValue" (ngModelChange)="onFilterChange()" [min]="1900"
-      [max]="2025" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" *ngIf="selectedFilter === 'rating'">
-    <mat-label>Seleccionar Clasificación</mat-label>
-    <mat-select [(value)]="selectedValue" (selectionChange)="onFilterChange()">
-      <mat-option value="G">Todo público</mat-option>
-      <mat-option value="PG">Supervisión de padres</mat-option>
-      <mat-option value="PG-13">Mayores de 13 años</mat-option>
-      <mat-option value="PG-15">Mayores de 15 años</mat-option>
-      <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
-      <mat-option value="NC-17">Solo adultos</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-</div>
+    </div>

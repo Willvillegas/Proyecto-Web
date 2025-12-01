@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MovieCardComponent } from "../../components/movie-card/movie-card.component";
 import { MoviesApiService } from '../../services/movies-api.service';
 import { MovieApi } from '../../interfaces/movieApi.interfaces';
@@ -12,7 +12,7 @@ import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
   selector: 'movies-list-page',
-  imports: [CommonModule, MovieCardComponent, MovieFilterComponent, RouterModule, MatIconModule, SortMoviesComponent],
+  imports: [MovieCardComponent, MovieFilterComponent, RouterModule, MatIconModule, SortMoviesComponent],
   templateUrl: './movies-list-page.component.html',
   styleUrl: './movies-list-page.component.css'
 })

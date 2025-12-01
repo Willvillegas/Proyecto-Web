@@ -10,7 +10,9 @@
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Título</mat-label>
               <input matInput formControlName="title" />
-              <mat-error *ngIf="movieForm.get('title')?.hasError('required')">El título es requerido</mat-error>
+              @if (movieForm.get('title')?.hasError('required')) {
+                <mat-error>El título es requerido</mat-error>
+              }
             </mat-form-field>
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Descripción</mat-label>
@@ -20,10 +22,12 @@
             <mat-form-field>
               <mat-label>Género</mat-label>
               <mat-select formControlName="genre" multiple>
-                <mat-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</mat-option>
+                @for (genre of genres; track genre) {
+                  <mat-option [value]="genre">{{ genre }}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
-             
+
 
             <mat-form-field appearance="fill" class="w-full" floatLabel="always">
               <mat-label>Director</mat-label>
@@ -37,68 +41,72 @@
               <mat-label>Calificación</mat-label>
               <input matInput formControlName="rating" type="number" min="0" max="10" step="0.1"
                 (input)="validateRating($event)">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-              <mat-label>Reparto (Actores)</mat-label>
-              <mat-select formControlName="cast" multiple>
-                <mat-option *ngFor="let actor of actors" [value]="actor._id">
-                  {{ actor.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-              <mat-label>Clasificación</mat-label>
-              <mat-select formControlName="clasification">
-                <mat-option value="G">Todo público</mat-option>
-                <mat-option value="PG">Supervisión de padres</mat-option>
-                <mat-option value="PG-13">Mayores de 13 años</mat-option>
-                <mat-option value="PG-15">Mayores de 15 años</mat-option>
-                <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
-                <mat-option value="NC-17">Solo adultos</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <button mat-raised-button color="accent" (click)="onAddImage()"
-              [disabled]="movieForm.get('posters')?.value.length >= 12" type="button">
-              Agregar Imagen
-            </button>
-          </div>
-          <div>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+                <mat-label>Reparto (Actores)</mat-label>
+                <mat-select formControlName="cast" multiple>
+                  @for (actor of actors; track actor) {
+                    <mat-option [value]="actor._id">
+                      {{ actor.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+                <mat-label>Clasificación</mat-label>
+                <mat-select formControlName="clasification">
+                  <mat-option value="G">Todo público</mat-option>
+                  <mat-option value="PG">Supervisión de padres</mat-option>
+                  <mat-option value="PG-13">Mayores de 13 años</mat-option>
+                  <mat-option value="PG-15">Mayores de 15 años</mat-option>
+                  <mat-option value="R">Mayores de 17 años (con adulto)</mat-option>
+                  <mat-option value="NC-17">Solo adultos</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button color="accent" (click)="onAddImage()"
+                [disabled]="movieForm.get('posters')?.value.length >= 12" type="button">
+                Agregar Imagen
+              </button>
+            </div>
+            <div>
 
 
-            <div class="mt-4 w-full">
-              <label>Imágenes</label>
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
-                <div *ngFor="let poster of movieForm.get('posters')?.value; let i = index" class="flex flex-col items-center space-y-2 w-full">
-                  <img [src]="poster.url" alt="Foto del actor" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
-                  
-                  <mat-radio-group formControlName="cover" (change)="onCoverChange(i)">
-                    <mat-radio-button [value]="poster._id" [checked]="poster.isCover">
-                      Foto de portada
-                    </mat-radio-button>
-                  </mat-radio-group>
-            
-                  <div class="flex flex-col gap-2 w-full">
-                    <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full" type ="button">Cambiar</button>
-                    <button mat-raised-button color="warn" (click)="onDeleteImage(i)" 
-                            [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full" type ="button">
-                      Eliminar
-                    </button>
-                  </div>
+              <div class="mt-4 w-full">
+                <label>Imágenes</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 w-full">
+                  @for (poster of movieForm.get('posters')?.value; track poster; let i = $index) {
+                    <div class="flex flex-col items-center space-y-2 w-full">
+                      <img [src]="poster.url" alt="Foto del actor" class="w-full h-auto min-h-[200px] max-h-48 object-cover rounded shadow-md border border-gray-300">
+                      <mat-radio-group formControlName="cover" (change)="onCoverChange(i)">
+                        <mat-radio-button [value]="poster._id" [checked]="poster.isCover">
+                          Foto de portada
+                        </mat-radio-button>
+                      </mat-radio-group>
+                      <div class="flex flex-col gap-2 w-full">
+                        <button mat-raised-button color="primary" (click)="onChangeImage(i)" class="w-full" type ="button">Cambiar</button>
+                        <button mat-raised-button color="warn" (click)="onDeleteImage(i)"
+                          [disabled]="movieForm.get('posters')?.value.length <= 1" class="w-full" type ="button">
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
+                  }
                 </div>
               </div>
+
+
             </div>
-
-
           </div>
-        </div>
-        <div class="mt-4 flex justify-between">
-          <button mat-raised-button color="primary" *ngIf="isEditMode" (click)="openDeleteDialog()"
-            [disabled]="isDeleting" class="ml-4" type="button">Eliminar Película</button>
-          <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
-            {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+          <div class="mt-4 flex justify-between">
+            @if (isEditMode) {
+              <button mat-raised-button color="primary" (click)="openDeleteDialog()"
+              [disabled]="isDeleting" class="ml-4" type="button">Eliminar Película</button>
+            }
+            <button mat-raised-button color="primary" [disabled]="movieForm.invalid" type="submit">
+              {{ isEditMode ? 'Guardar Cambios' : 'Crear Película' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

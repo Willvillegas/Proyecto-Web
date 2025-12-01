@@ -1,28 +1,31 @@
 <div class="flex flex-col p-8 rounded-lg shadow-xl">
   <div class="header-container">
     <h1 class="title-container">Actores</h1>
-    <button *ngIf="isAdmin" mat-stroked-button color="primary" [routerLink]="['/actors/new-actor']" class="add-actor-btn">
-      <mat-icon class ="add-icon">add</mat-icon>
-      Añadir
-    </button>
+    @if (isAdmin) {
+      <button mat-stroked-button color="primary" [routerLink]="['/actors/new-actor']" class="add-actor-btn">
+        <mat-icon class ="add-icon">add</mat-icon>
+        Añadir
+      </button>
+    }
   </div>
-  
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-4 pt-2 pb-4">
-      <div *ngFor="let actor of actors; let i = index" class="flex justify-center">
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-4 pt-2 pb-4">
+    @for (actor of actors; track actor; let i = $index) {
+      <div class="flex justify-center">
         <div class="w-full h-full flex justify-center">
           <actor-card [actor]="actor"></actor-card>
         </div>
       </div>
-    </div>
-  
-    <div class="pagination-container">
-      <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
-        Anterior
-      </button>
-      <button (click)="nextPage()" [disabled]="(currentPage * limit) >= totalActors" class="pagination-button">
-        Siguiente
-      </button>
-    </div>
+    }
+  </div>
+
+  <div class="pagination-container">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
+      Anterior
+    </button>
+    <button (click)="nextPage()" [disabled]="(currentPage * limit) >= totalActors" class="pagination-button">
+      Siguiente
+    </button>
+  </div>
 </div>
-  
-  
+

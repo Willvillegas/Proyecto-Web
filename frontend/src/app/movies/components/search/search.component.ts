@@ -4,7 +4,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/ma
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap, debounceTime, distinctUntilChanged, tap, catchError, map } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,15 +22,14 @@ export type SearchOption = {
 @Component({
   selector: 'movie-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  styleUrls: ['./search.component.css'],
   standalone: true,
   imports: [
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    CommonModule,
-    MatIconModule,
+    MatIconModule
   ],
 })
 export class SearchComponent implements OnInit {

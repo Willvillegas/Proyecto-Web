@@ -7,17 +7,21 @@
       <mat-form-field class="w-full">
         <mat-label>Username or Email</mat-label>
         <input matInput placeholder="Enter your username or email" formControlName="username" required />
-        <mat-error *ngIf="LoginForm.get('username')?.invalid && LoginForm.get('username')?.touched">
-          This is a mandatory field.
-        </mat-error>
+        @if (LoginForm.get('username')?.invalid && LoginForm.get('username')?.touched) {
+          <mat-error>
+            This is a mandatory field.
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>Password</mat-label>
         <input matInput type="password" placeholder="Enter your password" formControlName="password" required />
-        <mat-error *ngIf="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched">
-          This is a mandatory field.
-        </mat-error>
+        @if (LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched) {
+          <mat-error>
+            This is a mandatory field.
+          </mat-error>
+        }
       </mat-form-field>
 
       <div class="flex justify-center">

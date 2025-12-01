@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,7 +23,6 @@ import { MatRadioModule } from '@angular/material/radio';
 @Component({
   selector: 'movie-form-page',
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
@@ -37,8 +36,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDividerModule,
     FormsModule,
     MatCheckboxModule,
-    MatRadioModule,
-  ],
+    MatRadioModule
+],
   templateUrl: './movie-form-page.component.html',
   styleUrls: ['./movie-form-page.component.css'],
   encapsulation: ViewEncapsulation.None,

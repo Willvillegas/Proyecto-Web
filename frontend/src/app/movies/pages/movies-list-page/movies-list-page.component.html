@@ -4,24 +4,28 @@
       Películas
       <span class="filter-container">
         <movie-filter
-          (filterChanged)="onFilterChange({ filter: $event.filter || '', value: $event.value })"></movie-filter>
+        (filterChanged)="onFilterChange({ filter: $event.filter || '', value: $event.value })"></movie-filter>
         <sort-movies (sortChange)="onSortChange($event)"></sort-movies>
       </span>
     </h1>
 
-    <button *ngIf="isAdmin" mat-stroked-button color="primary" [routerLink]="['/movies/new-movie']"
-      class="add-movie-btn">
-      <mat-icon class="add-icon">add</mat-icon>
-      Añadir
-    </button>
+    @if (isAdmin) {
+      <button mat-stroked-button color="primary" [routerLink]="['/movies/new-movie']"
+        class="add-movie-btn">
+        <mat-icon class="add-icon">add</mat-icon>
+        Añadir
+      </button>
+    }
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 pt-2 pb-4">
-    <div *ngFor="let movie of movies; let i = index" class="flex justify-center">
-      <div class="w-full h-full flex justify-center">
-        <movie-card [movie]="movie"></movie-card>
+    @for (movie of movies; track movie; let i = $index) {
+      <div class="flex justify-center">
+        <div class="w-full h-full flex justify-center">
+          <movie-card [movie]="movie"></movie-card>
+        </div>
       </div>
-    </div>
+    }
   </div>
   <div class="pagination-container">
     <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">

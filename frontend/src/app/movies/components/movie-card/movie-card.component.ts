@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import { CommonModule } from '@angular/common';
+
 import { UserApiService } from '../../../users/services/userApi.service';
 
 @Component({
@@ -14,9 +14,8 @@ import { UserApiService } from '../../../users/services/userApi.service';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
-    MatIconModule,
-    CommonModule
-  ],
+    MatIconModule
+],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.css'],
 })

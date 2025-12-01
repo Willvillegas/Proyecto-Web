@@ -1,30 +1,31 @@
 <mat-card class="actor-card">
-    <mat-card-header>
-      <mat-card-title>{{ actor.name }}</mat-card-title>
-    </mat-card-header>
-  
-    <img mat-card-image [src]="coverImageUrl" alt="{{ actor.name }}" />
-  
-    <mat-card-content>
-      <div class="actor-details">
-        <span class="biography">{{ actor.biography }}</span>
-      </div>
-    </mat-card-content>
-  
-    <mat-card-actions>
-      <button mat-raised-button color="primary" 
-            *ngIf="isAdmin && actor._id"  
-            (click)="editActor(actor._id)">
-         Editar
-      <mat-icon>edit</mat-icon>
-      </button>
-        
+  <mat-card-header>
+    <mat-card-title>{{ actor.name }}</mat-card-title>
+  </mat-card-header>
+
+  <img mat-card-image [src]="coverImageUrl" alt="{{ actor.name }}" />
+
+  <mat-card-content>
+    <div class="actor-details">
+      <span class="biography">{{ actor.biography }}</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    @if (isAdmin && actor._id) {
       <button mat-raised-button color="primary"
-            *ngIf="actor._id" 
-            (click)="moreOptions(actor._id)">
+        (click)="editActor(actor._id)">
+        Editar
+        <mat-icon>edit</mat-icon>
+      </button>
+    }
+
+    @if (actor._id) {
+      <button mat-raised-button color="primary"
+        (click)="moreOptions(actor._id)">
         Ver Perfil
         <mat-icon>person</mat-icon>
       </button>
-    </mat-card-actions>
-  </mat-card>
-  
+    }
+  </mat-card-actions>
+</mat-card>

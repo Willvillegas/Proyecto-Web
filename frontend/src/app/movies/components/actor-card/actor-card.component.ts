@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -13,14 +13,13 @@ import { UserApiService } from '../../../users/services/userApi.service';
 @Component({
   selector: 'actor-card',
   imports: [
-    CommonModule,
     RouterModule,
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
     MatDividerModule,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   templateUrl: './actor-card.component.html',
   styleUrl: './actor-card.component.css',
 })

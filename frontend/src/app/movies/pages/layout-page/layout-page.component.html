@@ -9,14 +9,15 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <mat-list-item
-        *ngFor="let item of sidebarItems; let i = index"
-        (click)="sidenav.toggle()"
-        [routerLink]="[item.url]"
-      >
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-        {{ item.label }}
-      </mat-list-item>
+      @for (item of sidebarItems; track item; let i = $index) {
+        <mat-list-item
+          (click)="sidenav.toggle()"
+          [routerLink]="[item.url]"
+          >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          {{ item.label }}
+        </mat-list-item>
+      }
     </mat-nav-list>
   </mat-sidenav>
 
@@ -25,7 +26,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
-    <movie-search class="movie-search"></movie-search> 
+    <movie-search class="movie-search"></movie-search>
     <button mat-button (click)="logout()">Logout
       <mat-icon>logout</mat-icon>
     </button>

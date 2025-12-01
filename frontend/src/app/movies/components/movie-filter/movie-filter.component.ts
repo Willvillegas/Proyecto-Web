@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +9,7 @@ import { MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material
 
 @Component({
   selector: 'movie-filter',
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatAutocompleteModule],
+  imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatAutocompleteModule],
   templateUrl: './movie-filter.component.html',
   styleUrl: './movie-filter.component.css'
 })

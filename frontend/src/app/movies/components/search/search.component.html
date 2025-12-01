@@ -9,19 +9,27 @@
       [matAutocomplete]="auto"
       placeholder="Escribe para buscar..."
       class="example-input">
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectedOption($event)">
-      <mat-option *ngFor="let option of searchResults" [value]="option">
-        {{ formMode === 'movies' ? option.title : option.name }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <div *ngIf="selectedOption" class="selection-details">
-    <p *ngIf="formMode === 'movies'">
-      Película seleccionada: {{ selectedOption.title }}
-    </p>
-    <p *ngIf="formMode === 'actors'">
-      Actor seleccionado: {{ selectedOption.name }}
-    </p>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectedOption($event)">
+        @for (option of searchResults; track option) {
+          <mat-option [value]="option">
+            {{ formMode === 'movies' ? option.title : option.name }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    @if (selectedOption) {
+      <div class="selection-details">
+        @if (formMode === 'movies') {
+          <p>
+            Película seleccionada: {{ selectedOption.title }}
+          </p>
+        }
+        @if (formMode === 'actors') {
+          <p>
+            Actor seleccionado: {{ selectedOption.name }}
+          </p>
+        }
+      </div>
+    }
   </div>
-</div>
 
