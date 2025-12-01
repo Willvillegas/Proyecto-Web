@@ -10,7 +10,7 @@ import { ActorsApiService } from '../../services/actors-api.service';
 
 @Component({
   selector: 'movie-page',
-  imports: [MatChipsModule,MatCardModule, MatIconModule, CommonModule],
+  imports: [MatChipsModule, MatCardModule, MatIconModule, CommonModule],
   templateUrl: './movie-page.component.html',
   styleUrls: ['./movie-page.component.css']
 })
@@ -26,7 +26,7 @@ export class MoviePageComponent implements OnInit {
     private route: ActivatedRoute,
     private moviesService: MoviesApiService,
     private actorsService: ActorsApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const movieId = this.route.snapshot.paramMap.get('id');
@@ -46,7 +46,7 @@ export class MoviePageComponent implements OnInit {
       const actorIds = this.movie.cast
         .map(actor => actor._id)
         .filter((id): id is string => id !== undefined);
-  
+
       actorIds.forEach(id => {
         this.actorsService.getActorById(id).subscribe(
           (actor) => {
